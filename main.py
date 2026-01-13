@@ -4,8 +4,14 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Load dataset
-path = "data/PredictorProgresionEDvsPredictor.csv"
-df = pd.read_csv(path, dtype=str)
+path = "data/PredictorProgresiónEDvsPredictor.csv"
+df = pd.read_csv(
+    "data/PredictorProgresiónEDvsPredictor.csv",
+    dtype=str,
+    usecols=range(5),   # solo las primeras 5 columnas
+    engine="python",    # parser más flexible
+    on_bad_lines="warn" # opcional: avisa si descarta alguna fila
+)
 print("Columnas disponibles:")
 print(df.columns.tolist())
 print("\nPrimeras filas del dataset:")
