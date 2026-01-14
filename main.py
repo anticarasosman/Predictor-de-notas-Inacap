@@ -20,6 +20,11 @@ for major in majors:
     if major.math_priority != -1 and major.language_priority != -1 and major.english_priority != -1:
         print("El major:", major.name, "tiene las prioridades -> Matemática:", major.math_priority, ", Lenguaje:", major.language_priority, ", Inglés:", major.english_priority, "\n")
 
+print("========================================= Creando perfiles de alumnos =========================================\n")
+students = students_factory.create_students(df_past_data, majors)
+for student in students:
+    print("Estudiante:", student.name, "con RUT:", student.rut, "pertenece al major:", student.major.name, "\n")
+
 print("========================================= Buscando alumnos en riesgo academico =========================================\n")
 
 
