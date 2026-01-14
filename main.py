@@ -1,4 +1,5 @@
 import sys
+import random
 from factories.majors_factory import Majors_factory
 from factories.students_factory import Students_factory
 sys.path.append('load data')
@@ -22,7 +23,9 @@ for major in majors:
 
 print("========================================= Creando perfiles de alumnos =========================================\n")
 students = students_factory.create_students(df_past_data, majors)
-for student in students:
+#Imprimir algunos estudiantes creados al azar
+for i in range(10):
+    student = students[random.randint(0, len(students)-1)]
     print("Estudiante:", student.name, "con RUT:", student.rut, "pertenece al major:", student.major.name, "\n")
 
 print("========================================= Buscando alumnos en riesgo academico =========================================\n")
