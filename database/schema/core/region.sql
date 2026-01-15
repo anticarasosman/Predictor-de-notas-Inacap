@@ -1,0 +1,6 @@
+CREATE TABLE Region (
+    id_region INT PRIMARY KEY AUTO_INCREMENT,
+    
+    codigo INT UNIQUE NOT NULL,
+    nombre VARCHAR(100) NOT NULL UNIQUE
+)

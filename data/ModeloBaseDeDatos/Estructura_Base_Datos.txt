@@ -1,0 +1,67 @@
+Estudiantes
+└─→ Colegio (n:m)
+└─→ Predictor Datos (1:n)
+└─→ Dirección (n:m)
+└─→ Notas Estudiante (1:n)
+└─→ Matricula (1:n)
+└─→ Inscripciones Ramos (1:n)
+└─→ Transacción Pago (n:1)
+└─→ Historial Institucional (1:n)
+
+Colegio
+
+Historial Institucional
+
+Predictor Datos
+└─→ Matricula (n:1)
+
+Dirección
+└─→ Comuna (1:n)
+
+Notas Estudiante
+
+Matriculas
+└─→ Carreras (n:1)
+└─→ Pagos (1:n)
+
+Carreras
+└─→ Planes Estudio (1:n)
+└─→ Área Académica (1:n)
+└─→ Institución (n:1)
+
+Planes Estudio
+
+Área Académica
+
+Institución
+
+Pagos
+└─→Cuotas (1:n)
+└─→Transacción Pago (1:1)
+
+Cuotas
+└─→ Transacción Pago (1:1)
+
+Inscripciones Ramos
+└─→ Secciones Ramos (n:1)
+
+Secciones Ramos
+
+Transacción Pago
+
+Comuna
+└─→ Colegio (1:n)
+
+Región
+└─→ Comuna (1:n)
+└─→ Colegio (1:n)
+
+Ramo
+└─→ Secciones Ramo (1:n)
+└─→ Ramo (1:n)
+└─→ Prerrequisitos (1:n)
+└─→ Área Conocimiento (n:m)
+└─→ Planes Estudio (1:n)
+
+Ramos Plan Estudio
+└─→ Ramo (n:m)
