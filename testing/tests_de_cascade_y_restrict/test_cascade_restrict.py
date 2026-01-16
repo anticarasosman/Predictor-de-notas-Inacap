@@ -162,3 +162,93 @@ class TestConstraintsCascadeRestrict:
         # Verificar que el colegio sigue existiendo
         result = db.fetch_query("SELECT COUNT(*) FROM Colegio")
         assert result[0][0] == 1, "El colegio fue eliminado"
+    
+    def test_cascade_eliminar_estudiante_elimina_direccion(self, db):
+        """Test: Al eliminar estudiante se elimina su relación con direcciones (CASCADE)"""
+        # Preparar datos
+        success, error = db.execute_query("INSERT INTO Region (codigo, nombre) VALUES (%s, %s)", (11, 'Aysén'))
+        assert success, f"Error al insertar region: {error}"
+        success, error = db.execute_query("INSERT INTO Comuna (id_region, codigo, nombre) VALUES (%s, %s, %s)", 
+                        (1, 1001, 'Coyhaique'))
+        assert success, f"Error al insertar comuna: {error}"
+        
+        # Insertar dirección
+        success, error = db.execute_query("""INSERT INTO Direccion (id_comuna, calle, numero, tipo_direccion) 
+                          VALUES (%s, %s, %s, %s)""",
+                        (1, 'Calle Principal', 123, 'Permanente'))
+        assert success, f"Error al insertar direccion: {error}"
+        
+        # Insertar estudiante
+        success, error = db.execute_query("""INSERT INTO Estudiante 
+                          (rut, nombre, email_institucional, telefono, fecha_nacimiento, edad, sexo, nacionalidad, ano_egreso_media, puntaje_psu, integrantes_grupo_familiar) 
+                          VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""",
+                        ('20587683-9', 'Camila', 'camila@inacapmail.cl', '+569738539998', 
+                         date(2004, 3, 15), 21, 'F', 'CHILE', 2022, 550, 4))
+        assert success, f"Error al insertar estudiante: {error}"
+
+        rows = db.fetch_query("SELECT id_estudiante FROM Estudiante WHERE rut = %s", ('20587683-9',))
+        assert rows and rows[0], "No se obtuvo id_estudiante"
+        est_id = rows[0][0]
+        
+        # Insertar relación estudiante_direccion
+        success, error = db.execute_query("""INSERT INTO estudiante_direccion (id_estudiante, id_direccion) 
+                          VALUES (%s, %s)""",
+                        (est_id, 1))
+        assert success, f"Error al insertar estudiante_direccion: {error}"
+        
+        # Verificar que existe la relación
+        result = db.fetch_query("SELECT COUNT(*) FROM estudiante_direccion")
+        assert result[0][0] == 1, "No se insertó la relación estudiante_direccion"
+        
+        # Eliminar estudiante
+        success, error = db.execute_query("DELETE FROM Estudiante WHERE id_estudiante = %s", (est_id,))
+        assert success, f"Error al eliminar estudiante: {error}"
+        
+        # Verificar que la relación fue eliminada (CASCADE)
+        result = db.fetch_query("SELECT COUNT(*) FROM estudiante_direccion")
+        assert result[0][0] == 0, "La relación no fue eliminada al eliminar estudiante (CASCADE falló)"
+    
+    def test_cascade_eliminar_direccion_elimina_estudiante_direccion(self, db):
+        """Test: Al eliminar dirección se elimina su relación con estudiantes (CASCADE)"""
+        # Preparar datos
+        success, error = db.execute_query("INSERT INTO Region (codigo, nombre) VALUES (%s, %s)", (11, 'Aysén'))
+        assert success, f"Error al insertar region: {error}"
+        success, error = db.execute_query("INSERT INTO Comuna (id_region, codigo, nombre) VALUES (%s, %s, %s)", 
+                        (1, 1001, 'Coyhaique'))
+        assert success, f"Error al insertar comuna: {error}"
+        
+        # Insertar dirección
+        success, error = db.execute_query("""INSERT INTO Direccion (id_comuna, calle, numero, tipo_direccion) 
+                          VALUES (%s, %s, %s, %s)""",
+                        (1, 'Calle Principal', 123, 'Permanente'))
+        assert success, f"Error al insertar direccion: {error}"
+        
+        # Insertar estudiante
+        success, error = db.execute_query("""INSERT INTO Estudiante 
+                          (rut, nombre, email_institucional, telefono, fecha_nacimiento, edad, sexo, nacionalidad, ano_egreso_media, puntaje_psu, integrantes_grupo_familiar) 
+                          VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""",
+                        ('20587683-9', 'Camila', 'camila@inacapmail.cl', '+569738539998', 
+                         date(2004, 3, 15), 21, 'F', 'CHILE', 2022, 550, 4))
+        assert success, f"Error al insertar estudiante: {error}"
+
+        rows = db.fetch_query("SELECT id_estudiante FROM Estudiante WHERE rut = %s", ('20587683-9',))
+        assert rows and rows[0], "No se obtuvo id_estudiante"
+        est_id = rows[0][0]
+        
+        # Insertar relación estudiante_direccion
+        success, error = db.execute_query("""INSERT INTO estudiante_direccion (id_estudiante, id_direccion) 
+                          VALUES (%s, %s)""",
+                        (est_id, 1))
+        assert success, f"Error al insertar estudiante_direccion: {error}"
+        
+        # Verificar que existe la relación
+        result = db.fetch_query("SELECT COUNT(*) FROM estudiante_direccion")
+        assert result[0][0] == 1, "No se insertó la relación estudiante_direccion"
+        
+        # Eliminar dirección
+        success, error = db.execute_query("DELETE FROM Direccion WHERE id_direccion = 1")
+        assert success, f"Error al eliminar direccion: {error}"
+        
+        # Verificar que la relación fue eliminada (CASCADE)
+        result = db.fetch_query("SELECT COUNT(*) FROM estudiante_direccion")
+        assert result[0][0] == 0, "La relación no fue eliminada al eliminar dirección (CASCADE falló)"
