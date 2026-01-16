@@ -13,8 +13,9 @@ class TestInsertarDatosInvalidos:
     def test_region_codigo_duplicado(self, db):
         """Test: No permitir códigos de región duplicados"""
         # Insertar primera región
-        db.execute_query("INSERT INTO Region (codigo, nombre) VALUES (%s, %s)", 
+        success, error = db.execute_query("INSERT INTO Region (codigo, nombre) VALUES (%s, %s)", 
                         (11, 'Aysén'))
+        assert success, f"Error al insertar region: {error}"
         
         # Intentar insertar con mismo código
         query = "INSERT INTO Region (codigo, nombre) VALUES (%s, %s)"
@@ -26,8 +27,9 @@ class TestInsertarDatosInvalidos:
     def test_region_nombre_duplicado(self, db):
         """Test: No permitir nombres de región duplicados"""
         # Insertar primera región
-        db.execute_query("INSERT INTO Region (codigo, nombre) VALUES (%s, %s)", 
+        success, error = db.execute_query("INSERT INTO Region (codigo, nombre) VALUES (%s, %s)", 
                         (11, 'Aysén'))
+        assert success, f"Error al insertar region: {error}"
         
         # Intentar insertar con mismo nombre
         query = "INSERT INTO Region (codigo, nombre) VALUES (%s, %s)"
@@ -46,7 +48,8 @@ class TestInsertarDatosInvalidos:
     def test_colegio_sin_comuna(self, db):
         """Test: No permitir colegio sin comuna válida"""
         # Insertar región
-        db.execute_query("INSERT INTO Region (codigo, nombre) VALUES (%s, %s)", (11, 'Aysén'))
+        success, error = db.execute_query("INSERT INTO Region (codigo, nombre) VALUES (%s, %s)", (11, 'Aysén'))
+        assert success, f"Error al insertar region: {error}"
         
         # Intentar insertar colegio sin comuna válida
         query = """INSERT INTO Colegio (id_comuna, id_region, rbd, nombre, tipo_colegio) 
@@ -63,7 +66,7 @@ class TestInsertarDatosInvalidos:
                   VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
         
         # Insertar primer estudiante
-        db.execute_query(query, (
+        success, error = db.execute_query(query, (
             '20587683-9',
             'Camila',
             'camila@inacapmail.cl',
@@ -76,6 +79,7 @@ class TestInsertarDatosInvalidos:
             550,
             4
         ))
+        assert success, f"Error al insertar estudiante base: {error}"
         
         # Intentar insertar con mismo email
         success, error = db.execute_query(query, (
@@ -101,7 +105,7 @@ class TestInsertarDatosInvalidos:
                   VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
         
         # Insertar primer estudiante
-        db.execute_query(query, (
+        success, error = db.execute_query(query, (
             '20587683-9',
             'Camila',
             'camila@inacapmail.cl',
@@ -114,6 +118,7 @@ class TestInsertarDatosInvalidos:
             550,
             4
         ))
+        assert success, f"Error al insertar estudiante base: {error}"
         
         # Intentar insertar con mismo RUT
         success, error = db.execute_query(query, (
@@ -135,14 +140,17 @@ class TestInsertarDatosInvalidos:
     def test_colegio_rbd_duplicado(self, db):
         """Test: No permitir RBD duplicados"""
         # Preparar datos
-        db.execute_query("INSERT INTO Region (codigo, nombre) VALUES (%s, %s)", (11, 'Aysén'))
-        db.execute_query("INSERT INTO Comuna (id_region, codigo, nombre) VALUES (%s, %s, %s)", 
-                        (1, 1001, 'Coyhaique'))
+        success, error = db.execute_query("INSERT INTO Region (codigo, nombre) VALUES (%s, %s)", (11, 'Aysén'))
+        assert success, f"Error al insertar region: {error}"
+        success, error = db.execute_query("INSERT INTO Comuna (id_region, codigo, nombre) VALUES (%s, %s, %s)", 
+                (1, 1001, 'Coyhaique'))
+        assert success, f"Error al insertar comuna: {error}"
         
         # Insertar primer colegio
-        db.execute_query("""INSERT INTO Colegio (id_comuna, id_region, rbd, nombre, tipo_colegio) 
-                          VALUES (%s, %s, %s, %s, %s)""",
-                        (1, 1, '24206-3', 'Colegio 1', 'PARTICULARES PAGADOS'))
+        success, error = db.execute_query("""INSERT INTO Colegio (id_comuna, id_region, rbd, nombre, tipo_colegio) 
+                  VALUES (%s, %s, %s, %s, %s)""",
+                (1, 1, '24206-3', 'Colegio 1', 'PARTICULARES PAGADOS'))
+        assert success, f"Error al insertar colegio base: {error}"
         
         # Intentar insertar con mismo RBD
         query = """INSERT INTO Colegio (id_comuna, id_region, rbd, nombre, tipo_colegio) 

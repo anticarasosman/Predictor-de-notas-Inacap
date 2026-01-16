@@ -1,3 +1,3 @@
-CREATE TABLE estudiante_direccion (
+CREATE TABLE Estudiante_Direccion (
     estudiante_id INT NOT NULL
 )

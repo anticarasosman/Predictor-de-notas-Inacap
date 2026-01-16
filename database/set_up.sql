@@ -6,12 +6,16 @@ DROP DATABASE IF EXISTS inacap_test;
 CREATE DATABASE inacap_test;
 USE inacap_test;
 
--- Crear tablas en orden
-SOURCE c:/Users/gstaudt/Desktop/Predictor-de-notas-Inacap/database/schema/core/Region.sql;
-SOURCE c:/Users/gstaudt/Desktop/Predictor-de-notas-Inacap/database/schema/core/Comuna.sql;
-SOURCE c:/Users/gstaudt/Desktop/Predictor-de-notas-Inacap/database/schema/core/Colegio.sql;
-SOURCE c:/Users/gstaudt/Desktop/Predictor-de-notas-Inacap/database/schema/core/Estudiante.sql;
-SOURCE c:/Users/gstaudt/Desktop/Predictor-de-notas-Inacap/database/schema/core/Direccion.sql;
+-- Crear tablas en orden primero crear tablas core, luego bridge
+-- Core tables
+SOURCE c:/Users/gstaudt/Desktop/Predictor-de-notas-Inacap/database/schema/core/region.sql;
+SOURCE c:/Users/gstaudt/Desktop/Predictor-de-notas-Inacap/database/schema/core/comuna.sql;
+SOURCE c:/Users/gstaudt/Desktop/Predictor-de-notas-Inacap/database/schema/core/colegio.sql;
+SOURCE c:/Users/gstaudt/Desktop/Predictor-de-notas-Inacap/database/schema/core/estudiante.sql;
+SOURCE c:/Users/gstaudt/Desktop/Predictor-de-notas-Inacap/database/schema/core/direccion.sql;
+
+-- Bridge tables
+SOURCE c:/Users/gstaudt/Desktop/Predictor-de-notas-Inacap/database/schema/core/historial_institucional.sql;
 SOURCE c:/Users/gstaudt/Desktop/Predictor-de-notas-Inacap/database/schema/bridge/estudiante_colegio.sql;
 SOURCE c:/Users/gstaudt/Desktop/Predictor-de-notas-Inacap/database/schema/bridge/estudiante_direccion.sql;
 

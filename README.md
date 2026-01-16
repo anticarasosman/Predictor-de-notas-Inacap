@@ -207,7 +207,7 @@ python -m pytest tests_de_cascade_y_restrict/ -v
 # Ver output detallado
 python -m pytest . -v -s
 
-# Ver ejemplos practicos
+# Ver ejemplos practicos para diseñar tests
 python ejemplos_testing.py
 ```
 

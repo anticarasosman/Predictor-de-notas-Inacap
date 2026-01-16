@@ -42,8 +42,9 @@ class TestInsertarDatosValidos:
     def test_insertar_comuna(self, db):
         """Test: Insertar una comuna con región válida"""
         # Primero insertar región
-        db.execute_query("INSERT INTO Region (codigo, nombre) VALUES (%s, %s)", 
+        success, error = db.execute_query("INSERT INTO Region (codigo, nombre) VALUES (%s, %s)", 
                         (11, 'Aysén'))
+        assert success, f"Error al insertar region: {error}"
         
         # Insertar comuna
         query = "INSERT INTO Comuna (id_region, codigo, nombre) VALUES (%s, %s, %s)"
@@ -54,12 +55,14 @@ class TestInsertarDatosValidos:
     def test_insertar_colegio_completo(self, db):
         """Test: Insertar colegio con región y comuna"""
         # Insertar región
-        db.execute_query("INSERT INTO Region (codigo, nombre) VALUES (%s, %s)", 
-                        (11, 'Aysén'))
+        success, error = db.execute_query("INSERT INTO Region (codigo, nombre) VALUES (%s, %s)", 
+                (11, 'Aysén'))
+        assert success, f"Error al insertar region: {error}"
         
         # Insertar comuna
-        db.execute_query("INSERT INTO Comuna (id_region, codigo, nombre) VALUES (%s, %s, %s)", 
-                        (1, 1001, 'Coyhaique'))
+        success, error = db.execute_query("INSERT INTO Comuna (id_region, codigo, nombre) VALUES (%s, %s, %s)", 
+                (1, 1001, 'Coyhaique'))
+        assert success, f"Error al insertar comuna: {error}"
         
         # Insertar colegio
         query = """INSERT INTO Colegio (id_comuna, id_region, rbd, nombre, tipo_colegio) 
@@ -94,24 +97,33 @@ class TestInsertarDatosValidos:
     def test_insertar_estudiante_direccion_bridge(self, db):
         """Test: Insertar relación estudiante-dirección"""
         # Insertar estudiante
-        db.execute_query("""INSERT INTO Estudiante 
-                          (rut, nombre, email_institucional, telefono, fecha_nacimiento, edad, sexo, nacionalidad, ano_egreso_media, puntaje_psu, integrantes_grupo_familiar) 
-                          VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""",
-                        ('20587683-9', 'Camila', 'camila@inacapmail.cl', '+569738539998', 
-                         date(2004, 3, 15), 21, 'F', 'CHILE', 2022, 550, 4))
+        success, error = db.execute_query("""INSERT INTO Estudiante 
+                  (rut, nombre, email_institucional, telefono, fecha_nacimiento, edad, sexo, nacionalidad, ano_egreso_media, puntaje_psu, integrantes_grupo_familiar) 
+                  VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""",
+                ('20587683-9', 'Camila', 'camila@inacapmail.cl', '+569738539998', 
+                 date(2004, 3, 15), 21, 'F', 'CHILE', 2022, 550, 4))
+        assert success, f"Error al insertar estudiante: {error}"
         
         # Insertar región y comuna
-        db.execute_query("INSERT INTO Region (codigo, nombre) VALUES (%s, %s)", (11, 'Aysén'))
-        db.execute_query("INSERT INTO Comuna (id_region, codigo, nombre) VALUES (%s, %s, %s)", 
-                        (1, 1001, 'Coyhaique'))
+        success, error = db.execute_query("INSERT INTO Region (codigo, nombre) VALUES (%s, %s)", (11, 'Aysén'))
+        assert success, f"Error al insertar region: {error}"
+        success, error = db.execute_query("INSERT INTO Comuna (id_region, codigo, nombre) VALUES (%s, %s, %s)", 
+                (1, 1001, 'Coyhaique'))
+        assert success, f"Error al insertar comuna: {error}"
         
         # Insertar dirección
-        db.execute_query("""INSERT INTO Direccion (id_comuna, calle, numero, tipo_direccion) 
-                          VALUES (%s, %s, %s, %s)""",
-                        (1, 'Calle Principal', 123, 'Permanente'))
+        success, error = db.execute_query("""INSERT INTO Direccion (id_comuna, calle, numero, tipo_direccion) 
+                  VALUES (%s, %s, %s, %s)""",
+                (1, 'Calle Principal', 123, 'Permanente'))
+        assert success, f"Error al insertar direccion: {error}"
+        
+        # Obtener id_estudiante real
+        rows = db.fetch_query("SELECT id_estudiante FROM Estudiante WHERE rut = %s", ('20587683-9',))
+        assert rows and rows[0], "No se obtuvo id_estudiante"
+        est_id = rows[0][0]
         
         # Insertar en tabla bridge
         query = "INSERT INTO estudiante_direccion (estudiante_id) VALUES (%s)"
-        success, error = db.execute_query(query, (1,))
+        success, error = db.execute_query(query, (est_id,))
         
         assert success, f"Error al insertar en tabla bridge: {error}"

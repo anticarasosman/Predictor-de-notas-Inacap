@@ -1,4 +1,4 @@
-CREATE TABLE estudiante_colegio (
+CREATE TABLE Estudiante_Colegio (
     id_estudiante INT NOT NULL,
     id_colegio INT NOT NULL,
     ano_inicio INT NOT NULL,
