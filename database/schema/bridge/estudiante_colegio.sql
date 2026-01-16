@@ -1,8 +1,8 @@
 CREATE TABLE estudiante_colegio (
     id_estudiante INT NOT NULL,
     id_colegio INT NOT NULL,
-    año_inicio INT NOT NULL,
-    año_fin INT NOT NULL,
+    ano_inicio INT NOT NULL,
+    ano_fin INT NOT NULL,
     
     PRIMARY KEY (id_estudiante, id_colegio),
 

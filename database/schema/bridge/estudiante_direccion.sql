@@ -1,3 +1,3 @@
 CREATE TABLE estudiante_direccion (
-    estudiante_id INT NOT NULL,
+    estudiante_id INT NOT NULL
 )

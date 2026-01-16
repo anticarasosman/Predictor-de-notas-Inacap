@@ -7,7 +7,7 @@ CREATE TABLE PredictorDatos (
     logro_porcentaje INT,
     requiere_rendir BOOLEAN,
     año_evaluacion INT,
-    semestre_evaluacion VARCHAR(10), --El formato de semestre_evalucion es 20##-1 (Ej: Primer semestre de 2025 es 2025-1)
+    semestre_evaluacion VARCHAR(10), /* El formato de semestre_evalucion es 20##-1 (Ej: Primer semestre de 2025 es 2025-1) */
     fecha_evaluacion DATE,
     objetivo TEXT,
     metodos TEXT,

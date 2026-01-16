@@ -9,7 +9,7 @@ CREATE TABLE Estudiante (
     edad INT NOT NULL,
     sexo ENUM('M', 'F', 'O') NOT NULL,
     nacionalidad VARCHAR(100) NOT NULL,
-    año_egreso_media INT NOT NULL,
+    ano_egreso_media INT NOT NULL,
     puntaje_psu INT NOT NULL,
     integrantes_grupo_familiar INT NOT NULL,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
