@@ -1,0 +1,7 @@
+CREATE_TABLE Planes_Estudio (
+    id_plan_estudio INT PRIMARY KEY AUTO_INCREMENT,
+    nombre_plan_estudio VARCHAR(200) NOT NULL UNIQUE,
+    descripcion TEXT,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+)

@@ -117,13 +117,17 @@ class TestInsertarDatosValidos:
                 (1, 'Calle Principal', 123, 'Permanente'))
         assert success, f"Error al insertar direccion: {error}"
         
-        # Obtener id_estudiante real
+        # Obtener ids reales para la relación bridge
         rows = db.fetch_query("SELECT id_estudiante FROM Estudiante WHERE rut = %s", ('20587683-9',))
         assert rows and rows[0], "No se obtuvo id_estudiante"
         est_id = rows[0][0]
-        
+
+        rows = db.fetch_query("SELECT id_direccion FROM Direccion WHERE calle = %s AND numero = %s", ('Calle Principal', 123))
+        assert rows and rows[0], "No se obtuvo id_direccion"
+        dir_id = rows[0][0]
+
         # Insertar en tabla bridge
-        query = "INSERT INTO estudiante_direccion (estudiante_id) VALUES (%s)"
-        success, error = db.execute_query(query, (est_id,))
-        
+        query = "INSERT INTO estudiante_direccion (id_estudiante, id_direccion) VALUES (%s, %s)"
+        success, error = db.execute_query(query, (est_id, dir_id))
+
         assert success, f"Error al insertar en tabla bridge: {error}"
