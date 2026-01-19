@@ -10,6 +10,7 @@ CREATE TABLE HistorialInstitucional (
     ano_inicio INT NOT NULL,
     ano_finalizacion INT NOT NULL,
     motivo_retiro TEXT,
+        
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 )

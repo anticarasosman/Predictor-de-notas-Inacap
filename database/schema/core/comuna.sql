@@ -8,5 +8,8 @@ CREATE TABLE Comuna (
     FOREIGN KEY (id_region)
         REFERENCES Region(id_region) ON DELETE RESTRICT,
     
-    UNIQUE (nombre, id_region)
+    UNIQUE (nombre, id_region),
+
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 )

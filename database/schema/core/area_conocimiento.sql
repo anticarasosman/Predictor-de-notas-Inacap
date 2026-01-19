@@ -3,5 +3,8 @@ CREATE_TABLE Area_Conocimiento(
 
     nombre_area_conocimiento VARCHAR(200) NOT NULL UNIQUE,
     descripcion TEXT,
-    color VARCHAR(7) NOT NULL UNIQUE
+    color VARCHAR(7) NOT NULL UNIQUE,
+
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 )

@@ -7,5 +7,8 @@ CREATE_TABLE Ramos_Plan_Estudio(
     orden_malla INT NOT NULL,
     /* JSON con ID's de ramos que requieren este */
     es_prerequisito_de TEXT,
-    activo_en_plan BOOLEAN DEFAULT TRUE
+    activo_en_plan BOOLEAN DEFAULT TRUE,
+
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 )    

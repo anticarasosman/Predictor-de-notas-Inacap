@@ -28,8 +28,9 @@ CREATE_TABLE Matricula(
     fecha_matricula DATE NOT NULL,
     cambio_sede VARCHAR(100),
     semestre_anterior VARCHAR(100),
+    
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 
     UNIQUE (id_estudiante, semestre_ingreso, id_carrera)
 )

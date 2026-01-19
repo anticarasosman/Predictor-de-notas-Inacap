@@ -10,5 +10,7 @@ CREATE TABLE Direccion (
     departamento VARCHAR(50),
     poblacion_villa VARCHAR(100),
     tipo_direccion ENUM("Permanente", "Temporal") NOT NULL,
-    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 )

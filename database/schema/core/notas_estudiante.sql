@@ -13,8 +13,9 @@ CREATE_TABLE Notas_Estudiante (
     rendimiento_ingles ENUM("EN RIESGO", "BAJO", "BUENO"),
     año_registro INT NOT NULL,
     semestre_registro ENUM('1', '2') NOT NULL,
+
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 
     UNIQUE (id_estudiante, año_registro, semestre_registro)
 )

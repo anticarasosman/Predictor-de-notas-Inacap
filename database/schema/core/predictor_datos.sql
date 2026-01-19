@@ -1,6 +1,11 @@
 CREATE TABLE Predictor_Datos (
     id_predictor_datos INT PRIMARY KEY AUTO_INCREMENT,
     
+    FOREIGN KEY (id_estudiante)
+        REFERENCES Estudiante(id_estudiante) ON DELETE CASCADE,
+    FOREIGN KEY (id_matricula)
+        REFERENCES Matricula(id_matricula) ON DELETE CASCADE,
+
     id_estudiante INT NOT NULL,
     id_matricula INT NOT NULL,
     rinde_matematicas BOOLEAN,
@@ -14,10 +19,8 @@ CREATE TABLE Predictor_Datos (
     proceso TEXT,
     observaciones TEXT,
 
-    UNIQUE (id_estudiante, año_evaluacion, semestre_evaluacion),
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
-    FOREIGN KEY (id_estudiante)
-        REFERENCES Estudiante(id_estudiante) ON DELETE CASCADE,
-    FOREIGN KEY (id_matricula)
-        REFERENCES Matricula(id_matricula) ON DELETE CASCADE
+    UNIQUE (id_estudiante, año_evaluacion, semestre_evaluacion)
 )

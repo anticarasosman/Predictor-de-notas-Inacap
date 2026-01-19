@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.3.0 Chrome/140.0.7339.249 Electron/38.7.2 Safari/537.36" version="29.3.0">
   <diagram name="Página-1" id="3drBhxz1mO2mOmO49USI">
-    <mxGraphModel dx="2605" dy="4007" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="3042" dy="4236" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -61,7 +61,7 @@
           <mxGeometry height="30" width="320" y="510" as="geometry" />
         </mxCell>
         <mxCell id="pif9YFVKZQhnCXKuRGlg-18" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="Notas Estudiante" vertex="1">
-          <mxGeometry height="420" width="320" x="-1010" y="-1682" as="geometry" />
+          <mxGeometry height="450" width="320" x="-1010" y="-1682" as="geometry" />
         </mxCell>
         <mxCell id="pif9YFVKZQhnCXKuRGlg-19" parent="pif9YFVKZQhnCXKuRGlg-18" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;autosize=1;resizable=0;" value="&lt;div&gt;PK: id_nota (INT, AUTO_INCREMENT)&lt;/div&gt;" vertex="1">
           <mxGeometry height="30" width="320" y="30" as="geometry" />
@@ -99,8 +99,11 @@
         <mxCell id="8I-GXH4ktIOz0S2cyZmC-63" parent="pif9YFVKZQhnCXKuRGlg-18" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="fecha_creacion (TIMESTAMP, DEFAULT NOW())" vertex="1">
           <mxGeometry height="30" width="320" y="360" as="geometry" />
         </mxCell>
-        <mxCell id="pif9YFVKZQhnCXKuRGlg-30" parent="pif9YFVKZQhnCXKuRGlg-18" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;UK: UNIQUE(id_estudiante, año_registro, semestre)&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+        <mxCell id="8I-GXH4ktIOz0S2cyZmC-85" parent="pif9YFVKZQhnCXKuRGlg-18" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="fecha_modificacion (TIMESTAMP, DEFAULT NOW())" vertex="1">
           <mxGeometry height="30" width="320" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="pif9YFVKZQhnCXKuRGlg-30" parent="pif9YFVKZQhnCXKuRGlg-18" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;UK: UNIQUE(id_estudiante, año_registro, semestre)&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="30" width="320" y="420" as="geometry" />
         </mxCell>
         <mxCell id="pif9YFVKZQhnCXKuRGlg-31" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="Matricula" vertex="1">
           <mxGeometry height="730" width="319" x="-609" y="-1682" as="geometry" />

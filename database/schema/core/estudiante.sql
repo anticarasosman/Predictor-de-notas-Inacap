@@ -12,8 +12,8 @@ CREATE TABLE Estudiante (
     ano_egreso_media INT NOT NULL,
     puntaje_psu INT NOT NULL,
     integrantes_grupo_familiar INT NOT NULL,
-    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    email_personal VARCHAR(200) UNIQUE,
 
-    email_personal VARCHAR(200) UNIQUE
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 )
