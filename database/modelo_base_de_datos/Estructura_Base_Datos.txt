@@ -1,67 +1,140 @@
-Estudiantes
-└─→ Colegio (n:m)
-└─→ Predictor Datos (1:n)
-└─→ Dirección (n:m)
-└─→ Notas Estudiante (1:n)
+ESTRUCTURA DE LA BASE DE DATOS - PREDICTOR DE NOTAS INACAP
+================================================================
+
+TABLAS PRINCIPALES Y SUS RELACIONES:
+
+Estudiante
+└─→ Colegio (n:m) [vía Estudiante_Colegio]
+└─→ Direccion (n:m) [vía Estudiante_Direccion]
+└─→ Historial_Institucional (1:n)
+└─→ Predictor_Datos (1:n)
+└─→ Notas_Estudiante (1:n)
 └─→ Matricula (1:n)
-└─→ Inscripciones Ramos (1:n)
-└─→ Transacción Pago (n:1)
-└─→ Historial Institucional (1:n)
+└─→ Inscripciones_Ramos (1:n)
+└─→ Transaccion_Pago (1:n)
 
 Colegio
+└─→ Comuna (n:1)
+└─→ Region (n:1)
+└─→ Direccion (n:1)
+└─→ Estudiante (n:m) [vía Estudiante_Colegio]
 
-Historial Institucional
+Direccion
+└─→ Comuna (n:1)
+└─→ Estudiante (n:m) [vía Estudiante_Direccion]
+└─→ Colegio (1:n)
 
-Predictor Datos
+Historial_Institucional
+└─→ Estudiante (n:1)
+
+Predictor_Datos
+└─→ Estudiante (n:1)
 └─→ Matricula (n:1)
 
-Dirección
-└─→ Comuna (1:n)
+Notas_Estudiante
+└─→ Estudiante (n:1)
 
-Notas Estudiante
-
-Matriculas
-└─→ Carreras (n:1)
+Matricula
+└─→ Estudiante (n:1)
+└─→ Carrera (n:1)
+└─→ Predictor (n:1) [NOTA: Tabla Predictor no definida aún]
 └─→ Pagos (1:n)
+└─→ Predictor_Datos (1:n)
 
-Carreras
-└─→ Planes Estudio (1:n)
-└─→ Área Académica (1:n)
-└─→ Institución (n:1)
+Carrera
+└─→ Area_Academica (n:1)
+└─→ Institucion (n:1)
+└─→ Plan_Estudio (n:1)
+└─→ Matricula (1:n)
 
-Planes Estudio
+Area_Academica
+└─→ Carrera (1:n)
 
-Área Académica
+Area_Conocimiento
+└─→ Ramo (n:m) [vía Ramo_AreaConocimiento]
 
-Institución
+Institucion
+└─→ Carrera (1:n)
 
-Pagos
-└─→Cuotas (1:n)
-└─→Transacción Pago (1:1)
-
-Cuotas
-└─→ Transacción Pago (1:1)
-
-Inscripciones Ramos
-└─→ Secciones Ramos (n:1)
-
-Secciones Ramos
-
-Transacción Pago
-
-Comuna
-└─→ Colegio (1:n)
-
-Región
-└─→ Comuna (1:n)
-└─→ Colegio (1:n)
+Plan_Estudio
+└─→ Ramo (n:1)
+└─→ Carrera (1:n)
 
 Ramo
-└─→ Secciones Ramo (1:n)
-└─→ Ramo (1:n)
-└─→ Prerrequisitos (1:n)
-└─→ Área Conocimiento (n:m)
-└─→ Planes Estudio (1:n)
+└─→ Plan_Estudio (1:n)
+└─→ Prerequisitos (1:n)
+└─→ Secciones_Ramos (1:n)
+└─→ Area_Conocimiento (n:m) [vía Ramo_AreaConocimiento]
 
-Ramos Plan Estudio
-└─→ Ramo (n:m)
+Prerequisitos
+└─→ Ramo (n:1)
+└─→ Ramos_Plan_Estudio_Prerequisito (1:n)
+
+Ramos_Plan_Estudio
+└─→ Ramos_Plan_Estudio_Prerequisito (1:n)
+
+Ramos_Plan_Estudio_Prerequisito
+└─→ Ramos_Plan_Estudio (n:1)
+└─→ Prerequisitos (n:1)
+
+Profesor
+└─→ Secciones_Ramos (1:n)
+
+Secciones_Ramos
+└─→ Ramo (n:1)
+└─→ Profesor (n:1)
+└─→ Inscripciones_Ramos (1:n)
+
+Inscripciones_Ramos
+└─→ Estudiante (n:1)
+└─→ Secciones_Ramos (n:1)
+
+Pagos
+└─→ Matricula (n:1)
+└─→ Cuota (1:n)
+└─→ Transaccion_Pago (1:n)
+
+Cuota
+└─→ Pagos (n:1)
+└─→ Transaccion_Pago (1:n)
+
+Transaccion_Pago
+└─→ Cuota (n:1)
+└─→ Estudiante (n:1)
+└─→ Pagos (n:1)
+
+Region
+└─→ Comuna (1:n)
+└─→ Colegio (1:n)
+
+Comuna
+└─→ Region (n:1)
+└─→ Direccion (1:n)
+└─→ Colegio (1:n)
+
+================================================================
+TABLAS PUENTE (Bridge Tables):
+================================================================
+
+Estudiante_Colegio
+└─→ Estudiante (n:1)
+└─→ Colegio (n:1)
+
+Estudiante_Direccion
+└─→ Estudiante (n:1)
+└─→ Direccion (n:1)
+
+Ramo_AreaConocimiento
+└─→ Ramo (n:1)
+└─→ Area_Conocimiento (n:1)
+
+Ramos_Plan_Estudio_Prerequisito
+└─→ Ramos_Plan_Estudio (n:1)
+└─→ Prerequisitos (n:1)
+
+================================================================
+NOTAS IMPORTANTES:
+================================================================
+- La tabla Matricula referencia una tabla "Predictor" que aún no está definida
+- Todas las relaciones CASCADE y RESTRICT están configuradas según el esquema
+- Se utilizan tablas puente para relaciones muchos-a-muchos

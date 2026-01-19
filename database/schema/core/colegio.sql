@@ -7,6 +7,7 @@ CREATE TABLE Colegio (
     id_region INT NOT NULL,
     FOREIGN KEY (id_region)
         REFERENCES Region(id_region) ON DELETE RESTRICT,
+    id_direccion INT NOT NULL,
     FOREIGN KEY (id_direccion)
         REFERENCES Direccion(id_direccion) ON DELETE RESTRICT,
 

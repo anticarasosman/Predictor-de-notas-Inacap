@@ -12,7 +12,7 @@ CREATE TABLE Estudiante (
     nacionalidad VARCHAR(100) NOT NULL,
     ano_egreso_media INT NOT NULL,
     puntaje_psu INT NOT NULL,
-    integrantes_grupo_familiar INT NOT NULL
+    integrantes_grupo_familiar INT NOT NULL,
 
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP

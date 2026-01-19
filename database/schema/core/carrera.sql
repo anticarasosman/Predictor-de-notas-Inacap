@@ -1,4 +1,4 @@
-CREATE_TABLE Carrera (
+CREATE TABLE Carrera (
     id_carrera INT PRIMARY KEY AUTO_INCREMENT,
 
     id_area_academica INT NOT NULL,

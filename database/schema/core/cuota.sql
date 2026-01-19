@@ -1,4 +1,4 @@
-CREATE_TABLE Cuota (
+CREATE TABLE Cuota (
     id_cuota INT PRIMARY KEY AUTO_INCREMENT,
     
     id_pago INT NOT NULL,

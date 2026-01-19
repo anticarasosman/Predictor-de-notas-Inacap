@@ -1,4 +1,4 @@
-CREATE_TABLE Ramos_Plan_Estudio(
+CREATE TABLE Ramos_Plan_Estudio(
     id_ramo_plan_estudio INT PRIMARY KEY AUTO_INCREMENT,
 
     /* En que semestre esta el plan */
@@ -10,5 +10,5 @@ CREATE_TABLE Ramos_Plan_Estudio(
     activo_en_plan BOOLEAN DEFAULT TRUE,
 
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 )    

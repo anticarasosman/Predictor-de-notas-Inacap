@@ -1,4 +1,4 @@
-CREATE_TABLE Ramos_Plan_Estudio_Prequsito(
+CREATE TABLE Ramos_Plan_Estudio_Prequsito(
     id_ramo_plan_estudio_prerequisito INT PRIMARY KEY AUTO_INCREMENT,
 
     id_ramo_plan_estudio INT NOT NULL,

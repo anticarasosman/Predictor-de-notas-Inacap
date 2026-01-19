@@ -1,4 +1,4 @@
-CREATE_TABLE Ramo_AreaConocimiento (
+CREATE TABLE Ramo_AreaConocimiento (
     id_ramo INT NOT NULL,
     id_area_conocimiento INT NOT NULL,
 

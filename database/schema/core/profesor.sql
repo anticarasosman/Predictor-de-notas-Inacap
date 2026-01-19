@@ -1,4 +1,4 @@
-CREATE_TABLE Profesor (
+CREATE TABLE Profesor (
     id_profesor INT PRIMARY KEY AUTO_INCREMENT,
 
     nombre VARCHAR(100) NOT NULL,

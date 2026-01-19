@@ -1,4 +1,4 @@
-CREATE_TABLE Matricula(
+CREATE TABLE Matricula(
     id_matricula INT PRIMARY KEY AUTO_INCREMENT,
 
     id_estudiante INT NOT NULL,
@@ -7,9 +7,9 @@ CREATE_TABLE Matricula(
     id_carrera INT NOT NULL,
     FOREIGN KEY (id_carrera)
         REFERENCES Carrera(id_carrera) ON DELETE CASCADE,
-    id_predictor INT NOT NULL,
-    FOREIGN KEY (id_predictor)
-        REFERENCES Predictor(id_predictor) ON DELETE CASCADE,
+    id_predictor_datos INT NOT NULL,
+    FOREIGN KEY (id_predictor_datos)
+        REFERENCES Predictor_Datos(id_predictor_datos) ON DELETE CASCADE,
 
     /* El formato para los semestres es 20XX-(1 o 2)*/
     semestre_ingreso VARCHAR(10) NOT NULL,

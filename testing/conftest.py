@@ -90,18 +90,11 @@ class DatabaseManager:
             # Deshabilitar constraint checks temporalmente
             self.cursor.execute("SET FOREIGN_KEY_CHECKS=0")
             
-            tables = [
-                'PredictorDatos',
-                'HistorialInstitucional',
-                'estudiante_direccion',
-                'estudiante_colegio',
-                'Direccion',
-                'Estudiante',
-                'Colegio',
-                'Comuna',
-                'Region'
-            ]
+            # Obtener todas las tablas de la BD
+            self.cursor.execute("SHOW TABLES")
+            tables = [table[0] for table in self.cursor.fetchall()]
             
+            # Truncar todas las tablas
             for table in tables:
                 try:
                     self.cursor.execute(f"TRUNCATE TABLE {table}")
@@ -117,16 +110,112 @@ class DatabaseManager:
             self.connection.rollback()
             print(f"✗ Error al limpiar tablas: {e}")
             return False
+    
+    def load_seed_data(self):
+        """Cargar datos semilla desde archivos SQL"""
+        try:
+            # Ruta al directorio de seed data
+            seed_dir = Path(__file__).parent.parent / 'database' / 'seed_data'
+            
+            # Archivos de seed data en orden
+            seed_files = [
+                '01_region.sql',
+                '02_area_academica.sql',
+                '03_area_conocimiento.sql',
+                '04_institucion.sql',
+                '05_comuna.sql',
+                '06_direccion.sql',
+                '07_ramo.sql',
+                '08_profesor.sql',
+                '09_colegio.sql',
+                '10_estudiante.sql',
+                '11_plan_estudio.sql',
+                '12_carrera.sql',
+                '13_historial_institucional.sql',
+                '14_prerequisitos.sql',
+                '15_ramos_plan_estudio.sql',
+                '16_secciones_ramos.sql',
+                '18_matricula.sql',
+                '17_predictor_datos.sql',
+                '19_notas_estudiante.sql',
+                '20_inscripciones_ramos.sql',
+                '21_pagos.sql',
+                '22_cuota.sql',
+                '23_transaccion_pago.sql',
+                '24_estudiante_colegio.sql',
+                '25_estudiante_direccion.sql',
+                '26_ramo_areaConocimiento.sql',
+                '27_ramosPlanEstudio_prerequisito.sql',
+            ]
+            
+            # Deshabilitar constraint checks temporalmente
+            self.cursor.execute("SET FOREIGN_KEY_CHECKS=0")
+            
+            # Cargar cada archivo
+            for seed_file in seed_files:
+                file_path = seed_dir / seed_file
+                if file_path.exists():
+                    with open(file_path, 'r', encoding='utf-8') as f:
+                        sql_content = f.read()
+                        
+                        # Ejecutar cada statement SQL
+                        for statement in sql_content.split(';'):
+                            statement = statement.strip()
+                            if statement and not statement.startswith('--'):
+                                try:
+                                    self.cursor.execute(statement)
+                                except Error as e:
+                                    # Ignorar errores menores (comentarios, etc)
+                                    if 'syntax' not in str(e).lower():
+                                        pass
+            
+            # Reabilitar constraint checks
+            self.cursor.execute("SET FOREIGN_KEY_CHECKS=1")
+            self.connection.commit()
+            print("✓ Datos semilla cargados exitosamente")
+            return True
+        except Error as e:
+            self.connection.rollback()
+            print(f"✗ Error al cargar datos semilla: {e}")
+            return False
 
 
 # ===== PYTEST FIXTURE =====
 
 @pytest.fixture(scope="function")
 def db():
-    """Fixture para inicializar y cerrar la conexión a BD"""
+    """
+    Fixture para inicializar BD con datos semilla
+    
+    Esta fixture:
+    1. Conecta a la base de datos
+    2. Limpia todas las tablas
+    3. Carga datos semilla automáticamente
+    4. Proporciona el DatabaseManager para el test
+    5. Desconecta al finalizar
+    """
     db_manager = DatabaseManager()
     assert db_manager.connect(), "No se pudo conectar a la base de datos"
     db_manager.clear_tables()
+    db_manager.load_seed_data()  # ← Carga automática de datos semilla
+    
+    yield db_manager
+    
+    db_manager.disconnect()
+
+
+@pytest.fixture(scope="function")
+def db_empty():
+    """
+    Fixture alternativa: BD limpia SIN datos semilla
+    
+    Usar cuando necesites una BD completamente vacía.
+    Ejemplo: @pytest.mark.usefixtures("db_empty")
+    """
+    db_manager = DatabaseManager()
+    assert db_manager.connect(), "No se pudo conectar a la base de datos"
+    db_manager.clear_tables()
+    # NO carga datos semilla
     
     yield db_manager
     

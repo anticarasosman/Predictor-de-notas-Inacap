@@ -1,4 +1,4 @@
-CREATE_TABLE Inscripciones_Ramos (
+CREATE TABLE Inscripciones_Ramos (
     id_inscripcion INT PRIMARY KEY AUTO_INCREMENT,
 
     id_estudiante INT NOT NULL,

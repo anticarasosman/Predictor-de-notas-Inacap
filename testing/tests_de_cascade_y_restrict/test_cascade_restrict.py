@@ -1,6 +1,8 @@
 """
 Tests de funcionamiento de CASCADE y RESTRICT en eliminaciones
 Verifica que las reglas de integridad referencial funcionen correctamente
+
+NOTA: Los tests usan datos semilla precargados para mayor eficiencia.
 """
 
 import pytest
@@ -12,73 +14,56 @@ class TestConstraintsCascadeRestrict:
     
     def test_restrict_eliminar_region_con_comunas(self, db):
         """Test: No se puede eliminar región que tiene comunas (RESTRICT)"""
-        # Preparar datos
-        db.execute_query("INSERT INTO Region (codigo, nombre) VALUES (%s, %s)", (11, 'Aysén'))
-        db.execute_query("INSERT INTO Comuna (id_region, codigo, nombre) VALUES (%s, %s, %s)", 
-                        (1, 1001, 'Coyhaique'))
+        # Región 11 (Aysén) ya tiene comunas en datos semilla
+        result = db.fetch_query("SELECT id_region FROM Region WHERE codigo = %s", (11,))
+        assert result and len(result) > 0, "Región no encontrada"
+        id_region = result[0][0]
         
         # Intentar eliminar región
-        success, error = db.execute_query("DELETE FROM Region WHERE id_region = 1")
+        success, error = db.execute_query(f"DELETE FROM Region WHERE id_region = {id_region}")
         
         assert not success, "Se permitió eliminar región que tiene comunas"
         assert "FOREIGN KEY" in error or "foreign key" in error.lower(), f"Error inesperado: {error}"
         
         # Verificar que la región sigue existiendo
-        result = db.fetch_query("SELECT COUNT(*) FROM Region")
+        result = db.fetch_query("SELECT COUNT(*) FROM Region WHERE id_region = %s", (id_region,))
         assert result[0][0] == 1, "La región fue eliminada"
     
     def test_restrict_eliminar_comuna_con_colegios(self, db):
         """Test: No se puede eliminar comuna que tiene colegios (RESTRICT)"""
-        # Preparar datos
-        db.execute_query("INSERT INTO Region (codigo, nombre) VALUES (%s, %s)", (11, 'Aysén'))
-        db.execute_query("INSERT INTO Comuna (id_region, codigo, nombre) VALUES (%s, %s, %s)", 
-                        (1, 1001, 'Coyhaique'))
-        db.execute_query("""INSERT INTO Colegio (id_comuna, id_region, rbd, nombre, tipo_colegio) 
-                          VALUES (%s, %s, %s, %s, %s)""",
-                        (1, 1, '24206-3', 'Colegio', 'PARTICULARES PAGADOS'))
+        # Coyhaique ya tiene colegios en datos semilla
+        result = db.fetch_query("SELECT id_comuna FROM Comuna WHERE nombre = %s", ('Coyhaique',))
+        assert result and len(result) > 0, "Comuna no encontrada"
+        id_comuna = result[0][0]
         
         # Intentar eliminar comuna
-        success, error = db.execute_query("DELETE FROM Comuna WHERE id_comuna = 1")
+        success, error = db.execute_query(f"DELETE FROM Comuna WHERE id_comuna = {id_comuna}")
         
         assert not success, "Se permitió eliminar comuna que tiene colegios"
         
         # Verificar que la comuna sigue existiendo
-        result = db.fetch_query("SELECT COUNT(*) FROM Comuna")
+        result = db.fetch_query("SELECT COUNT(*) FROM Comuna WHERE id_comuna = %s", (id_comuna,))
         assert result[0][0] == 1, "La comuna fue eliminada"
     
     def test_cascade_eliminar_estudiante_elimina_historial(self, db):
         """Test: Al eliminar estudiante se elimina su historial (CASCADE)"""
-        # Insertar estudiante
-        success, error = db.execute_query("""INSERT INTO Estudiante 
-                          (rut, nombre, email_institucional, telefono, fecha_nacimiento, edad, sexo, nacionalidad, ano_egreso_media, puntaje_psu, integrantes_grupo_familiar) 
-                          VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""",
-                        ('20587683-9', 'Camila', 'camila@inacapmail.cl', '+569738539998', 
-                         date(2004, 3, 15), 21, 'F', 'CHILE', 2022, 550, 4))
-        assert success, f"Error al insertar estudiante: {error}"
-
-        # Obtener id_estudiante real
-        rows = db.fetch_query("SELECT id_estudiante FROM Estudiante WHERE rut = %s", ('20587683-9',))
-        assert rows and rows[0], "No se obtuvo id_estudiante"
-        est_id = rows[0][0]
+        # Camila ya tiene historial en datos semilla
+        result = db.fetch_query("SELECT id_estudiante FROM Estudiante WHERE rut = %s", ('20587683-9',))
+        assert result and len(result) > 0, "Camila no encontrada"
+        est_id = result[0][0]
         
-        # Insertar historial institucional
-        success, error = db.execute_query("""INSERT INTO HistorialInstitucional 
-                          (id_estudiante, institucion_anterior, carrera_anterior, ano_inicio, ano_finalizacion) 
-                          VALUES (%s, %s, %s, %s, %s)""",
-                        (est_id, 'Universidad XYZ', 'Ingeniería', 2020, 2022))
-        assert success, f"Error al insertar historial: {error}"
-        
-        # Verificar que existe el historial
-        result = db.fetch_query("SELECT COUNT(*) FROM HistorialInstitucional")
-        assert result is not None and result[0][0] == 1, "No se insertó el historial"
+        # Verificar que tiene historial
+        result = db.fetch_query("SELECT COUNT(*) FROM HistorialInstitucional WHERE id_estudiante = %s", (est_id,))
+        historial_count_antes = result[0][0]
+        assert historial_count_antes > 0, "Camila no tiene historial en datos semilla"
         
         # Eliminar estudiante
         success, error = db.execute_query("DELETE FROM Estudiante WHERE id_estudiante = %s", (est_id,))
         assert success, f"Error al eliminar estudiante: {error}"
         
         # Verificar que el historial fue eliminado (CASCADE)
-        result = db.fetch_query("SELECT COUNT(*) FROM HistorialInstitucional")
-        assert result is not None and result[0][0] == 0, "El historial no fue eliminado al eliminar estudiante (CASCADE falló)"
+        result = db.fetch_query("SELECT COUNT(*) FROM HistorialInstitucional WHERE id_estudiante = %s", (est_id,))
+        assert result[0][0] == 0, "El historial no fue eliminado al eliminar estudiante (CASCADE falló)"
     
     def test_cascade_eliminar_estudiante_colegio(self, db):
         """Test: Al eliminar estudiante se elimina la relación estudiante_colegio (CASCADE)"""

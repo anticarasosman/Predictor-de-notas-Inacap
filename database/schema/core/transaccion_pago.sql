@@ -1,4 +1,4 @@
-CREATE_TABLE Transaccion_Pago (
+CREATE TABLE Transaccion_Pago (
     id_transaccion_pago INT PRIMARY KEY AUTO_INCREMENT,
     
     id_cuota INT NOT NULL,

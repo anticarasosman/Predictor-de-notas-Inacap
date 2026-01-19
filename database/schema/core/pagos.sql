@@ -1,4 +1,4 @@
-CREATE_TABLE Pagos (
+CREATE TABLE Pagos (
     id_pagos INT PRIMARY KEY AUTO_INCREMENT,
     
     id_matricula INT NOT NULL,

@@ -1,4 +1,4 @@
-CREATE_TABLE Institucion(
+CREATE TABLE Institucion(
     id_institucion INT PRIMARY KEY AUTO_INCREMENT,
     tipo_instucion ENUM("C.F.T", "I:P"),
     nombre_institucion VARCHAR(200) NOT NULL UNIQUE,
