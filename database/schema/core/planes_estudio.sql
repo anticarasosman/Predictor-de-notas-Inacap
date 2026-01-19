@@ -1,5 +1,9 @@
 CREATE_TABLE Planes_Estudio (
     id_plan_estudio INT PRIMARY KEY AUTO_INCREMENT,
+
+    id_ramo INT NOT NULL,
+    FOREIGN KEY (id_ramo) REFERENCES Ramo(id_ramo) ON DELETE CASCADE RESTRICT,
+
     codigo_plan_estudio VARCHAR(20) NOT NULL UNIQUE,
     nombre_plan_estudio VARCHAR(200) NOT NULL UNIQUE,
     año_vigencia INT NOT NULL,

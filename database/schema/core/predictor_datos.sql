@@ -1,4 +1,4 @@
-CREATE TABLE PredictorDatos (
+CREATE TABLE Predictor_Datos (
     id_predictor_datos INT PRIMARY KEY AUTO_INCREMENT,
     
     id_estudiante INT NOT NULL,
