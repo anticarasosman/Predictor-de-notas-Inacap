@@ -4,6 +4,7 @@ CREATE TABLE Estudiante (
     rut VARCHAR(12) NOT NULL UNIQUE,
     nombre VARCHAR(200) NOT NULL,
     email_institucional VARCHAR(200) NOT NULL UNIQUE,
+    email_personal VARCHAR(200) UNIQUE,
     telefono VARCHAR(20) NOT NULL,
     fecha_nacimiento DATE NOT NULL,
     edad INT NOT NULL,
@@ -11,8 +12,7 @@ CREATE TABLE Estudiante (
     nacionalidad VARCHAR(100) NOT NULL,
     ano_egreso_media INT NOT NULL,
     puntaje_psu INT NOT NULL,
-    integrantes_grupo_familiar INT NOT NULL,
-    email_personal VARCHAR(200) UNIQUE,
+    integrantes_grupo_familiar INT NOT NULL
 
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP

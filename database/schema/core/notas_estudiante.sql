@@ -11,8 +11,8 @@ CREATE_TABLE Notas_Estudiante (
     rendimiento_matematicas ENUM("EN RIESGO", "BAJO", "BUENO")
     rendimiento_lenguaje ENUM("EN RIESGO", "BAJO", "BUENO"),
     rendimiento_ingles ENUM("EN RIESGO", "BAJO", "BUENO"),
-    año_registro INT NOT NULL,
-    semestre_registro ENUM('1', '2') NOT NULL,
+    /* El formato para los semestres es 20XX-(1 o 2)*/
+    semestre_ingreso VARCHAR(10) NOT NULL,
 
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP

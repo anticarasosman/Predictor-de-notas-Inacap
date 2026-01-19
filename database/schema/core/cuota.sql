@@ -1,8 +1,8 @@
 CREATE_TABLE Cuota (
     id_cuota INT PRIMARY KEY AUTO_INCREMENT,
     
-    id_plan_estudio INT NOT NULL,
-    FOREIGN KEY (id_plan_estudio) REFERENCES Planes_Estudio(id_plan_estudio) ON DELETE CASCADE,
+    id_pago INT NOT NULL,
+    FOREIGN KEY (id_pago) REFERENCES Pagos(id_pago) ON DELETE CASCADE,
 
     numero_cuota INT NOT NULL,
     /* Formato es: cuota X de X (Ej: cuota 3 de 5)*/
@@ -15,9 +15,10 @@ CREATE_TABLE Cuota (
     estado_cuota ENUM("PENDIENTE", "PAGADO", "VENCIDO", "EN MORA", "CONDONADO", "ATRASADA") NOT NULL,
     dias_mora INT DEFAULT 0,
     interes_mora DECIMAL(10,2) DEFAULT 0.00,
+    fecha_registro_pago DATE,
 
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 
-    UNIQUE (id_plan_estudio, numero_cuota)
+    UNIQUE (id_pago, numero_cuota)
 )

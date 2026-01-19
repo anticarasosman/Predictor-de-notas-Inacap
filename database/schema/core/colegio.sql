@@ -7,6 +7,8 @@ CREATE TABLE Colegio (
     id_region INT NOT NULL,
     FOREIGN KEY (id_region)
         REFERENCES Region(id_region) ON DELETE RESTRICT,
+    FOREIGN KEY (id_direccion)
+        REFERENCES Direccion(id_direccion) ON DELETE RESTRICT,
 
     rbd VARCHAR(10) UNIQUE, /* Codigo Mineduc */
     nombre VARCHAR(200) NOT NULL,

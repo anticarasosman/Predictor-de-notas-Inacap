@@ -9,7 +9,7 @@ CREATE_TABLE Planes_Estudio (
     año_vigencia INT NOT NULL,
     semestre_vigencia INT NOT NULL,
     estado ENUM("VIGENTE", "INACTIVO") NOT NULL,
-    total_creditos INT NOT NULL,
+    duracion_estimada_semestres INT NOT NULL,
     descripcion TEXT,
     fecha_inicio DATE NOT NULL,
     fecha_fin DATE,

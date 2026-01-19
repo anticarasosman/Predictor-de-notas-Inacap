@@ -4,12 +4,12 @@ CREATE_TABLE Matricula(
     id_estudiante INT NOT NULL,
     FOREIGN KEY (id_estudiante)
         REFERENCES Estudiante(id_estudiante) ON DELETE CASCADE,
+    id_carrera INT NOT NULL,
+    FOREIGN KEY (id_carrera)
+        REFERENCES Carrera(id_carrera) ON DELETE CASCADE,
     id_predictor INT NOT NULL,
     FOREIGN KEY (id_predictor)
         REFERENCES Predictor(id_predictor) ON DELETE CASCADE,
-    id_carrera INT NOT NULL,
-        FOREIGN KEY (id_carrera)
-            REFERENCES Carrera(id_carrera) ON DELETE CASCADE,
 
     /* El formato para los semestres es 20XX-(1 o 2)*/
     semestre_ingreso VARCHAR(10) NOT NULL,
@@ -27,7 +27,7 @@ CREATE_TABLE Matricula(
     cantidad_asignaturas_actuales INT DEFAULT 0,
     fecha_matricula DATE NOT NULL,
     cambio_sede VARCHAR(100),
-    semestre_anterior VARCHAR(100),
+    programa_anterior VARCHAR(100),
     
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP

@@ -8,8 +8,8 @@ CREATE TABLE Direccion (
     calle VARCHAR(200) NOT NULL,
     numero INT NOT NULL,
     departamento VARCHAR(50),
-    poblacion_villa VARCHAR(100),
     tipo_direccion ENUM("Permanente", "Temporal") NOT NULL,
+    activa BOOLEAN DEFAULT TRUE,
 
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP

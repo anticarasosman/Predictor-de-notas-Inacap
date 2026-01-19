@@ -1,7 +1,5 @@
 CREATE_TABLE Carrera (
     id_carrera INT PRIMARY KEY AUTO_INCREMENT,
-    codigo_carrera VARCHAR(20) NOT NULL UNIQUE,
-    nombre_carrera VARCHAR(200), NOT NULL, UNIQUE,
 
     id_area_academica INT NOT NULL,
     FOREIGN KEY (id_area_academica)
@@ -13,6 +11,8 @@ CREATE_TABLE Carrera (
     FOREIGN KEY (id_plan_estudio)
         REFERENCES Plan_Estudio(id_plan_estudio) ON DELETE CASCADE,
     
+    codigo_carrera VARCHAR(20) NOT NULL UNIQUE,
+    nombre_carrera VARCHAR(200), NOT NULL, UNIQUE,
     mencion VARCHAR(100),
     jornada ENUM("DIURNA", "VESPERTINA", "MIXTA") NOT NULL,
     tipo_programa ENUM("REGULAR", "PEEC"),

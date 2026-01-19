@@ -4,6 +4,9 @@ CREATE_TABLE Inscripciones_Ramos (
     id_estudiante INT NOT NULL,
     FOREIGN KEY (id_estudiante)
         REFERENCES Estudiante(id_estudiante) ON DELETE CASCADE,
+    id_seccion INT NOT NULL,
+    FOREIGN KEY (id_seccion)
+        REFERENCES Secciones_Ramos(id_seccion_ramo) ON DELETE CASCADE,
 
     fecha_inscripcion DATE NOT NULL,
     tipo_inscripcion ENUM('REGULAR', 'CONVALIDACION', 'HOMOLOGACION') NOT NULL,
@@ -15,5 +18,7 @@ CREATE_TABLE Inscripciones_Ramos (
     motivo_retiro VARCHAR(255),
 
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+    UNIQUE (id_estudiante, id_seccion, fecha_inscripcion)
 )

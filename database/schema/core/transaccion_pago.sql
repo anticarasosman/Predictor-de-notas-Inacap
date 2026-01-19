@@ -8,7 +8,7 @@ CREATE_TABLE Transaccion_Pago (
     id_pagos INT NOT NULL,
     SECONDARY KEY (id_pagos) REFERENCES Pagos(id_pagos) ON DELETE CASCADE,
 
-    monto_pago DECIMAL(10,2) NOT NULL,
+    monto_transaccion DECIMAL(10,2) NOT NULL,
     tipo_transaccion ENUM("PAGO", "AJUSTE", "CONDONACION", "DEVOLUCION") NOT NULL,
     metodo_pago ENUM("EFECTIVO", "TARJETA_CREDITO", "TARJETA_DEBITO", "TRANSFERENCIA_BANCARIA", "PAYPAL") NOT NULL,
     numero_comprobante INT NOT NULL,

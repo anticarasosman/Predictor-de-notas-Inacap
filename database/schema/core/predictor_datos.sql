@@ -1,13 +1,13 @@
 CREATE TABLE Predictor_Datos (
     id_predictor_datos INT PRIMARY KEY AUTO_INCREMENT,
     
+    id_estudiante INT NOT NULL,
     FOREIGN KEY (id_estudiante)
         REFERENCES Estudiante(id_estudiante) ON DELETE CASCADE,
+    id_matricula INT NOT NULL,
     FOREIGN KEY (id_matricula)
         REFERENCES Matricula(id_matricula) ON DELETE CASCADE,
-
-    id_estudiante INT NOT NULL,
-    id_matricula INT NOT NULL,
+        
     rinde_matematicas BOOLEAN,
     logro_porcentaje INT,
     requiere_rendir BOOLEAN,
