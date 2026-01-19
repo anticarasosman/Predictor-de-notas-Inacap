@@ -95,6 +95,11 @@ SOURCE c:/Users/gstaudt/Desktop/Predictor-de-notas-Inacap/database/seed_data/25_
 SOURCE c:/Users/gstaudt/Desktop/Predictor-de-notas-Inacap/database/seed_data/26_ramo_areaConocimiento.sql;
 SOURCE c:/Users/gstaudt/Desktop/Predictor-de-notas-Inacap/database/seed_data/27_ramosPlanEstudio_prerequisito.sql;
 
+-- ============================================================================
+-- CARGA DE TRIGGERS
+-- ============================================================================
+SOURCE c:/Users/gstaudt/Desktop/Predictor-de-notas-Inacap/database/triggers/init_triggers.sql;
+
 -- Verificar
 SELECT 'Base de datos creada exitosamente!' AS status;
 SHOW TABLES;

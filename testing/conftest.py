@@ -1,6 +1,6 @@
 """
 conftest.py - Configuración compartida para todos los tests
-Contiene: DatabaseManager + pytest fixture
+Contiene: DatabaseManager + pytest fixtures + markers
 """
 
 import pytest
@@ -8,6 +8,15 @@ import mysql.connector
 from mysql.connector import Error
 import os
 from pathlib import Path
+
+
+def pytest_configure(config):
+    """Configurar markers personalizados para pytest"""
+    config.addinivalue_line("markers", "valid: Tests para inserciones válidas")
+    config.addinivalue_line("markers", "invalid: Tests para inserciones inválidas (deben fallar)")
+    config.addinivalue_line("markers", "constraints: Tests de CASCADE y RESTRICT")
+    config.addinivalue_line("markers", "seed: Tests de verificación de datos semilla")
+    config.addinivalue_line("markers", "slow: Tests que toman más tiempo en ejecutar")
 
 # Cargar variables de entorno desde .env (si existe)
 try:
