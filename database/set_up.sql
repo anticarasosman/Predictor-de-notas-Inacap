@@ -39,7 +39,7 @@ SOURCE c:/Users/gstaudt/Desktop/Predictor-de-notas-Inacap/database/schema/core/m
 SOURCE c:/Users/gstaudt/Desktop/Predictor-de-notas-Inacap/database/schema/core/predictor_datos.sql;
 
 -- FASE 6: Gestión financiera
-SOURCE c:/Users/gstaudt/Desktop/Predictor-de-notas-Inacap/database/schema/core/pagos.sql;
+SOURCE c:/Users/gstaudt/Desktop/Predictor-de-notas-Inacap/database/schema/core/pago.sql;
 SOURCE c:/Users/gstaudt/Desktop/Predictor-de-notas-Inacap/database/schema/core/cuota.sql;
 SOURCE c:/Users/gstaudt/Desktop/Predictor-de-notas-Inacap/database/schema/core/transaccion_pago.sql;
 

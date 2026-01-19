@@ -12,10 +12,10 @@ CREATE TABLE Carrera (
         REFERENCES Plan_Estudio(id_plan_estudio) ON DELETE CASCADE,
     
     codigo_carrera VARCHAR(20) NOT NULL UNIQUE,
-    nombre_carrera VARCHAR(200), NOT NULL, UNIQUE,
+    nombre_carrera VARCHAR(200) NOT NULL UNIQUE,
     mencion VARCHAR(100),
     jornada ENUM("DIURNA", "VESPERTINA", "MIXTA") NOT NULL,
-    tipo_programa ENUM("REGULAR", "PEEC"),
+    tipo_programa ENUM("REGULAR", "PEEC") NOT NULL,
     activa BOOLEAN DEFAULT TRUE,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP

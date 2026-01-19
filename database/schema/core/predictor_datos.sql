@@ -11,7 +11,7 @@ CREATE TABLE Predictor_Datos (
     rinde_matematicas BOOLEAN,
     logro_porcentaje INT,
     requiere_rendir BOOLEAN,
-    año_evaluacion INT,
+    ano_evaluacion INT,
     semestre_evaluacion VARCHAR(10), /* El formato de semestre_evalucion es 20##-1 (Ej: Primer semestre de 2025 es 2025-1) */
     fecha_evaluacion DATE,
     objetivo TEXT,
@@ -22,5 +22,5 @@ CREATE TABLE Predictor_Datos (
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
-    UNIQUE (id_estudiante, año_evaluacion, semestre_evaluacion)
+    UNIQUE (id_estudiante, ano_evaluacion, semestre_evaluacion)
 )

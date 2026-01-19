@@ -1,4 +1,4 @@
-CREATE TABLE Planes_Estudio (
+CREATE TABLE Plan_Estudio (
     id_plan_estudio INT PRIMARY KEY AUTO_INCREMENT,
 
     id_ramo INT NOT NULL,

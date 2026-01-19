@@ -7,9 +7,6 @@ CREATE TABLE Matricula(
     id_carrera INT NOT NULL,
     FOREIGN KEY (id_carrera)
         REFERENCES Carrera(id_carrera) ON DELETE CASCADE,
-    id_predictor_datos INT NOT NULL,
-    FOREIGN KEY (id_predictor_datos)
-        REFERENCES Predictor_Datos(id_predictor_datos) ON DELETE CASCADE,
 
     /* El formato para los semestres es 20XX-(1 o 2)*/
     semestre_ingreso VARCHAR(10) NOT NULL,
@@ -22,7 +19,7 @@ CREATE TABLE Matricula(
     /* Nivel academico del estudiantes */
     nivel_actual ENUM('PREESCOLAR', "PRIMARIO", 'SECUNDARIO', "BACHILLERATO", "LICENCIATURA", "MAESTRIA", "DOCTORADO") NOT NULL,
     numero_de_convalidaciones INT DEFAULT 0,
-    numero de homologaciones INT DEFAULT 0,
+    numero_de_homologaciones INT DEFAULT 0,
     cantidad_examenes_competencia INT DEFAULT 0,
     cantidad_asignaturas_actuales INT DEFAULT 0,
     fecha_matricula DATE NOT NULL,
@@ -30,7 +27,7 @@ CREATE TABLE Matricula(
     programa_anterior VARCHAR(100),
     
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
     UNIQUE (id_estudiante, semestre_ingreso, id_carrera)
 )

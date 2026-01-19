@@ -2,9 +2,11 @@ CREATE TABLE Secciones_Ramos(
     id_seccion_ramo INT PRIMARY KEY AUTO_INCREMENT,
 
     id_ramo INT NOT NULL,
-    FOREIGN KEY (id_ramo) REFERENCES Ramo(id_ramo) ON DELETE CASCADE,
+    FOREIGN KEY (id_ramo)
+        REFERENCES Ramo(id_ramo) ON DELETE CASCADE,
     id_profesor INT NOT NULL,
-    FOREIGN KEY (id_profesor) REFERENCES Profesor(id_profesor) ON DELETE SET NULL,
+    FOREIGN KEY (id_profesor)
+        REFERENCES Profesor(id_profesor) ON DELETE RESTRICT,
 
     seccion VARCHAR(10) NOT NULL,
     codigo_seccion VARCHAR(50) UNIQUE NOT NULL,
