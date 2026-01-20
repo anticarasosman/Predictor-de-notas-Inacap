@@ -21,4 +21,6 @@ CREATE TABLE Secciones_Ramos(
 
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+
+    UNIQUE(id_ramo, seccion, semestre_dictado, id_estudiante)
 )
