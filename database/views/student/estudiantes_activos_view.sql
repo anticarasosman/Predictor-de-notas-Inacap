@@ -1,0 +1,1 @@
+/*  Solo estudiantes activos en el sistema  */

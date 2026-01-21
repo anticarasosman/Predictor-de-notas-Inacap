@@ -1,0 +1,1 @@
+/* Secciones con cupos llenos */
