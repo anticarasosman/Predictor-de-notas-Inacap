@@ -1385,6 +1385,308 @@ class TestForeignKeyRestrict:
         assert row[0][0] == 1, "El profesor fue eliminado indebidamente"
 
 
+class TestCheckConstraints:
+    """Pruebas de CHECK constraints (Categoría 7)"""
+    
+    @pytest.mark.constraints
+    def test_promedio_matematicas_invalido_bajo(self, db):
+        """No se puede insertar promedio de matemáticas menor a 1.0"""
+        # Obtener datos base
+        row = db.fetch_query("SELECT id_estudiante FROM Estudiante LIMIT 1")
+        if not row or not row[0]:
+            pytest.skip("No hay estudiante disponible")
+        est_id = row[0][0]
+        
+        success, error = db.execute_query(
+            "INSERT INTO Notas_Estudiante (id_estudiante, semestre_ingreso, promedio_matematicas) VALUES (%s, %s, %s)",
+            (est_id, '2025-1', 0.5)
+        )
+        assert not success, "Se permitió promedio menor a 1.0"
+        assert error and "check" in error.lower(), f"Error inesperado: {error}"
+    
+    @pytest.mark.constraints
+    def test_promedio_matematicas_invalido_alto(self, db):
+        """No se puede insertar promedio de matemáticas mayor a 7.0"""
+        row = db.fetch_query("SELECT id_estudiante FROM Estudiante LIMIT 1")
+        if not row or not row[0]:
+            pytest.skip("No hay estudiante disponible")
+        est_id = row[0][0]
+        
+        success, error = db.execute_query(
+            "INSERT INTO Notas_Estudiante (id_estudiante, semestre_ingreso, promedio_matematicas) VALUES (%s, %s, %s)",
+            (est_id, '2025-1', 7.5)
+        )
+        assert not success, "Se permitió promedio mayor a 7.0"
+        assert error and "check" in error.lower(), f"Error inesperado: {error}"
+    
+    @pytest.mark.constraints
+    def test_promedio_matematicas_valido_minimo(self, db):
+        """Se puede insertar promedio de matemáticas igual a 1.0"""
+        row = db.fetch_query("SELECT id_estudiante FROM Estudiante LIMIT 1")
+        if not row or not row[0]:
+            pytest.skip("No hay estudiante disponible")
+        est_id = row[0][0]
+        
+        success, error = db.execute_query(
+            "INSERT INTO Notas_Estudiante (id_estudiante, semestre_ingreso, promedio_matematicas) VALUES (%s, %s, %s)",
+            (est_id, '2025-1', 1.0)
+        )
+        assert success, f"No se permitió promedio válido 1.0: {error}"
+        
+        # Verificar que se insertó
+        row = db.fetch_query(
+            "SELECT COUNT(*) FROM Notas_Estudiante WHERE id_estudiante = %s AND promedio_matematicas = %s",
+            (est_id, 1.0)
+        )
+        assert row[0][0] >= 1, "No se insertó el promedio válido"
+    
+    @pytest.mark.constraints
+    def test_promedio_matematicas_valido_maximo(self, db):
+        """Se puede insertar promedio de matemáticas igual a 7.0"""
+        row = db.fetch_query("SELECT id_estudiante FROM Estudiante LIMIT 1")
+        if not row or not row[0]:
+            pytest.skip("No hay estudiante disponible")
+        est_id = row[0][0]
+        
+        success, error = db.execute_query(
+            "INSERT INTO Notas_Estudiante (id_estudiante, semestre_ingreso, promedio_matematicas) VALUES (%s, %s, %s)",
+            (est_id, '2025-1', 7.0)
+        )
+        assert success, f"No se permitió promedio válido 7.0: {error}"
+        
+        row = db.fetch_query(
+            "SELECT COUNT(*) FROM Notas_Estudiante WHERE id_estudiante = %s AND promedio_matematicas = %s",
+            (est_id, 7.0)
+        )
+        assert row[0][0] >= 1, "No se insertó el promedio válido"
+    
+    @pytest.mark.constraints
+    def test_promedio_lenguaje_invalido(self, db):
+        """No se puede insertar promedio de lenguaje fuera del rango 1.0-7.0"""
+        row = db.fetch_query("SELECT id_estudiante FROM Estudiante LIMIT 1")
+        if not row or not row[0]:
+            pytest.skip("No hay estudiante disponible")
+        est_id = row[0][0]
+        
+        # Test valor bajo
+        success, error = db.execute_query(
+            "INSERT INTO Notas_Estudiante (id_estudiante, semestre_ingreso, promedio_lenguaje) VALUES (%s, %s, %s)",
+            (est_id, '2025-1', 0.9)
+        )
+        assert not success, "Se permitió promedio de lenguaje menor a 1.0"
+        
+        # Test valor alto
+        success, error = db.execute_query(
+            "INSERT INTO Notas_Estudiante (id_estudiante, semestre_ingreso, promedio_lenguaje) VALUES (%s, %s, %s)",
+            (est_id, '2025-2', 7.1)
+        )
+        assert not success, "Se permitió promedio de lenguaje mayor a 7.0"
+    
+    @pytest.mark.constraints
+    def test_promedio_lenguaje_valido(self, db):
+        """Se puede insertar promedio de lenguaje dentro del rango 1.0-7.0"""
+        row = db.fetch_query("SELECT id_estudiante FROM Estudiante LIMIT 1")
+        if not row or not row[0]:
+            pytest.skip("No hay estudiante disponible")
+        est_id = row[0][0]
+        
+        success, error = db.execute_query(
+            "INSERT INTO Notas_Estudiante (id_estudiante, semestre_ingreso, promedio_lenguaje) VALUES (%s, %s, %s)",
+            (est_id, '2025-1', 5.5)
+        )
+        assert success, f"No se permitió promedio válido 5.5: {error}"
+        
+        row = db.fetch_query(
+            "SELECT COUNT(*) FROM Notas_Estudiante WHERE id_estudiante = %s AND promedio_lenguaje = %s",
+            (est_id, 5.5)
+        )
+        assert row[0][0] >= 1, "No se insertó el promedio válido"
+    
+    @pytest.mark.constraints
+    def test_promedio_ingles_invalido(self, db):
+        """No se puede insertar promedio de inglés fuera del rango 1.0-7.0"""
+        row = db.fetch_query("SELECT id_estudiante FROM Estudiante LIMIT 1")
+        if not row or not row[0]:
+            pytest.skip("No hay estudiante disponible")
+        est_id = row[0][0]
+        
+        # Test valor bajo
+        success, error = db.execute_query(
+            "INSERT INTO Notas_Estudiante (id_estudiante, semestre_ingreso, promedio_ingles) VALUES (%s, %s, %s)",
+            (est_id, '2025-1', 0.1)
+        )
+        assert not success, "Se permitió promedio de inglés menor a 1.0"
+        
+        # Test valor alto
+        success, error = db.execute_query(
+            "INSERT INTO Notas_Estudiante (id_estudiante, semestre_ingreso, promedio_ingles) VALUES (%s, %s, %s)",
+            (est_id, '2025-2', 8.0)
+        )
+        assert not success, "Se permitió promedio de inglés mayor a 7.0"
+    
+    @pytest.mark.constraints
+    def test_promedio_ingles_valido(self, db):
+        """Se puede insertar promedio de inglés dentro del rango 1.0-7.0"""
+        row = db.fetch_query("SELECT id_estudiante FROM Estudiante LIMIT 1")
+        if not row or not row[0]:
+            pytest.skip("No hay estudiante disponible")
+        est_id = row[0][0]
+        
+        success, error = db.execute_query(
+            "INSERT INTO Notas_Estudiante (id_estudiante, semestre_ingreso, promedio_ingles) VALUES (%s, %s, %s)",
+            (est_id, '2025-1', 3.5)
+        )
+        assert success, f"No se permitió promedio válido 3.5: {error}"
+        
+        row = db.fetch_query(
+            "SELECT COUNT(*) FROM Notas_Estudiante WHERE id_estudiante = %s AND promedio_ingles = %s",
+            (est_id, 3.5)
+        )
+        assert row[0][0] >= 1, "No se insertó el promedio válido"
+    
+    @pytest.mark.constraints
+    def test_nota_final_inscripcion_invalida(self, db):
+        """No se puede insertar nota final fuera del rango 1.0-7.0 en inscripción"""
+        # Obtener una sección de ramo
+        row = db.fetch_query("SELECT id_seccion_ramo FROM Secciones_Ramos LIMIT 1")
+        if not row or not row[0]:
+            pytest.skip("No hay secciones de ramo en seed data")
+        seccion_id = row[0][0]
+        
+        # Obtener un estudiante
+        row = db.fetch_query("SELECT id_estudiante FROM Estudiante LIMIT 1")
+        if not row or not row[0]:
+            pytest.skip("No hay estudiante disponible")
+        est_id = row[0][0]
+        
+        # Test valor bajo
+        success, error = db.execute_query(
+            "INSERT INTO Inscripciones_Ramos (id_estudiante, id_seccion, fecha_inscripcion, tipo_inscripcion, nota_final, porcentaje_asistencia) VALUES (%s, %s, %s, %s, %s, %s)",
+            (est_id, seccion_id, '2025-01-15', 'REGULAR', 0.5, 50.0)
+        )
+        assert not success, "Se permitió nota final menor a 1.0"
+        
+        # Test valor alto
+        success, error = db.execute_query(
+            "INSERT INTO Inscripciones_Ramos (id_estudiante, id_seccion, fecha_inscripcion, tipo_inscripcion, nota_final, porcentaje_asistencia) VALUES (%s, %s, %s, %s, %s, %s)",
+            (est_id, seccion_id, '2025-01-16', 'REGULAR', 7.5, 50.0)
+        )
+        assert not success, "Se permitió nota final mayor a 7.0"
+    
+    @pytest.mark.constraints
+    def test_nota_final_inscripcion_valida(self, db):
+        """Se puede insertar nota final dentro del rango 1.0-7.0 en inscripción"""
+        row = db.fetch_query("SELECT id_seccion_ramo FROM Secciones_Ramos LIMIT 1")
+        if not row or not row[0]:
+            pytest.skip("No hay secciones de ramo en seed data")
+        seccion_id = row[0][0]
+        
+        row = db.fetch_query("SELECT id_estudiante FROM Estudiante LIMIT 1")
+        if not row or not row[0]:
+            pytest.skip("No hay estudiante disponible")
+        est_id = row[0][0]
+        
+        success, error = db.execute_query(
+            "INSERT INTO Inscripciones_Ramos (id_estudiante, id_seccion, fecha_inscripcion, tipo_inscripcion, nota_final, porcentaje_asistencia) VALUES (%s, %s, %s, %s, %s, %s)",
+            (est_id, seccion_id, '2025-01-15', 'REGULAR', 5.5, 85.0)
+        )
+        assert success, f"No se permitió nota final válida 5.5: {error}"
+        
+        row = db.fetch_query(
+            "SELECT COUNT(*) FROM Inscripciones_Ramos WHERE id_estudiante = %s AND id_seccion = %s AND nota_final = %s",
+            (est_id, seccion_id, 5.5)
+        )
+        assert row[0][0] >= 1, "No se insertó la nota final válida"
+    
+    @pytest.mark.constraints
+    def test_porcentaje_asistencia_invalido_bajo(self, db):
+        """No se puede insertar porcentaje de asistencia menor a 0.0"""
+        row = db.fetch_query("SELECT id_seccion_ramo FROM Secciones_Ramos LIMIT 1")
+        if not row or not row[0]:
+            pytest.skip("No hay secciones de ramo en seed data")
+        seccion_id = row[0][0]
+        
+        row = db.fetch_query("SELECT id_estudiante FROM Estudiante LIMIT 1")
+        if not row or not row[0]:
+            pytest.skip("No hay estudiante disponible")
+        est_id = row[0][0]
+        
+        success, error = db.execute_query(
+            "INSERT INTO Inscripciones_Ramos (id_estudiante, id_seccion, fecha_inscripcion, tipo_inscripcion, nota_final, porcentaje_asistencia) VALUES (%s, %s, %s, %s, %s, %s)",
+            (est_id, seccion_id, '2025-01-15', 'REGULAR', 5.0, -0.1)
+        )
+        assert not success, "Se permitió porcentaje de asistencia negativo"
+    
+    @pytest.mark.constraints
+    def test_porcentaje_asistencia_invalido_alto(self, db):
+        """No se puede insertar porcentaje de asistencia mayor a 100.0"""
+        row = db.fetch_query("SELECT id_seccion_ramo FROM Secciones_Ramos LIMIT 1")
+        if not row or not row[0]:
+            pytest.skip("No hay secciones de ramo en seed data")
+        seccion_id = row[0][0]
+        
+        row = db.fetch_query("SELECT id_estudiante FROM Estudiante LIMIT 1")
+        if not row or not row[0]:
+            pytest.skip("No hay estudiante disponible")
+        est_id = row[0][0]
+        
+        success, error = db.execute_query(
+            "INSERT INTO Inscripciones_Ramos (id_estudiante, id_seccion, fecha_inscripcion, tipo_inscripcion, nota_final, porcentaje_asistencia) VALUES (%s, %s, %s, %s, %s, %s)",
+            (est_id, seccion_id, '2025-01-16', 'REGULAR', 5.0, 100.1)
+        )
+        assert not success, "Se permitió porcentaje de asistencia mayor a 100"
+    
+    @pytest.mark.constraints
+    def test_porcentaje_asistencia_valido_minimo(self, db):
+        """Se puede insertar porcentaje de asistencia igual a 0.0"""
+        row = db.fetch_query("SELECT id_seccion_ramo FROM Secciones_Ramos LIMIT 1")
+        if not row or not row[0]:
+            pytest.skip("No hay secciones de ramo en seed data")
+        seccion_id = row[0][0]
+        
+        row = db.fetch_query("SELECT id_estudiante FROM Estudiante LIMIT 1")
+        if not row or not row[0]:
+            pytest.skip("No hay estudiante disponible")
+        est_id = row[0][0]
+        
+        success, error = db.execute_query(
+            "INSERT INTO Inscripciones_Ramos (id_estudiante, id_seccion, fecha_inscripcion, tipo_inscripcion, nota_final, porcentaje_asistencia) VALUES (%s, %s, %s, %s, %s, %s)",
+            (est_id, seccion_id, '2025-01-15', 'REGULAR', 5.0, 0.0)
+        )
+        assert success, f"No se permitió porcentaje válido 0.0: {error}"
+        
+        row = db.fetch_query(
+            "SELECT COUNT(*) FROM Inscripciones_Ramos WHERE id_estudiante = %s AND id_seccion = %s AND porcentaje_asistencia = %s",
+            (est_id, seccion_id, 0.0)
+        )
+        assert row[0][0] >= 1, "No se insertó el porcentaje válido"
+    
+    @pytest.mark.constraints
+    def test_porcentaje_asistencia_valido_maximo(self, db):
+        """Se puede insertar porcentaje de asistencia igual a 100.0"""
+        row = db.fetch_query("SELECT id_seccion_ramo FROM Secciones_Ramos LIMIT 1")
+        if not row or not row[0]:
+            pytest.skip("No hay secciones de ramo en seed data")
+        seccion_id = row[0][0]
+        
+        row = db.fetch_query("SELECT id_estudiante FROM Estudiante LIMIT 1")
+        if not row or not row[0]:
+            pytest.skip("No hay estudiante disponible")
+        est_id = row[0][0]
+        
+        success, error = db.execute_query(
+            "INSERT INTO Inscripciones_Ramos (id_estudiante, id_seccion, fecha_inscripcion, tipo_inscripcion, nota_final, porcentaje_asistencia) VALUES (%s, %s, %s, %s, %s, %s)",
+            (est_id, seccion_id, '2025-01-17', 'REGULAR', 5.0, 100.0)
+        )
+        assert success, f"No se permitió porcentaje válido 100.0: {error}"
+        
+        row = db.fetch_query(
+            "SELECT COUNT(*) FROM Inscripciones_Ramos WHERE id_estudiante = %s AND id_seccion = %s AND porcentaje_asistencia = %s",
+            (est_id, seccion_id, 100.0)
+        )
+        assert row[0][0] >= 1, "No se insertó el porcentaje válido"
+
+
 class TestForeignKeyCascade:
     """Pruebas de relaciones ON DELETE CASCADE (Categoría 5)"""
     
