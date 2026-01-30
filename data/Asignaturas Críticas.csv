@@ -1,0 +1,251 @@
+﻿INACAP;;;;;;;;;;;;;;;;;;;;;;;;;;;
+Asignaturas críticas (Req 719831 );;;;;;;;;;;;;;;;;;;;;;;;;;;
+Asignaturas Críticas (Req 719831 );;;;;;;;;;;;;;;;;;;;;;;;;;;
+Fecha de Consulta: 30-01-2026 15:20;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+PERIODO;ZONA;SEDE;CODIGO ASIGNATURA;ASIGNATURA;AREA;COD PE;PROGRAMA;COD MENCION;MENCION;PLAN;INSTITUCION;JORNADA;NIVEL;PREREQUISITO SEMESTRE SIGUIENTE;ULTIMO NIVEL;SECCIONES;ALUMNOS;PROMEDIO NOTA UNO;PROMEDIO NOTA DOS;PROMEDIO NOTA TRES;ALUMNOS EN RIESGO;PORCENTAJE REPROBACION N1;PORCENTAJE REPROBACION N2;PORCENTAJE REPROBACION N3;AYUDANTIA VIRTUAL;AYUDANTIA SEDE;ALUMNOS AYUDANTIA
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AABD01;Business Analytics;Administración;IAD;Ingeniería en Administración de Empresas;IAD;SIN MENCIÓN;IAD-IAD-1;I.P.;VESPERTINA;8;0;SI;1;17;6.5;6.3;6.5;0;;0;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AACE01;Taller de Consultoría Empresarial;Administración;IAD;Ingeniería en Administración de Empresas;IAD;SIN MENCIÓN;IAD-IAD-1;I.P.;VESPERTINA;8;0;SI;1;16;6.3;6.4;6.3;0;;0;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AAFN01;Estados Financieros;Administración;AE;Administración de Empresas;AE0;Sin Mención;AE-AE0-3;C.F.T.;VESPERTINA;4;0;SI;1;2;4.6;5.1;4.5;1;;16.7;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AATA01;Taller de Asistencia Empresarial;Administración;AE;Administración de Empresas;AE0;Sin Mención;AE-AE0-3;C.F.T.;VESPERTINA;4;0;SI;1;1;5.5;6;6.5;0;;10;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;ABC302;Producción Frutales;Agroindustria y Medioambiente;88;Ingeniería Agrícola;885;Sin Mención;88-885-3;I.P.;DIURNA;4;1;NO;1;27;6.8;5.9;3.7;0;;14.3;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;ACTA01;Taller de Asistencia Contable;Administración;47;Contabilidad General;470;SIN MENCIÓN;47-470-6;C.F.T.;VESPERTINA;4;0;SI;1;0;;;;0;;0;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;ACTR02;Taller de Tributación Renta;Administración;47;Contabilidad General;470;SIN MENCIÓN;47-470-6;C.F.T.;VESPERTINA;4;0;SI;1;0;;;;0;;12.5;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;ADA401;Marketing;Administración;AE;Administración de Empresas;AE0;Sin Mención;AE-AE0-4;C.F.T.;DIURNA;2;0;NO;1;29;6;6.5;6.4;1;;13;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;ADB401;Finanzas;Administración;AE;Administración de Empresas;AE0;Sin Mención;AE-AE0-4;C.F.T.;DIURNA;2;0;NO;4;117;4.2;4.1;4.8;62;;41.7;;0;SI;87
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;ADC404;Contabilidad;Administración;AE;Administración de Empresas;AE0;Sin Mención;AE-AE0-4;C.F.T.;DIURNA;2;1;NO;2;46;5.5;3.4;4;8;;13;;0;SI;18
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;ADD401;Software de Remuneraciones;Administración;AE;Administración de Empresas;AE0;Sin Mención;AE-AE0-4;C.F.T.;DIURNA;4;0;SI;1;18;5.9;5.5;6.3;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;ADJ502;Legislación Laboral;Administración;AE;Administración de Empresas;AE0;Sin Mención;AE-AE0-4;C.F.T.;DIURNA;4;0;SI;2;18;5.7;6.6;5.4;0;;;;0;SI;2
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;ADMO02;Ventas y Servicios;Administración;AE;Administración de Empresas;AE0;Sin Mención;AE-AE0-4;C.F.T.;DIURNA;2;0;NO;1;31;6.6;6.4;6;0;;13;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;ADMO03;Legislación Tributaria;Administración;AE;Administración de Empresas;AE0;Sin Mención;AE-AE0-4;C.F.T.;DIURNA;2;0;NO;1;28;5.1;6.7;5.8;0;;13.6;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;ADOO01;Proyecto Integrado;Administración;AE;Administración de Empresas;AE0;Sin Mención;AE-AE0-4;C.F.T.;DIURNA;4;0;SI;1;17;6.3;6.8;6.7;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AEEU01;Electivo V Alternativa B: Experiencia del Usuario;Administración;ELE;Electivos CFT - IP;ELEC;Electivos CFT-IP;IAD-IAD-1-Electivos;I.P.;VESPERTINA;1;0;SI;1;5;6.5;6.4;7;0;;0;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AEGC01;Electivo VI Alternativa B: Gestión del Cambio;Administración;ELE;Electivos CFT - IP;ELEC;Electivos CFT-IP;IAD-IAD-1-Electivos;I.P.;VESPERTINA;1;0;SI;1;13;6.7;5.9;6.4;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AEMK01;Electivo VI Alternativa A: Mercado de Capitales;Administración;ELE;Electivos CFT - IP;ELEC;Electivos CFT-IP;IAD-IAD-1-Electivos;I.P.;VESPERTINA;1;0;SI;1;4;5.1;5.3;5.4;0;;0;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AENE01;Electivo V Alternativa A: Negociación;Administración;ELE;Electivos CFT - IP;ELEC;Electivos CFT-IP;IAD-IAD-1-Electivos;I.P.;VESPERTINA;1;0;SI;1;12;6.9;6.1;6.6;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AGA305;Tecnologías de Proceso y Almacenamiento;Agroindustria y Medioambiente;TEA;Técnico Agrícola;TEA;Sin mención;TEA-TEA-1;C.F.T.;DIURNA;2;0;NO;1;11;4.4;5.2;5.1;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AGA402;Seguridad y Salud Laboral;Agroindustria y Medioambiente;88;Ingeniería Agrícola;885;Sin Mención;88-885-3;I.P.;DIURNA;4;0;NO;1;27;5.9;7;6.7;0;;12.5;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AGB121;Prevención y Control de Plagas, Enfermedades y Malezas;Agroindustria y Medioambiente;88;Ingeniería Agrícola;885;Sin Mención;88-885-4;I.P.;DIURNA;2;0;NO;1;26;6.2;5.5;6.6;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AGB122;Taller de Prácticas Agrícolas Sostenibles;Agroindustria y Medioambiente;88;Ingeniería Agrícola;885;Sin Mención;88-885-4;I.P.;DIURNA;2;0;NO;1;27;5.9;5.7;6.3;1;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AGC221;Sistemas de Riego;Agroindustria y Medioambiente;88;Ingeniería Agrícola;885;Sin Mención;88-885-4;I.P.;DIURNA;2;0;NO;1;26;6;5.9;6.8;1;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AGC306;Negocios Agrícolas;Agroindustria y Medioambiente;88;Ingeniería Agrícola;885;Sin Mención;88-885-3;I.P.;DIURNA;4;0;NO;1;20;4.7;5.6;7;0;;25;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AGD404;Cultivos Intensivos y Sistemas Hidropónicos;Agroindustria y Medioambiente;88;Ingeniería Agrícola;885;Sin Mención;88-885-3;I.P.;DIURNA;4;0;NO;1;25;5.4;7;7;0;;0;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AGE502;Gestión de Riesgos Climáticos;Agroindustria y Medioambiente;88;Ingeniería Agrícola;885;Sin Mención;88-885-3;I.P.;DIURNA;6;0;NO;1;9;6.4;6.2;6.6;0;;0;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AGE504;Desarrollo Mercado Exportador;Agroindustria y Medioambiente;88;Ingeniería Agrícola;885;Sin Mención;88-885-3;I.P.;DIURNA;8;0;SI;1;7;6.9;6.7;7;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AGE505;Gestión del Proceso de Producción Agrícola;Agroindustria y Medioambiente;88;Ingeniería Agrícola;885;Sin Mención;88-885-3;I.P.;DIURNA;6;0;NO;1;6;6.7;6.7;6.6;0;;0;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AGE506;Infraestructura Agroindustrial;Agroindustria y Medioambiente;88;Ingeniería Agrícola;885;Sin Mención;88-885-3;I.P.;DIURNA;8;0;SI;1;8;6;6.7;6.5;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AGEE14;Sustentabilidad y Mecánica Básica de Equipos Agrícolas;Administración;ELE;Electivos CFT - IP;ELEC;Electivos CFT-IP;88-885-3-Electivos;I.P.;DIURNA;8;0;SI;1;8;5.5;6.5;6.6;1;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AGEE15;Formulación de Raciones en Alimentación Animal;Administración;ELE;Electivos CFT - IP;ELEC;Electivos CFT-IP;88-885-3-Electivos;I.P.;DIURNA;8;0;SI;1;5;4.5;6;6.4;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AGEE22;Tecnologías de Cultivos Intensivos en Ambientes Controlados;Administración;ELE;Electivos CFT - IP;ELEC;Electivos CFT-IP;88-885-3-Electivos;I.P.;DIURNA;4;0;NO;1;4;6;7;7;0;;0;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AGEE25;Energías Renovables y Sistemas de Reciclaje en la Agricultura;Administración;ELE;Electivos CFT - IP;ELEC;Electivos CFT-IP;88-885-3-Electivos;I.P.;DIURNA;8;0;SI;1;3;4.8;6;6.5;1;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AGEE32;Sanidad Animal;Administración;ELE;Electivos CFT - IP;ELEC;Electivos CFT-IP;88-885-3-Electivos;I.P.;DIURNA;4;0;NO;1;17;5;5.6;6.2;0;;20;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AGG403;Interpretación y Uso de Datos en Agricultura de Precisión;Agroindustria y Medioambiente;88;Ingeniería Agrícola;885;Sin Mención;88-885-3;I.P.;DIURNA;6;0;NO;1;7;4.4;6.3;6.1;0;;0;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AGI001;Proyecto Integrado;Agroindustria y Medioambiente;88;Ingeniería Agrícola;885;Sin Mención;88-885-3;I.P.;DIURNA;4;0;NO;1;27;6.7;6.6;6.6;0;;14.3;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AGI002;Proyecto de Título Profesional;Agroindustria y Medioambiente;88;Ingeniería Agrícola;885;Sin Mención;88-885-3;I.P.;DIURNA;8;0;SI;1;7;6.3;6.3;6.7;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AGO325;Manejo de Suelo y Nutrición Vegetal;Agroindustria y Medioambiente;88;Ingeniería Agrícola;885;Sin Mención;88-885-4;I.P.;DIURNA;2;0;NO;2;54;4.3;5.3;5.4;16;;;;0;SI;27
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;APA4V1;Desarrollo de Personas en el Sector Público;Administración;TAP;Técnico en Administración Pública;TAP;Sin Mención;TAP-TAP-2;C.F.T.;VESPERTINA;2;0;NO;1;23;4.3;6.1;6.3;3;;17.1;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;APB4V1;Herramientas de Productividad para la Gestión Pública;Administración;TAP;Técnico en Administración Pública;TAP;Sin Mención;TAP-TAP-2;C.F.T.;VESPERTINA;2;0;NO;1;23;5.8;6.2;6.7;0;;25.7;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;APB4V2;Bases de Datos para la Gestión Pública;Administración;TAP;Técnico en Administración Pública;TAP;Sin Mención;TAP-TAP-2;C.F.T.;VESPERTINA;2;0;NO;1;23;5.3;6;6.2;0;;22.9;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;APCM02;Software ERP;Administración;47;Contabilidad General;470;SIN MENCIÓN;47-470-6;C.F.T.;VESPERTINA;4;0;SI;1;1;6.5;6;6;0;;11.1;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;APD4V1;Contabilidad Pública;Administración;TAP;Técnico en Administración Pública;TAP;Sin Mención;TAP-TAP-2;C.F.T.;VESPERTINA;4;0;SI;1;23;6.2;6.3;6.1;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;APFN01;Finanzas;Administración;47;Contabilidad General;470;SIN MENCIÓN;47-470-6;C.F.T.;VESPERTINA;3;0;NO;1;2;6.3;5.6;5.5;0;60;;38.5;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;APO4V4;Plataformas de Compras;Administración;TAP;Técnico en Administración Pública;TAP;Sin Mención;TAP-TAP-2;C.F.T.;VESPERTINA;4;0;SI;1;22;5.4;6.6;6.7;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;APO4V7;Fundamentos Normativos de la Administración Pública;Administración;TAP;Técnico en Administración Pública;TAP;Sin Mención;TAP-TAP-2;C.F.T.;VESPERTINA;2;0;NO;1;23;6.8;4.1;5.8;0;;20;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;APPE01;Planificación Estratégica y Control Gestión;Administración;IAD;Ingeniería en Administración de Empresas;IAD;SIN MENCIÓN;IAD-IAD-1;I.P.;VESPERTINA;8;0;SI;1;17;5.6;5.4;5.9;0;;0;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;APPIV1;Proyecto Integrado;Administración;TAP;Técnico en Administración Pública;TAP;Sin Mención;TAP-TAP-2;C.F.T.;VESPERTINA;4;0;SI;1;23;6;6.1;6.4;2;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;APTS01;Taller de Simulación de Negocios;Administración;IAD;Ingeniería en Administración de Empresas;IAD;SIN MENCIÓN;IAD-IAD-1;I.P.;VESPERTINA;6;0;NO;1;1;6.4;2.7;6.1;0;;5.9;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;ATAD01;Administración;Mecánica;MI;Ingeniería en Mecánica y Electromovilidad Automotriz;MI1;Sin Mención;MI-MI1-1;I.P.;DIURNA;2;0;NO;1;29;5.9;5.6;5.5;0;;27.6;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;ATAD01;Administración;Mecánica;ME;Técnico en Mecánica y Electromovilidad Automotriz;ME1;Sin Mención;ME-ME1-1;C.F.T.;VESPERTINA;2;0;NO;1;34;6.4;6;5.8;2;;46.2;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;ATAN01;Administración;Gastronomía;GA;Gastronomía;GA;Sin Mención;GA-GA-1;C.F.T.;VESPERTINA;2;0;NO;1;16;5.4;4.6;4.3;2;;16.7;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;ATAN01;Administración;Agroindustria y Medioambiente;88;Ingeniería Agrícola;885;Sin Mención;88-885-4;I.P.;DIURNA;2;0;NO;1;25;5.7;5.9;6.4;2;;0;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;ATAN01;Administración;Salud;48;Técnico en Enfermería;480;SIN MENCIÓN;48-480-7;C.F.T.;DIURNA;2;0;NO;3;77;6.1;4;6;7;;17.5;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;ATAN01;Administración;Salud;TO;Técnico en Odontología;TO;Sin mención;TO-TO-1;C.F.T.;DIURNA;2;0;NO;2;45;6.2;5.7;6.1;0;;15.4;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;ATAN01;Administración;Gastronomía;GA;Gastronomía;GA;Sin Mención;GA-GA-1;C.F.T.;DIURNA;2;0;NO;1;26;5.9;4.8;6.1;2;;17.9;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;ATAN01;Administración;Diseño e Industria Digital;DDW;Diseño Digital y Web;DDW;Sin mención;DDW-DDW-1;C.F.T.;DIURNA;2;0;NO;1;17;5.7;5.1;6.5;0;;11.5;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;ATAN01;Administración;Construcción;CC;Construcción Civil;CC0;Sin mención;CC-CC0-5;I.P.;DIURNA;2;0;NO;1;30;6;4.8;6.5;4;;24;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;ATAN01;Administración;Construcción;TC;Técnico en Construcción;TCO;SIN MENCIÓN;TC-TCO-2;C.F.T.;VESPERTINA;2;0;NO;1;31;6.3;5.2;4.8;1;;22.2;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;ATFI01;Finanzas;Construcción;CC;Construcción Civil;CC0;Sin mención;CC-CC0-5;I.P.;DIURNA;6;0;NO;1;36;4.8;6.4;5.7;2;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;ATFN01;Finanzas;Mecánica;MI;Ingeniería en Mecánica y Electromovilidad Automotriz;MI1;Sin Mención;MI-MI1-1;I.P.;DIURNA;6;1;NO;1;22;3.4;5.5;3.9;5;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AUAU01;Taller Integrado de Auditoría;Administración;CA;Contador Auditor;CA1;Sin Mención;CA-CA1-1;U.T.C.;VESPERTINA;8;0;SI;1;1;7;7;7;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AVA401;Marketing;Administración;AE;Administración de Empresas;AE0;Sin Mención;AE-AE0-5;C.F.T.;VESPERTINA;2;0;NO;1;21;6.3;5.7;6.6;0;;15.4;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AVB401;Finanzas;Administración;AE;Administración de Empresas;AE0;Sin Mención;AE-AE0-5;C.F.T.;VESPERTINA;2;0;NO;1;25;3.9;5.5;6.2;1;;23.1;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AVC404;Contabilidad;Administración;AE;Administración de Empresas;AE0;Sin Mención;AE-AE0-5;C.F.T.;VESPERTINA;2;1;NO;2;42;5.6;3.8;5.8;10;;7.7;;0;SI;21
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AVD401;Software de Remuneraciones;Administración;AE;Administración de Empresas;AE0;Sin Mención;AE-AE0-5;C.F.T.;VESPERTINA;4;0;SI;2;39;5.8;6.3;6.5;11;;;;0;SI;19
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AVFI01;Finanzas;Administración;TAP;Técnico en Administración Pública;TAP;Sin Mención;TAP-TAP-2;C.F.T.;VESPERTINA;4;0;SI;1;22;5.3;6.3;7;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AVGP01;Gestión de Personas;Administración;TAP;Técnico en Administración Pública;TAP;Sin Mención;TAP-TAP-2;C.F.T.;VESPERTINA;2;0;NO;1;23;5.6;6.1;6;0;;20;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AVJ502;Legislación Laboral;Administración;AE;Administración de Empresas;AE0;Sin Mención;AE-AE0-5;C.F.T.;VESPERTINA;4;0;SI;1;20;5.7;6.1;6.6;1;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AVMO02;Ventas y Servicios;Administración;AE;Administración de Empresas;AE0;Sin Mención;AE-AE0-5;C.F.T.;VESPERTINA;2;0;NO;1;21;5.8;5.8;5.8;0;;15.4;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AVMO03;Legislación Tributaria;Administración;AE;Administración de Empresas;AE0;Sin Mención;AE-AE0-5;C.F.T.;VESPERTINA;2;0;NO;1;21;6;5.1;6.3;2;;19.2;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;AVOO01;Proyecto Integrado;Administración;AE;Administración de Empresas;AE0;Sin Mención;AE-AE0-5;C.F.T.;VESPERTINA;4;0;SI;1;19;6.5;6.6;6.5;1;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;CBIF01;Introducción a la Física;Construcción;TC;Técnico en Construcción;TCO;SIN MENCIÓN;TC-TCO-1;C.F.T.;VESPERTINA;4;0;SI;1;2;4.9;5.9;5.8;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;CBPR01;Probabilidad;Agroindustria y Medioambiente;88;Ingeniería Agrícola;885;Sin Mención;88-885-3;I.P.;DIURNA;6;0;NO;1;6;6;6.3;6.7;0;;0;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;CCCA04;Edificación en Altura;Construcción;CC;Construcción Civil;CC0;Sin mención;CC-CC0-5;I.P.;DIURNA;4;0;NO;1;21;6.2;6.5;6.5;0;;24.1;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;CCCA04;Edificación en Altura;Construcción;TC;Técnico en Construcción;TCO;SIN MENCIÓN;TC-TCO-2;C.F.T.;VESPERTINA;4;0;SI;1;20;5.8;5.5;5.6;0;;25;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;CCCA06;Análisis de Costos;Construcción;CC;Construcción Civil;CC0;Sin mención;CC-CC0-5;I.P.;DIURNA;6;0;NO;1;26;6.2;6;6.4;2;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;CCCC06;Comportamiento de Estructuras;Construcción;CC;Construcción Civil;CC0;Sin mención;CC-CC0-5;I.P.;DIURNA;6;0;NO;2;26;6.4;4.4;5.6;2;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;CCCG04;Instalaciones de Gas y Eléctricas;Construcción;TC;Técnico en Construcción;TCO;SIN MENCIÓN;TC-TCO-2;C.F.T.;VESPERTINA;4;0;SI;1;18;5.7;6.4;6.6;0;;30.8;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;CCCG04;Instalaciones de Gas y Eléctricas;Construcción;CC;Construcción Civil;CC0;Sin mención;CC-CC0-5;I.P.;DIURNA;4;0;NO;1;20;6.4;6.3;6.6;0;;15.4;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;CCCH06;Hormigones y Morteros;Construcción;CC;Construcción Civil;CC0;Sin mención;CC-CC0-5;I.P.;DIURNA;6;0;NO;3;28;5.9;6.5;6.2;1;;;;0;SI;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;CCCH14;Proyecto Integrado;Construcción;TC;Técnico en Construcción;TCO;SIN MENCIÓN;TC-TCO-2;C.F.T.;VESPERTINA;4;0;SI;1;15;5.4;6.3;6.6;0;;0;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;CCCH14;Proyecto Integrado;Construcción;CC;Construcción Civil;CC0;Sin mención;CC-CC0-5;I.P.;DIURNA;4;0;NO;1;21;6.3;6.7;7;1;;20;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;CCCI04;Instalaciones Sanitarias;Construcción;CC;Construcción Civil;CC0;Sin mención;CC-CC0-5;I.P.;DIURNA;4;0;NO;1;20;6.7;6.6;6.7;1;;14.8;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;CCCI04;Instalaciones Sanitarias;Construcción;TC;Técnico en Construcción;TCO;SIN MENCIÓN;TC-TCO-2;C.F.T.;VESPERTINA;4;0;SI;1;18;5.6;6.6;6.5;0;;20;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;CCCM02;Taller BIM;Construcción;TC;Técnico en Construcción;TCO;SIN MENCIÓN;TC-TCO-2;C.F.T.;VESPERTINA;2;0;NO;2;29;6.3;6.4;5.3;0;;13.6;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;CCCM02;Taller BIM;Construcción;CC;Construcción Civil;CC0;Sin mención;CC-CC0-5;I.P.;DIURNA;2;0;NO;2;32;6.6;6.7;6.2;0;;20.8;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;CCCO06;Planificación de Obras de Construcción;Construcción;CC;Construcción Civil;CC0;Sin mención;CC-CC0-5;I.P.;DIURNA;6;1;NO;2;26;6.4;6.3;6.2;2;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;CCCP02;Taller de Cubicación y Presupuesto;Construcción;CC;Construcción Civil;CC0;Sin mención;CC-CC0-5;I.P.;DIURNA;2;0;NO;2;19;4.9;5.1;5.5;1;;16.7;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;CCCP02;Taller de Cubicación y Presupuesto;Construcción;TC;Técnico en Construcción;TCO;SIN MENCIÓN;TC-TCO-2;C.F.T.;VESPERTINA;2;0;NO;2;29;5;5.5;5.7;1;;14.3;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;CCCP12;Aspectos Legales y Contratos;Construcción;TC;Técnico en Construcción;TCO;SIN MENCIÓN;TC-TCO-2;C.F.T.;VESPERTINA;2;0;NO;1;28;4.9;6;6;0;;4.5;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;CCCP12;Aspectos Legales y Contratos;Construcción;CC;Construcción Civil;CC0;Sin mención;CC-CC0-5;I.P.;DIURNA;2;0;NO;1;32;5.5;5.4;5.5;2;;20.8;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;CCCP22;Obra Gruesa;Construcción;CC;Construcción Civil;CC0;Sin mención;CC-CC0-5;I.P.;DIURNA;2;0;NO;1;31;6;5.6;6.3;1;;20.8;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;CCCP22;Obra Gruesa;Construcción;TC;Técnico en Construcción;TCO;SIN MENCIÓN;TC-TCO-2;C.F.T.;VESPERTINA;2;0;NO;2;29;5.3;4.9;5.3;0;;8.7;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;CCCP32;Terminaciones;Construcción;TC;Técnico en Construcción;TCO;SIN MENCIÓN;TC-TCO-2;C.F.T.;VESPERTINA;2;0;NO;2;30;4.9;5.1;5;0;;21.7;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;CCCP32;Terminaciones;Construcción;CC;Construcción Civil;CC0;Sin mención;CC-CC0-5;I.P.;DIURNA;2;0;NO;1;32;6.7;5.9;5.9;1;;20;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;CCCS04;Construcción Sustentable;Construcción;TC;Técnico en Construcción;TCO;SIN MENCIÓN;TC-TCO-2;C.F.T.;VESPERTINA;4;0;SI;1;20;5.1;6.3;5.8;0;;23.1;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;CCCS04;Construcción Sustentable;Construcción;CC;Construcción Civil;CC0;Sin mención;CC-CC0-5;I.P.;DIURNA;4;0;NO;1;23;6;6.8;6.8;0;;19.2;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;COCI01;Construcción Industrializada;Construcción;CC;Construcción Civil;CC0;Sin mención;CC-CC0-4;I.P.;DIURNA;6;0;NO;1;6;6.9;5.7;5.6;1;;9.5;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;COEE15;Laboratorio de Innovación de Materiales;Administración;ELE;Electivos CFT - IP;ELEC;Electivos CFT-IP;CC-CC0-4-Electivos;I.P.;DIURNA;1;0;NO;1;12;6.9;5.3;5.5;0;;0;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;COHI02;Taller Integrado de Propuestas;Construcción;TC;Técnico en Construcción;TCO;SIN MENCIÓN;TC-TCO-1;C.F.T.;VESPERTINA;4;0;SI;1;8;4.5;5.4;5.1;0;;33.3;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;COHI03;Taller de Propuestas y Licitaciones BIM;Construcción;CC;Construcción Civil;CC0;Sin mención;CC-CC0-4;I.P.;DIURNA;6;0;NO;1;6;5.8;6.8;6.9;1;;20.8;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;COHI04;Proyecto de Título;Construcción;CC;Construcción Civil;CC0;Sin mención;CC-CC0-4;I.P.;DIURNA;8;0;SI;1;22;6;4.9;5.9;5;;7.7;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;COOC01;Obras Civiles;Construcción;CC;Construcción Civil;CC0;Sin mención;CC-CC0-4;I.P.;DIURNA;8;0;SI;1;22;5.4;6.8;5.8;1;;7.7;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;COSE01;Sustentabilidad y Economía Circular;Construcción;CC;Construcción Civil;CC0;Sin mención;CC-CC0-4;I.P.;DIURNA;8;0;SI;1;21;5.6;7;6.7;3;;0;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;DDA303;Animación Digital;Diseño e Industria Digital;DDW;Diseño Digital y Web;DDW;Sin mención;DDW-DDW-1;C.F.T.;DIURNA;4;0;SI;2;31;5.8;4;4.7;8;;;;0;SI;13
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;DDA304;Metodología de la Creatividad;Diseño e Industria Digital;DDW;Diseño Digital y Web;DDW;Sin mención;DDW-DDW-1;C.F.T.;DIURNA;2;0;NO;2;37;5.8;5.7;5.1;9;;31;;0;SI;18
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;DDB403;Laboratorio Digital Web;Diseño e Industria Digital;DDW;Diseño Digital y Web;DDW;Sin mención;DDW-DDW-1;C.F.T.;DIURNA;2;0;NO;1;18;6.2;4.3;6.4;0;;24.1;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;DDB405;Laboratorio Digital UI;Diseño e Industria Digital;DDW;Diseño Digital y Web;DDW;Sin mención;DDW-DDW-1;C.F.T.;DIURNA;4;0;SI;2;32;3.9;5;5.8;9;;;;0;SI;16
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;DDB406;Taller de Diseño de Interfaz;Diseño e Industria Digital;DDW;Diseño Digital y Web;DDW;Sin mención;DDW-DDW-1;C.F.T.;DIURNA;4;0;SI;2;33;6.7;6;6.3;6;;;;0;SI;17
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;DDC402;Imagen y Gráfica Digital;Diseño e Industria Digital;DDW;Diseño Digital y Web;DDW;Sin mención;DDW-DDW-1;C.F.T.;DIURNA;2;0;NO;2;33;6.5;5.8;4.8;6;;17.2;;0;SI;16
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;DDC403;Taller Diseño Web;Diseño e Industria Digital;DDW;Diseño Digital y Web;DDW;Sin mención;DDW-DDW-1;C.F.T.;DIURNA;2;0;NO;1;18;5.2;4.9;5.7;0;;24.1;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;DIIT01;Proyecto Integrado;Diseño e Industria Digital;DDW;Diseño Digital y Web;DDW;Sin mención;DDW-DDW-1;C.F.T.;DIURNA;4;0;SI;1;16;5.6;4.7;5.3;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;EDSB01;Salud Bucal Familiar y Comunitaria;Salud;OD;Técnico en Odontología;OD0;Sin Mención;OD-OD0-2;C.F.T.;DIURNA;4;1;NO;1;5;4.6;4.8;5.3;0;;3.7;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;FGES01;Inglés Inicial;Administración;AE;Administración de Empresas;AE0;Sin Mención;AE-AE0-4;C.F.T.;DIURNA;4;0;SI;1;18;6.6;6.6;6.5;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;FGES01;Inglés Inicial;Salud;TO;Técnico en Odontología;TO;Sin mención;TO-TO-1;C.F.T.;DIURNA;4;1;NO;2;33;6.6;6.5;4.6;1;;;;0;SI;11
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;FGES02;Inglés Habilitante;Administración;ELE;Electivos CFT - IP;ELEC;Electivos CFT-IP;IN-INGO1;I.P.;DIURNA;6;0;NO;1;35;;;;34;;0;;0;SI;35
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;FGES02;Inglés Habilitante;Construcción;CC;Construcción Civil;CC0;Sin mención;CC-CC0-5;I.P.;DIURNA;0;0;NO;1;32;5.8;5.6;6.4;2;;0;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;FGES02;Inglés Habilitante;Mecánica;MI;Ingeniería en Mecánica y Electromovilidad Automotriz;MI1;Sin Mención;MI-MI1-1;I.P.;DIURNA;0;0;NO;1;18;5.6;5.4;6.5;1;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;FGIE01;Innovación y Emprendimiento I;Mecánica;MI;Ingeniería en Mecánica y Electromovilidad Automotriz;MI1;Sin Mención;MI-MI1-1;I.P.;DIURNA;4;1;NO;1;20;6.3;6.2;6.3;1;;3.3;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;FGIE01;Innovación y Emprendimiento I;Diseño e Industria Digital;DDW;Diseño Digital y Web;DDW;Sin mención;DDW-DDW-1;C.F.T.;DIURNA;4;0;SI;1;19;6.6;6.7;6.2;1;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;FGIE01;Innovación y Emprendimiento I;Gastronomía;GA;Gastronomía;GA;Sin Mención;GA-GA-1;C.F.T.;VESPERTINA;4;0;SI;1;19;7;7;5;2;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;FGIE01;Innovación y Emprendimiento I;Mecánica;ME;Técnico en Mecánica y Electromovilidad Automotriz;ME1;Sin Mención;ME-ME1-1;C.F.T.;VESPERTINA;4;0;SI;1;21;6.5;6.4;5.5;1;;0;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;FGIE01;Innovación y Emprendimiento I;Construcción;TC;Técnico en Construcción;TCO;SIN MENCIÓN;TC-TCO-2;C.F.T.;VESPERTINA;4;0;SI;1;18;5.1;6.6;6.4;1;;25;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;FGIE01;Innovación y Emprendimiento I;Construcción;CC;Construcción Civil;CC0;Sin mención;CC-CC0-5;I.P.;DIURNA;4;1;NO;1;21;6.9;6.9;7;2;;8.3;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;FGIE01;Innovación y Emprendimiento I;Gastronomía;GA;Gastronomía;GA;Sin Mención;GA-GA-1;C.F.T.;DIURNA;4;0;SI;1;27;6.3;6.4;6.2;3;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;FGIE01;Innovación y Emprendimiento I;Salud;48;Técnico en Enfermería;480;SIN MENCIÓN;48-480-7;C.F.T.;DIURNA;4;1;NO;2;48;7;7;7;1;;0;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;FGIE01;Innovación y Emprendimiento I;Agroindustria y Medioambiente;88;Ingeniería Agrícola;885;Sin Mención;88-885-3;I.P.;DIURNA;4;1;NO;1;22;6.5;6.3;6.5;0;;22.2;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;FGIE03;Innovación y Emprendimiento III;Construcción;CC;Construcción Civil;CC0;Sin mención;CC-CC0-4;I.P.;DIURNA;8;0;SI;1;28;6.5;6.4;6.4;1;;4;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;FGIE03;Innovación y Emprendimiento III;Administración;IAD;Ingeniería en Administración de Empresas;IAD;SIN MENCIÓN;IAD-IAD-1;I.P.;VESPERTINA;8;0;SI;1;18;7;7;7;0;;0;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;FGIE03;Innovación y Emprendimiento III;Mecánica;MI;Ingeniería en Mecánica y Electromovilidad Automotriz;MI1;Sin Mención;MI-MI1-1;I.P.;DIURNA;8;0;SI;1;14;5.4;5.6;6;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;FVES01;Inglés Inicial;Administración;AE;Administración de Empresas;AE0;Sin Mención;AE-AE0-5;C.F.T.;VESPERTINA;4;0;SI;1;19;6.8;5.5;6.3;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;FVES01;Inglés Inicial;Informática, Ciberseguridad y Telecomunicaciones;B5;Analista Programador;B50;SIN MENCIÓN;B5-B50-14;C.F.T.;VESPERTINA;4;0;SI;2;18;6.5;5.8;5.1;2;;;;0;SI;7
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;FVES01;Inglés Inicial;Administración;TAP;Técnico en Administración Pública;TAP;Sin Mención;TAP-TAP-2;C.F.T.;VESPERTINA;4;0;SI;1;23;6.5;5.9;5.9;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;GAB202;Diseño de Ofertas en Repostería;Gastronomía;GA;Gastronomía;GA;Sin Mención;GA-GA-1;C.F.T.;DIURNA;2;0;NO;1;24;5.5;6;5.6;0;;6.7;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;GAB202;Diseño de Ofertas en Repostería;Gastronomía;GA;Gastronomía;GA;Sin Mención;GA-GA-1;C.F.T.;VESPERTINA;2;0;NO;1;13;6.3;6.8;5.7;1;;5.9;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;GAC301;Recepción y Almacenamiento de Insumos;Gastronomía;GA;Gastronomía;GA;Sin Mención;GA-GA-1;C.F.T.;VESPERTINA;2;0;NO;1;13;5.3;6.4;6.4;1;;11.8;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;GAC301;Recepción y Almacenamiento de Insumos;Gastronomía;GA;Gastronomía;GA;Sin Mención;GA-GA-1;C.F.T.;DIURNA;2;0;NO;1;24;5.5;6.3;6.1;1;;6.7;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;GAC302;Taller de Producción Gastronómica;Gastronomía;GA;Gastronomía;GA;Sin Mención;GA-GA-1;C.F.T.;DIURNA;2;0;NO;3;36;6.7;6.4;5.7;1;;6.7;;0;SI;12
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;GAC302;Taller de Producción Gastronómica;Gastronomía;GA;Gastronomía;GA;Sin Mención;GA-GA-1;C.F.T.;VESPERTINA;2;0;NO;1;12;6.2;6.3;3.9;0;;5.9;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;GAC306;Taller de Servicio al Cliente en Restaurant;Gastronomía;GA;Gastronomía;GA;Sin Mención;GA-GA-1;C.F.T.;VESPERTINA;2;0;NO;1;12;5.5;7;5.9;0;;0;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;GAC306;Taller de Servicio al Cliente en Restaurant;Gastronomía;GA;Gastronomía;GA;Sin Mención;GA-GA-1;C.F.T.;DIURNA;2;0;NO;2;22;6.6;7;7;0;;3.3;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;GAD401;Taller de Supervisión de la Producción Gastronómica;Gastronomía;GA;Gastronomía;GA;Sin Mención;GA-GA-1;C.F.T.;VESPERTINA;4;0;SI;1;13;6.5;6.1;6.7;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;GAD401;Taller de Supervisión de la Producción Gastronómica;Gastronomía;GA;Gastronomía;GA;Sin Mención;GA-GA-1;C.F.T.;DIURNA;4;0;SI;2;28;6.3;6.1;6.4;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;GAE401;Taller de Producción en Pastelería;Gastronomía;GA;Gastronomía;GA;Sin Mención;GA-GA-1;C.F.T.;DIURNA;2;0;NO;2;24;6.8;6.7;6.2;0;;3.3;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;GAE401;Taller de Producción en Pastelería;Gastronomía;GA;Gastronomía;GA;Sin Mención;GA-GA-1;C.F.T.;VESPERTINA;2;0;NO;1;12;6;6.6;5.3;0;;5.9;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;GAF401;Taller de Supervisión de la Producción en Pastelería;Gastronomía;GA;Gastronomía;GA;Sin Mención;GA-GA-1;C.F.T.;DIURNA;4;0;SI;2;27;6.3;6.4;6.4;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;GAF401;Taller de Supervisión de la Producción en Pastelería;Gastronomía;GA;Gastronomía;GA;Sin Mención;GA-GA-1;C.F.T.;VESPERTINA;4;0;SI;1;13;7;5.9;6.4;2;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;GAF402;Taller de Supervisión de la Producción en Heladería;Gastronomía;GA;Gastronomía;GA;Sin Mención;GA-GA-1;C.F.T.;DIURNA;4;0;SI;2;28;6.8;5.8;6.5;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;GAF402;Taller de Supervisión de la Producción en Heladería;Gastronomía;GA;Gastronomía;GA;Sin Mención;GA-GA-1;C.F.T.;VESPERTINA;4;0;SI;1;15;6.9;6.5;7;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;GAIT01;Proyecto Integrado;Gastronomía;GA;Gastronomía;GA;Sin Mención;GA-GA-1;C.F.T.;VESPERTINA;4;0;SI;1;15;6.4;7;6.7;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;GAIT01;Proyecto Integrado;Gastronomía;GA;Gastronomía;GA;Sin Mención;GA-GA-1;C.F.T.;DIURNA;4;0;SI;1;25;5.9;5.5;5.9;1;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;GAZ012;Inglés de Especialidad I;Administración;ELE;Electivos CFT - IP;ELEC;Electivos CFT-IP;GA-GA-1-Electivos;I.P.;VESPERTINA;1;0;NO;1;4;5.7;7;6.9;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;GAZ012;Inglés de Especialidad I;Administración;ELE;Electivos CFT - IP;ELEC;Electivos CFT-IP;GA-GA-1-Electivos;I.P.;DIURNA;1;0;NO;1;13;5.9;6.5;6.8;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;GAZ022;Laboratorio de Productos y Subproductos Alimenticios;Administración;ELE;Electivos CFT - IP;ELEC;Electivos CFT-IP;GA-GA-1-Electivos;I.P.;VESPERTINA;1;0;NO;1;12;5.3;6.9;5.4;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;GAZ022;Laboratorio de Productos y Subproductos Alimenticios;Administración;ELE;Electivos CFT - IP;ELEC;Electivos CFT-IP;GA-GA-1-Electivos;I.P.;DIURNA;1;0;NO;1;14;5.3;5.9;5.5;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;GSCA63;Confiabilidad Automotriz;Mecánica;MI;Ingeniería en Mecánica y Electromovilidad Automotriz;MI1;Sin Mención;MI-MI1-1;I.P.;DIURNA;6;0;NO;1;23;5;5.6;4.7;2;;0;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;GSES82;Electromovilidad Sostenible;Mecánica;MI;Ingeniería en Mecánica y Electromovilidad Automotriz;MI1;Sin Mención;MI-MI1-1;I.P.;DIURNA;8;0;SI;1;12;5.7;5.3;6.1;0;;0;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;GSPS24;Protocolos de Seguridad en Electromovilidad;Mecánica;MI;Ingeniería en Mecánica y Electromovilidad Automotriz;MI1;Sin Mención;MI-MI1-1;I.P.;DIURNA;2;0;NO;2;28;5.1;6.8;4.5;2;;14.8;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;GSPS24;Protocolos de Seguridad en Electromovilidad;Mecánica;ME;Técnico en Mecánica y Electromovilidad Automotriz;ME1;Sin Mención;ME-ME1-1;C.F.T.;VESPERTINA;2;0;NO;2;33;5.3;6.4;5.9;3;;17.9;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;HIIA45;Integración Automotriz II;Mecánica;MI;Ingeniería en Mecánica y Electromovilidad Automotriz;MI1;Sin Mención;MI-MI1-1;I.P.;DIURNA;4;0;NO;1;23;5.4;5.8;5.9;1;;0;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;HIIA45;Integración Automotriz II;Mecánica;ME;Técnico en Mecánica y Electromovilidad Automotriz;ME1;Sin Mención;ME-ME1-1;C.F.T.;VESPERTINA;4;0;SI;1;25;5;5.8;6.9;0;;7.7;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;HIIA65;Integración Automotriz III;Mecánica;MI;Ingeniería en Mecánica y Electromovilidad Automotriz;MI1;Sin Mención;MI-MI1-1;I.P.;DIURNA;6;0;NO;1;21;5.2;5.8;4.6;1;;0;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;HIPA85;Proyecto Automotriz;Mecánica;MI;Ingeniería en Mecánica y Electromovilidad Automotriz;MI1;Sin Mención;MI-MI1-1;I.P.;DIURNA;8;0;SI;1;12;4.6;5.8;5.7;0;;0;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;IDEN01;Inglés I;Salud;OD;Técnico en Odontología;OD0;Sin Mención;OD-OD0-2;C.F.T.;DIURNA;3;1;NO;1;1;6.6;6.6;7;0;;;6.1;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;IDEN02;Inglés II;Salud;OD;Técnico en Odontología;OD0;Sin Mención;OD-OD0-2;C.F.T.;DIURNA;4;0;NO;1;3;7;6.8;6.2;0;;0;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;INIA01;Seminario de Grado;Administración;CA;Contador Auditor;CA1;Sin Mención;CA-CA1-1;U.T.C.;VESPERTINA;8;0;SI;1;1;6.5;6.5;6;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;MAET41;Preparación de Motores;Administración;ELE;Electivos CFT - IP;ELEC;Electivos CFT-IP;MI-MI1-1-Electivos;I.P.;DIURNA;1;0;NO;1;10;6.2;6.2;5.9;1;;14.3;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;MAET41;Preparación de Motores;Administración;ELE;Electivos CFT - IP;ELEC;Electivos CFT-IP;ME-ME1-1-Electivos;I.P.;VESPERTINA;1;0;NO;2;25;5.5;4.9;5.1;17;;20;;0;SI;17
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;MAET42;Diagnóstico Automotriz Avanzado;Administración;ELE;Electivos CFT - IP;ELEC;Electivos CFT-IP;ME-ME1-1-Electivos;I.P.;VESPERTINA;1;0;NO;1;16;5.3;6.2;4.7;0;;10;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;MAET42;Diagnóstico Automotriz Avanzado;Administración;ELE;Electivos CFT - IP;ELEC;Electivos CFT-IP;MI-MI1-1-Electivos;I.P.;DIURNA;1;0;NO;1;12;5.3;6.5;5.7;0;;0;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;MAET85;Selección de Motores;Administración;ELE;Electivos CFT - IP;ELEC;Electivos CFT-IP;MI-MI1-1-Electivos;I.P.;DIURNA;1;0;NO;1;12;5.2;6.4;5.1;2;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;MAFM61;Análisis de Fallas en Sistemas Mecánicos;Mecánica;MI;Ingeniería en Mecánica y Electromovilidad Automotriz;MI1;Sin Mención;MI-MI1-1;I.P.;DIURNA;6;0;NO;1;22;6.1;5.3;5.8;0;;0;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;MAFT62;Análisis de Fallas en Sistemas de Termofluidos;Mecánica;MI;Ingeniería en Mecánica y Electromovilidad Automotriz;MI1;Sin Mención;MI-MI1-1;I.P.;DIURNA;6;0;NO;1;18;4.9;6;5.6;0;;0;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;MAGE42;Gestión Electrónica del Motor;Mecánica;ME;Técnico en Mecánica y Electromovilidad Automotriz;ME1;Sin Mención;ME-ME1-1;C.F.T.;VESPERTINA;4;0;SI;1;24;4.5;4.8;5;0;;0;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;MAGE42;Gestión Electrónica del Motor;Mecánica;MI;Ingeniería en Mecánica y Electromovilidad Automotriz;MI1;Sin Mención;MI-MI1-1;I.P.;DIURNA;4;0;NO;1;23;5;5.2;4.9;0;;5.6;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;MASA23;Seguridad Activa del Automóvil;Mecánica;MI;Ingeniería en Mecánica y Electromovilidad Automotriz;MI1;Sin Mención;MI-MI1-1;I.P.;DIURNA;2;1;NO;2;25;6.1;3.9;5.4;2;;7.7;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;MASA23;Seguridad Activa del Automóvil;Mecánica;ME;Técnico en Mecánica y Electromovilidad Automotriz;ME1;Sin Mención;ME-ME1-1;C.F.T.;VESPERTINA;2;1;NO;2;33;5.3;5.1;5.4;2;;18.5;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;MASA81;Soporte Automotriz Especializado;Mecánica;MI;Ingeniería en Mecánica y Electromovilidad Automotriz;MI1;Sin Mención;MI-MI1-1;I.P.;DIURNA;8;0;SI;1;12;4.6;5.1;5.2;0;;0;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;MASE22;Sistemas Eléctricos del Automóvil;Mecánica;MI;Ingeniería en Mecánica y Electromovilidad Automotriz;MI1;Sin Mención;MI-MI1-1;I.P.;DIURNA;2;1;NO;2;27;6.6;6.3;6.1;1;;6.5;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;MASE22;Sistemas Eléctricos del Automóvil;Mecánica;ME;Técnico en Mecánica y Electromovilidad Automotriz;ME1;Sin Mención;ME-ME1-1;C.F.T.;VESPERTINA;2;1;NO;2;32;6.2;6.3;6.4;1;;17.2;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;MASM21;Sistemas de Motorización;Mecánica;ME;Técnico en Mecánica y Electromovilidad Automotriz;ME1;Sin Mención;ME-ME1-1;C.F.T.;VESPERTINA;2;1;NO;2;29;6.6;6.3;6;0;;10.7;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;MASM21;Sistemas de Motorización;Mecánica;MI;Ingeniería en Mecánica y Electromovilidad Automotriz;MI1;Sin Mención;MI-MI1-1;I.P.;DIURNA;2;1;NO;2;27;6;6.6;6.9;1;;11.1;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;MASM43;Sistemas Multiplexados de Seguridad y Confortabilidad;Mecánica;ME;Técnico en Mecánica y Electromovilidad Automotriz;ME1;Sin Mención;ME-ME1-1;C.F.T.;VESPERTINA;4;0;SI;1;26;6.3;6.9;6.2;0;;0;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;MASM43;Sistemas Multiplexados de Seguridad y Confortabilidad;Mecánica;MI;Ingeniería en Mecánica y Electromovilidad Automotriz;MI1;Sin Mención;MI-MI1-1;I.P.;DIURNA;4;0;NO;1;21;6.4;6.1;6.7;1;;0;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;MASP41;Diagnóstico de Sistemas de Propulsión Inteligentes;Mecánica;MI;Ingeniería en Mecánica y Electromovilidad Automotriz;MI1;Sin Mención;MI-MI1-1;I.P.;DIURNA;4;0;NO;1;21;4.2;6.5;6.9;1;;7.1;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;MASP41;Diagnóstico de Sistemas de Propulsión Inteligentes;Mecánica;ME;Técnico en Mecánica y Electromovilidad Automotriz;ME1;Sin Mención;ME-ME1-1;C.F.T.;VESPERTINA;4;0;SI;1;24;3.8;6.6;6.9;0;;6.3;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;MTAE02;Resolución de Problemas en Álgebra;Agroindustria y Medioambiente;TEA;Técnico Agrícola;TEA;Sin mención;TEA-TEA-1;C.F.T.;DIURNA;1;1;NO;1;2;5.9;6;5.6;1;30.8;;22.2;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;MTFC01;Funciones y Números Complejos;Agroindustria y Medioambiente;TEA;Técnico Agrícola;TEA;Sin mención;TEA-TEA-1;C.F.T.;DIURNA;2;0;NO;1;6;4.4;5;3.7;1;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;MTFF01;Funciones y Progresiones;Administración;AE;Administración de Empresas;AE0;Sin Mención;AE-AE0-4;C.F.T.;DIURNA;2;0;NO;1;30;5.3;5.1;5;4;;11.4;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;MTFG01;Funciones y Geometría;Mecánica;MI;Ingeniería en Mecánica y Electromovilidad Automotriz;MI1;Sin Mención;MI-MI1-1;I.P.;DIURNA;2;0;NO;1;22;4.9;5.2;4;6;;15.4;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;MTFG01;Funciones y Geometría;Diseño e Industria Digital;DDW;Diseño Digital y Web;DDW;Sin mención;DDW-DDW-1;C.F.T.;DIURNA;2;0;NO;1;14;5;5.6;5.3;1;;23.1;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;MTFG01;Funciones y Geometría;Construcción;TC;Técnico en Construcción;TCO;SIN MENCIÓN;TC-TCO-2;C.F.T.;VESPERTINA;2;0;NO;1;27;5.3;5.3;4.8;0;;15;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;MTFG01;Funciones y Geometría;Construcción;CC;Construcción Civil;CC0;Sin mención;CC-CC0-5;I.P.;DIURNA;2;0;NO;1;26;5.1;5.4;5.1;5;;17.6;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;MTFG01;Funciones y Geometría;Agroindustria y Medioambiente;88;Ingeniería Agrícola;885;Sin Mención;88-885-4;I.P.;DIURNA;2;0;NO;2;38;4.4;4.2;4.5;22;;;;0;SI;19
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;MTFG01;Funciones y Geometría;Mecánica;ME;Técnico en Mecánica y Electromovilidad Automotriz;ME1;Sin Mención;ME-ME1-1;C.F.T.;VESPERTINA;2;0;NO;2;51;4.9;5.2;4.8;4;;14.9;;0;SI;22
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;MVFF01;Funciones y Progresiones;Administración;AE;Administración de Empresas;AE0;Sin Mención;AE-AE0-5;C.F.T.;VESPERTINA;2;0;NO;2;42;5;5.4;4.9;8;;4.8;;0;SI;21
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;MVFF01;Funciones y Progresiones;Administración;TAP;Técnico en Administración Pública;TAP;Sin Mención;TAP-TAP-2;C.F.T.;VESPERTINA;2;0;NO;1;22;5;4.7;5;3;;17.2;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;MVFM01;Funciones y Matrices;Informática, Ciberseguridad y Telecomunicaciones;B5;Analista Programador;B50;SIN MENCIÓN;B5-B50-14;C.F.T.;VESPERTINA;2;0;NO;1;36;5.5;4.1;5.7;4;;12.8;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TAAT02;Comunicación: Aprende a transmitir tus ideas de manera efectiva;Extra-Curricular;TAA;Talleres de Apoyo al Aprendizaje;TAA;Sin mención;TAA-TAA-1;I.P.;VESPERTINA;1;0;SI;3;45;;;;27;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TAAT02;Comunicación: Aprende a transmitir tus ideas de manera efectiva;Extra-Curricular;TAA;Talleres de Apoyo al Aprendizaje;TAA;Sin mención;TAA-TAA-1;I.P.;DIURNA;1;0;SI;8;105;;;;21;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TAAT04;Integridad. Construyendo Relaciones de Confianza;Extra-Curricular;TAA;Talleres de Apoyo al Aprendizaje;TAA;Sin mención;TAA-TAA-1;I.P.;DIURNA;1;0;SI;3;50;;;;27;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TAAT05;Perseverancia. Claves para alcanzar tus objetivos;Extra-Curricular;TAA;Talleres de Apoyo al Aprendizaje;TAA;Sin mención;TAA-TAA-1;I.P.;VESPERTINA;1;0;SI;5;52;;;;41;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TAAT05;Perseverancia. Claves para alcanzar tus objetivos;Extra-Curricular;TAA;Talleres de Apoyo al Aprendizaje;TAA;Sin mención;TAA-TAA-1;I.P.;DIURNA;1;0;SI;9;108;;;;76;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TEAF02;Administración de Fármacos;Salud;48;Técnico en Enfermería;480;SIN MENCIÓN;48-480-7;C.F.T.;DIURNA;2;2;NO;3;80;4.4;5.6;3.9;9;;14.9;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TECH01;Calidad, Seguridad y Humanización en la Atención del Usuario;Salud;48;Técnico en Enfermería;480;SIN MENCIÓN;48-480-7;C.F.T.;DIURNA;2;0;NO;3;71;4.9;6.3;5.3;2;;9.4;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TEEB01;Enfermería Básica;Salud;48;Técnico en Enfermería;480;SIN MENCIÓN;48-480-7;C.F.T.;DIURNA;2;2;NO;4;101;4.9;4.4;4.8;29;;25.8;;0;SI;27
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TEEP01;Electivo II Emergencias y Prehospitalario;Administración;ELE;Electivos CFT - IP;ELEC;Electivos CFT-IP;48-480-7-Electivos;I.P.;DIURNA;1;0;NO;1;29;5.2;5.4;6.5;0;;11.5;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TEEU01;Enfermería en Urgencias;Salud;48;Técnico en Enfermería;480;SIN MENCIÓN;48-480-7;C.F.T.;DIURNA;4;1;NO;3;55;5.1;5.7;5.6;6;;13.7;;0;SI;11
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TEMI01;Manejo de Insumos Clínicos;Salud;48;Técnico en Enfermería;480;SIN MENCIÓN;48-480-7;C.F.T.;DIURNA;2;0;NO;3;72;5;5.7;3.9;13;;11.8;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TEMR01;Cuidados de la Mujer y Recién Nacido;Salud;48;Técnico en Enfermería;480;SIN MENCIÓN;48-480-7;C.F.T.;DIURNA;4;1;NO;2;46;6.5;6;6.4;2;;0;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TENA01;Cuidados de Enfermería del Niño y Adolescente;Salud;48;Técnico en Enfermería;480;SIN MENCIÓN;48-480-7;C.F.T.;DIURNA;4;1;NO;2;42;5.3;5.1;6;4;;12.2;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TEPP01;Práctica Profesional/Internado;Salud;48;Técnico en Enfermería;480;SIN MENCIÓN;48-480-7;C.F.T.;DIURNA;5;0;SI;1;1;6.5;6.7;6.1;0;0;;0;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TEPQ01;Electivo II Cuidados en Pabellón Quirúrgico;Administración;ELE;Electivos CFT - IP;ELEC;Electivos CFT-IP;48-480-7-Electivos;I.P.;DIURNA;1;0;NO;1;24;4.4;4.5;5.2;7;;18.5;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TEPS01;Promoción de la Salud y Prevención de la Enfermedad;Salud;48;Técnico en Enfermería;480;SIN MENCIÓN;48-480-7;C.F.T.;DIURNA;2;0;NO;3;74;4.6;6.4;5.5;7;;11.1;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TESD01;Salud Digital;Salud;48;Técnico en Enfermería;480;SIN MENCIÓN;48-480-7;C.F.T.;DIURNA;4;1;NO;2;45;5;5.7;6;0;;2;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TETE03;Taller Integrado de Empresas III;Administración;CA;Contador Auditor;CA1;Sin Mención;CA-CA1-1;U.T.C.;VESPERTINA;8;0;SI;1;1;7;7;7;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TI2021;Programación Orientada a Objeto;Informática, Ciberseguridad y Telecomunicaciones;B5;Analista Programador;B50;SIN MENCIÓN;B5-B50-12;C.F.T.;VESPERTINA;2;1;NO;1;1;7;5.8;3.8;0;0;0;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TI2023;Desarrollo Ágil;Informática, Ciberseguridad y Telecomunicaciones;B5;Analista Programador;B50;SIN MENCIÓN;B5-B50-12;C.F.T.;VESPERTINA;2;1;NO;1;1;6;6.7;6.5;0;0;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TI2041;Programación Back End;Informática, Ciberseguridad y Telecomunicaciones;B5;Analista Programador;B50;SIN MENCIÓN;B5-B50-12;C.F.T.;VESPERTINA;4;0;SI;1;3;6.1;5.1;5.9;0;;15.4;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TI2042;Aplicaciones Móviles para IoT;Informática, Ciberseguridad y Telecomunicaciones;B5;Analista Programador;B50;SIN MENCIÓN;B5-B50-12;C.F.T.;VESPERTINA;4;0;SI;1;3;3.6;4.3;5.2;0;;15.4;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TI2043;Ingeniería de Software;Informática, Ciberseguridad y Telecomunicaciones;B5;Analista Programador;B50;SIN MENCIÓN;B5-B50-12;C.F.T.;VESPERTINA;4;0;SI;1;1;6.5;6.8;6.8;0;;22.2;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TI3V21;Programación Orientada a Objeto Seguro;Informática, Ciberseguridad y Telecomunicaciones;B5;Analista Programador;B50;SIN MENCIÓN;B5-B50-14;C.F.T.;VESPERTINA;2;0;NO;3;47;4.9;3.9;4.5;2;;27.3;;0;SI;15
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TI3V22;Bases de Datos Estructuradas;Informática, Ciberseguridad y Telecomunicaciones;B5;Analista Programador;B50;SIN MENCIÓN;B5-B50-14;C.F.T.;VESPERTINA;2;1;NO;3;52;4.3;4.5;5;7;;26.1;;0;SI;16
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TI3V23;Metodología de Desarrollo Ágil;Informática, Ciberseguridad y Telecomunicaciones;B5;Analista Programador;B50;SIN MENCIÓN;B5-B50-14;C.F.T.;VESPERTINA;2;0;NO;1;38;3.4;5.7;5.5;3;;30.4;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TI3V25;Modelamiento de Soluciones Informáticas;Informática, Ciberseguridad y Telecomunicaciones;B5;Analista Programador;B50;SIN MENCIÓN;B5-B50-14;C.F.T.;VESPERTINA;2;0;NO;2;38;6.2;6.4;6.5;0;;34.8;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TI3V41;Programación Back End;Informática, Ciberseguridad y Telecomunicaciones;B5;Analista Programador;B50;SIN MENCIÓN;B5-B50-14;C.F.T.;VESPERTINA;4;0;SI;2;31;4.2;4.7;6.4;11;;;;0;SI;14
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TI3V42;Aplicaciones Móviles para IoT;Informática, Ciberseguridad y Telecomunicaciones;B5;Analista Programador;B50;SIN MENCIÓN;B5-B50-14;C.F.T.;VESPERTINA;4;0;SI;1;16;6.7;6.3;6.3;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TI3V43;Ingeniería de Software;Informática, Ciberseguridad y Telecomunicaciones;B5;Analista Programador;B50;SIN MENCIÓN;B5-B50-14;C.F.T.;VESPERTINA;4;0;SI;1;15;6;6.8;6.7;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TIHI42;Taller de Diseño y Desarrollo de Soluciones;Informática, Ciberseguridad y Telecomunicaciones;B5;Analista Programador;B50;SIN MENCIÓN;B5-B50-12;C.F.T.;VESPERTINA;4;0;SI;1;3;5.6;6.3;6.2;0;;16.7;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TIHV43;Proyecto Integrado;Informática, Ciberseguridad y Telecomunicaciones;B5;Analista Programador;B50;SIN MENCIÓN;B5-B50-14;C.F.T.;VESPERTINA;4;0;SI;1;12;6.9;5.9;4.7;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TILV12;Realidad Virtual y Aumentada;Administración;ELE;Electivos CFT - IP;ELEC;Electivos CFT-IP;B5-B50-14-Electivos;I.P.;VESPERTINA;4;0;SI;1;6;6.5;5;6.2;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TILV22;Desarrollo de Video Juegos;Administración;ELE;Electivos CFT - IP;ELEC;Electivos CFT-IP;B5-B50-14-Electivos;I.P.;VESPERTINA;4;0;SI;1;8;5.9;6.4;5.8;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TOAC02;Administración Clínica Dental y Equipos;Salud;TO;Técnico en Odontología;TO;Sin mención;TO-TO-1;C.F.T.;DIURNA;2;0;NO;2;45;5.7;5.3;5;0;;6;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TOCS02;Calidad, Seguridad y Humanización en la Atención Odontológica y Bioética;Salud;TO;Técnico en Odontología;TO;Sin mención;TO-TO-1;C.F.T.;DIURNA;2;0;NO;2;45;5.4;4.7;6;4;;19.2;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TOEB02;Esterilización y Bioseguridad;Salud;TO;Técnico en Odontología;TO;Sin mención;TO-TO-1;C.F.T.;DIURNA;2;1;NO;2;43;5.6;6.2;6;3;;12;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TOID02;Imagenología Dental;Salud;TO;Técnico en Odontología;TO;Sin mención;TO-TO-1;C.F.T.;DIURNA;2;1;NO;2;45;4.1;5.1;5.9;1;;11.1;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TOOD02;Operatoria Dental;Salud;TO;Técnico en Odontología;TO;Sin mención;TO-TO-1;C.F.T.;DIURNA;2;1;NO;2;45;4.1;5.9;6;5;;13.3;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TOOG04;Odontogeriatría;Salud;TO;Técnico en Odontología;TO;Sin mención;TO-TO-1;C.F.T.;DIURNA;4;1;NO;1;21;6.2;6.4;6.2;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TOPP02;Promoción y Prevención en Salud Bucal Familiar;Salud;TO;Técnico en Odontología;TO;Sin mención;TO-TO-1;C.F.T.;DIURNA;2;0;NO;2;44;4.4;4.8;5.2;1;;11.5;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TORO04;Rehabilitación Oral;Salud;TO;Técnico en Odontología;TO;Sin mención;TO-TO-1;C.F.T.;DIURNA;4;1;NO;1;21;4.5;5.1;6.1;0;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TORT04;Ortodoncia y Ortopedia;Salud;TO;Técnico en Odontología;TO;Sin mención;TO-TO-1;C.F.T.;DIURNA;4;1;NO;2;43;4.3;6.4;6.4;1;;;;0;SI;21
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TOUI04;Urgencias e Integración de Especialidades Odontológicas;Salud;TO;Técnico en Odontología;TO;Sin mención;TO-TO-1;C.F.T.;DIURNA;4;1;NO;1;18;4.8;6.1;5.8;1;;;;0;NO;0
+PRIMAVERA 2025;Zona Austral;COYHAIQUE;TTRA01;Tutoría;Extra-Curricular;TU;Tutoría;TU1;Sin Mención;TU-TU1-1;I.P.;DIURNA;1;0;SI;4;0;;;;0;;;;0;NO;0

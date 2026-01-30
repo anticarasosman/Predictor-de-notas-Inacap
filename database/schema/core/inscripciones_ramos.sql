@@ -11,7 +11,7 @@ CREATE TABLE Inscripciones_Ramos (
     fecha_inscripcion DATE NOT NULL,
     tipo_inscripcion ENUM('REGULAR', 'CONVALIDACION', 'HOMOLOGACION') NOT NULL,
     estado_inscripcion ENUM('INSCRITO', 'RETIRADO', 'COMPLETADO') DEFAULT 'INSCRITO',
-    nota_final DECIMAL(3,2) CHECK (nota_final BETWEEN 1.0 AND 7.0),
+    nota_final DECIMAL(2,1) CHECK (nota_final BETWEEN 1.0 AND 7.0),
     porcentaje_asistencia DECIMAL(5,2) CHECK (porcentaje_asistencia BETWEEN 0.0 AND 100.0),
     situacion_final ENUM('APROBADO', 'REPROBADO', 'PENDIENTE') DEFAULT 'PENDIENTE',
     fecha_retiro DATE,
