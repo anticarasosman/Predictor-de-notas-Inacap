@@ -1,1 +1,0 @@
-/* Cantidad de estudiantes por carrera */

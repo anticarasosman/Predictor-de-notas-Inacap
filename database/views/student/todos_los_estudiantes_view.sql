@@ -1,1 +1,0 @@
-/* Estudiante con info geográfica completa */

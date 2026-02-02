@@ -1,0 +1,28 @@
+CREATE TABLE Asignatura_semestre (
+    id_asignatura_semestre INT PRIMARY KEY AUTO_INCREMENT,
+
+    codigo_asignatura VARCHAR(10),
+    FOREIGN KEY (codigo_asignatura) REFERENCES Asignatura(codigo_asignatura),
+
+    periodo_semestre VARCHAR(10),
+    FOREIGN KEY (periodo_semestre) REFERENCES Semestre(periodo),
+
+    secciones INT,
+    alumnos INT,
+
+    porcentaje_reprobacion_N1 INT,
+    porcentaje_reprobacion_N2 INT,
+    porcentaje_reprobacion_N3 INT,
+    alumnos_en_riesgo INT,
+    alumnos_ayudantia INT,
+    
+    promedio_nota_uno DECIMAL(2,1),
+    promedio_nota_dos DECIMAL(2,1),
+    promedio_nota_tres DECIMAL(2,1),
+    
+    ayudantia_virtual BOOLEAN DEFAULT FALSE,
+    ayudantia_sede BOOLEAN DEFAULT FALSE,
+
+    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+)

@@ -1,1 +1,0 @@
-/* Estudiantes con cuotas pendientes/vencidas */

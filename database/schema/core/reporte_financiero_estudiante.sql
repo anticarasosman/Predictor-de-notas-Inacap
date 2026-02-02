@@ -1,0 +1,16 @@
+CREATE TABLE Reporte_financiero_estudiante (
+    id_reporte_financiero_estudiante INT PRIMARY KEY AUTO_INCREMENT,
+
+    rut_estudiante VARCHAR(12),
+    FOREIGN KEY (rut_estudiante) REFERENCES Estudiante(rut),
+
+    cantidad_cuotas_pendientes_matriculas INT,
+    cantidad_cuotas_pendientes_colegiaturas INT,
+    deuda_matriculas INT,
+    deuda_colegiaturas INT,
+    otras_deudas INT,
+    deuda_total INT,
+
+
+    fecha_generacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)

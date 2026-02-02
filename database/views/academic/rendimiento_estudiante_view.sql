@@ -1,1 +1,0 @@
-/* Notas y rendimiento académico por semestre */

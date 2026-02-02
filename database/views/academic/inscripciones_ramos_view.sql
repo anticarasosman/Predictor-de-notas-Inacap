@@ -1,1 +1,0 @@
-/* Inscripciones con info de profesor, ramo y seccion */

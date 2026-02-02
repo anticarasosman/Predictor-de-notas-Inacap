@@ -1,1 +1,0 @@
-/* Datos de predictor por estudiante */

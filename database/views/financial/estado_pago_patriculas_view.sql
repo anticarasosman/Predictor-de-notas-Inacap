@@ -1,1 +1,0 @@
-/* Estado de pago de cada matricula */

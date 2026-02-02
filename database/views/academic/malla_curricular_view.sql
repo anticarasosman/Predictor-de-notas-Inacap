@@ -1,1 +1,0 @@
-/* Plan de estudio con ramos ordenados */

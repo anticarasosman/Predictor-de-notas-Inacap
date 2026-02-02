@@ -1,19 +1,31 @@
 CREATE TABLE Estudiante (
-    id_estudiante INT PRIMARY KEY AUTO_INCREMENT,
+    rut VARCHAR(12) PRIMARY KEY,
 
-    rut VARCHAR(12) NOT NULL UNIQUE,
+    secciones_curriculares INT,
+    secciones_online INT,
+    deuda INT DEFAULT 0,
+    asistencia_promedio INT,
+
     nombre VARCHAR(200) NOT NULL,
-    email_institucional VARCHAR(200) NOT NULL UNIQUE,
-    email_personal VARCHAR(200) UNIQUE,
-    telefono VARCHAR(20) NOT NULL,
-    fecha_nacimiento DATE NOT NULL,
-    edad INT NOT NULL,
-    sexo ENUM('M', 'F', 'O') NOT NULL,
-    nacionalidad VARCHAR(100) NOT NULL,
-    ano_egreso_media INT NOT NULL,
-    puntaje_psu INT NOT NULL,
-    integrantes_grupo_familiar INT NOT NULL,
+    programa_estudio VARCHAR(100),
+    nombre_apoderado VARCHAR(200),
 
-    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    terminal BOOLEAN DEFAULT FALSE,
+    tiene_gratuidad BOOLEAN DEFAULT FALSE,
+    solicitud_interrupcion_estudios BOOLEAN DEFAULT FALSE,
+    solicitud_interrupcion_estudio_pendiente BOOLEAN DEFAULT FALSE,
+    interrupcion_estudio_pendiente BOOLEAN DEFAULT FALSE,
+    beca_stem BOOLEAN DEFAULT FALSE,
+
+    tipo_alumno ENUM("NUEVO", "VIEJO"),
+    estado_matricula ENUM("ACTIVO", "PENDIENTE", "EN POSTULACION", "MATRICULADO", "LISTA DE ESPERA", "CANCELADO"),
+
+    promedio_media_matematica DECIMAL(2,1),
+    promedio_media_lenguaje DECIMAL(2,1),
+    promedio_media_ingles DECIMAL(2,1),
+    
+    ultima_asistencia DATE,
+
+    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 )

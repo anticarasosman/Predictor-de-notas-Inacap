@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.3.0 Chrome/140.0.7339.249 Electron/38.7.2 Safari/537.36" version="29.3.0">
   <diagram name="Página-1" id="3drBhxz1mO2mOmO49USI">
-    <mxGraphModel dx="3319" dy="3213" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2658" dy="3575" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -132,30 +132,33 @@
           <mxGeometry height="30" width="323" y="30" as="geometry" />
         </mxCell>
         <mxCell id="zR47HOAyRayRGUPqPEn1-5" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="Reporte_Financiero_Estudiante" vertex="1">
-          <mxGeometry height="240" width="320" x="-1654" y="-2330" as="geometry">
+          <mxGeometry height="270" width="320" x="-1654" y="-2330" as="geometry">
             <mxRectangle height="30" width="100" x="40" y="40" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
         <mxCell id="zR47HOAyRayRGUPqPEn1-6" parent="zR47HOAyRayRGUPqPEn1-5" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;autosize=1;resizable=0;" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;PK: id_estudiante (INT, AUTO_INCREMENT)&lt;/span&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="30" width="320" y="30" as="geometry" />
         </mxCell>
-        <mxCell id="zR47HOAyRayRGUPqPEn1-63" parent="zR47HOAyRayRGUPqPEn1-5" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;autosize=1;resizable=0;" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;cantidad_cuotas_pendientes_colegiaturas (INT)&lt;/span&gt;&lt;/div&gt;" vertex="1">
+        <mxCell id="6ZUrBKvL44mrh0GlFoAT-1" parent="zR47HOAyRayRGUPqPEn1-5" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;autosize=1;resizable=0;" value="FK: rut_estudiante (VARCHAR (20))" vertex="1">
           <mxGeometry height="30" width="320" y="60" as="geometry" />
         </mxCell>
-        <mxCell id="zR47HOAyRayRGUPqPEn1-64" parent="zR47HOAyRayRGUPqPEn1-5" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;autosize=1;resizable=0;" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;cantidad_cuotas_pendientes_matriculas (INT)&lt;/span&gt;&lt;/div&gt;" vertex="1">
+        <mxCell id="zR47HOAyRayRGUPqPEn1-63" parent="zR47HOAyRayRGUPqPEn1-5" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;autosize=1;resizable=0;" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;cantidad_cuotas_pendientes_colegiaturas (INT)&lt;/span&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="30" width="320" y="90" as="geometry" />
         </mxCell>
-        <mxCell id="zR47HOAyRayRGUPqPEn1-66" parent="zR47HOAyRayRGUPqPEn1-5" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;autosize=1;resizable=0;" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;deuda_matriculas (INT)&lt;/span&gt;&lt;/div&gt;" vertex="1">
+        <mxCell id="zR47HOAyRayRGUPqPEn1-64" parent="zR47HOAyRayRGUPqPEn1-5" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;autosize=1;resizable=0;" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;cantidad_cuotas_pendientes_matriculas (INT)&lt;/span&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="30" width="320" y="120" as="geometry" />
         </mxCell>
-        <mxCell id="zR47HOAyRayRGUPqPEn1-67" parent="zR47HOAyRayRGUPqPEn1-5" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;autosize=1;resizable=0;" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;deuda_colegiatura (INT)&lt;/span&gt;&lt;/div&gt;" vertex="1">
+        <mxCell id="zR47HOAyRayRGUPqPEn1-66" parent="zR47HOAyRayRGUPqPEn1-5" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;autosize=1;resizable=0;" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;deuda_matriculas (INT)&lt;/span&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="30" width="320" y="150" as="geometry" />
         </mxCell>
-        <mxCell id="zR47HOAyRayRGUPqPEn1-68" parent="zR47HOAyRayRGUPqPEn1-5" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;autosize=1;resizable=0;" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;deuda_total_otras_deudas (INT)&lt;/span&gt;&lt;/div&gt;" vertex="1">
+        <mxCell id="zR47HOAyRayRGUPqPEn1-67" parent="zR47HOAyRayRGUPqPEn1-5" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;autosize=1;resizable=0;" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;deuda_colegiatura (INT)&lt;/span&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="30" width="320" y="180" as="geometry" />
         </mxCell>
-        <mxCell id="zR47HOAyRayRGUPqPEn1-69" parent="zR47HOAyRayRGUPqPEn1-5" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;autosize=1;resizable=0;" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;deuda_total (INT)&lt;/span&gt;&lt;/div&gt;" vertex="1">
+        <mxCell id="zR47HOAyRayRGUPqPEn1-68" parent="zR47HOAyRayRGUPqPEn1-5" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;autosize=1;resizable=0;" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;deuda_total_otras_deudas (INT)&lt;/span&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="30" width="320" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="zR47HOAyRayRGUPqPEn1-69" parent="zR47HOAyRayRGUPqPEn1-5" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;autosize=1;resizable=0;" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;deuda_total (INT)&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="30" width="320" y="240" as="geometry" />
         </mxCell>
         <mxCell id="zR47HOAyRayRGUPqPEn1-16" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="Estudiante-Semestre" vertex="1">
           <mxGeometry height="240" width="320" x="-1240" y="-2010" as="geometry">

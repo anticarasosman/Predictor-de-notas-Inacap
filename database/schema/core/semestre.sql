@@ -1,0 +1,5 @@
+CREATE TABLE Semestre(
+    id_semestre INT PRIMARY KEY AUTO_INCREMENT,
+
+    periodo VARCHAR(10) NOT NULL UNIQUE,
+)
