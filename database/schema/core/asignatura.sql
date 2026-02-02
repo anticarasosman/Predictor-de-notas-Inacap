@@ -6,8 +6,10 @@ CREATE TABLE Asignatura(
     area VARCHAR(100),
     COD_mencion VARCHAR(10),
     mencion VARCHAR(100),
-    plan VARCHAR(20),
+    plan VARCHAR(30),
+
     modalidad ENUM("VESPERTINA", "DIURNA"),
+    
     nivel INT,
     prerequisito_semestre_siguiente INT,
     ultimo_nivel INT,

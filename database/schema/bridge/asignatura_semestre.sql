@@ -9,12 +9,12 @@ CREATE TABLE Asignatura_semestre (
 
     secciones INT,
     alumnos INT,
-
-    porcentaje_reprobacion_N1 INT,
-    porcentaje_reprobacion_N2 INT,
-    porcentaje_reprobacion_N3 INT,
     alumnos_en_riesgo INT,
     alumnos_ayudantia INT,
+    
+    porcentaje_reprobacion_N1 FLOAT,
+    porcentaje_reprobacion_N2 FLOAT,
+    porcentaje_reprobacion_N3 FLOAT,
     
     promedio_nota_uno DECIMAL(2,1),
     promedio_nota_dos DECIMAL(2,1),

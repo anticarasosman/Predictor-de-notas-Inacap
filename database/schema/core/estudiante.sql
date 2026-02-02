@@ -3,7 +3,6 @@ CREATE TABLE Estudiante (
 
     secciones_curriculares INT,
     secciones_online INT,
-    deuda INT DEFAULT 0,
     asistencia_promedio INT,
 
     nombre VARCHAR(200) NOT NULL,

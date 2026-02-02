@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.3.0 Chrome/140.0.7339.249 Electron/38.7.2 Safari/537.36" version="29.3.0">
   <diagram name="Página-1" id="3drBhxz1mO2mOmO49USI">
-    <mxGraphModel dx="2324" dy="4332" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="3240" dy="4340" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -142,7 +142,7 @@
         <mxCell id="6ZUrBKvL44mrh0GlFoAT-1" parent="zR47HOAyRayRGUPqPEn1-5" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;autosize=1;resizable=0;" value="FK: rut_estudiante (VARCHAR (20))" vertex="1">
           <mxGeometry height="30" width="320" y="60" as="geometry" />
         </mxCell>
-        <mxCell id="6ZUrBKvL44mrh0GlFoAT-2" parent="zR47HOAyRayRGUPqPEn1-5" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;autosize=1;resizable=0;" value="FK: rut_estudiante (VARCHAR (20))" vertex="1">
+        <mxCell id="6ZUrBKvL44mrh0GlFoAT-2" parent="zR47HOAyRayRGUPqPEn1-5" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;autosize=1;resizable=0;" value="FK: periodo_semestre (VARCHAR (20))" vertex="1">
           <mxGeometry height="30" width="320" y="90" as="geometry" />
         </mxCell>
         <mxCell id="zR47HOAyRayRGUPqPEn1-63" parent="zR47HOAyRayRGUPqPEn1-5" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;autosize=1;resizable=0;" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;cantidad_cuotas_pendientes_colegiaturas (INT)&lt;/span&gt;&lt;/div&gt;" vertex="1">
@@ -306,6 +306,14 @@
         <mxCell id="zR47HOAyRayRGUPqPEn1-112" connectable="0" parent="zR47HOAyRayRGUPqPEn1-104" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="n:1" vertex="1">
           <mxGeometry relative="1" x="-0.163" y="-3" as="geometry">
             <mxPoint x="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6ZUrBKvL44mrh0GlFoAT-3" edge="1" parent="1" source="6ZUrBKvL44mrh0GlFoAT-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="zR47HOAyRayRGUPqPEn1-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="6ZUrBKvL44mrh0GlFoAT-4" connectable="0" parent="6ZUrBKvL44mrh0GlFoAT-3" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Text" vertex="1">
+          <mxGeometry relative="1" x="-0.1653" y="-3" as="geometry">
+            <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
       </root>
