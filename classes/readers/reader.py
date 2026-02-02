@@ -35,6 +35,36 @@ class Reader(ABC):
         except Error as e:
             print(f"✗ Error al verificar asignatura: {str(e)}")
             return False
+        
+    def _asignatura_semestre_exists(self, cursor, codigo, periodo):
+        try:
+            query = "SELECT COUNT(*) FROM Asignatura_semestre WHERE codigo_asignatura = %s AND periodo_semestre = %s"
+            cursor.execute(query, (codigo, periodo))
+            result = cursor.fetchone() is not None
+            return result
+        except Error as e:
+            print(f"✗ Error al verificar asignatura_semestre: {str(e)}")
+            return False
+    
+    def _estudiante_semestre_exists(self, cursor, rut, periodo):
+        try:
+            query = "SELECT COUNT(*) FROM Estudiante_semestre WHERE rut_estudiante = %s AND periodo_semestre = %s"
+            cursor.execute(query, (rut, periodo))
+            result = cursor.fetchone() is not None
+            return result
+        except Error as e:
+            print(f"✗ Error al verificar estudiante_semestre: {str(e)}")
+            return False
+        
+    def _estudiante_asignatura_exists(self, cursor, rut, codigo, periodo):
+        try:
+            query = "SELECT COUNT(*) FROM Estudiante_asignatura WHERE rut_estudiante = %s AND codigo_asignatura = %s AND periodo_semestre = %s"
+            cursor.execute(query, (rut, codigo, periodo))
+            result = cursor.fetchone() is not None
+            return result
+        except Error as e:
+            print(f"✗ Error al verificar estudiante_asignatura: {str(e)}")
+            return False
     
     # --- ESTUDIANTE ---
     

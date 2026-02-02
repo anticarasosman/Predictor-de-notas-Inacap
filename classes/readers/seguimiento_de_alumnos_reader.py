@@ -75,10 +75,23 @@ class SeguimientoDeAlumnosReader(Reader):
 
                 if self._estudiante_exists(cursor, rut_estudiante):
                     self._update_estudiante(cursor, rut_estudiante, datos_estudiante)
-                    self._update_estudiante_semestre(cursor, rut_estudiante, periodo, datos_estudiante_semestre)
                 else:
                     self._insert_estudiante(cursor, rut_estudiante, datos_estudiante)
+
+                if self._estudiante_semestre_exists(cursor, rut_estudiante, periodo):
+                    self._update_estudiante_semestre(cursor, rut_estudiante, periodo, datos_estudiante_semestre)
+                else:
                     self._insert_estudiante_semestre(cursor, rut_estudiante, periodo, datos_estudiante_semestre)
+
+                if self._asignatura_exists(codigo_asignatura):
+                    self._update_asignatura(cursor, codigo_asignatura, datos_asignatura)
+                else:
+                    self._insert_asignatura(cursor, codigo_asignatura, datos_asignatura)
+
+                if self._estudiante_asignatura_exists(cursor, rut_estudiante, codigo_asignatura, periodo):
+                    self._update_estudiante_asignatura(cursor, rut_estudiante, codigo_asignatura, periodo, datos_estudiante_asignatura)
+                else:
+                    self._insert_estudiante_asignatura(cursor, rut_estudiante, codigo_asignatura, periodo, datos_estudiante_asignatura)
                     
         finally:
             cursor.close()

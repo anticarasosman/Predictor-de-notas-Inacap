@@ -54,9 +54,12 @@ class AsignaturaCriticasReader(Reader):
                 
                 if self._asignatura_exists(codigo_asignatura):
                     self._update_asignatura(cursor, codigo_asignatura, datos_asignatura)
-                    self._update_asignatura_semestre(cursor, codigo_asignatura, periodo, datos_asignatura_semestre)
                 else:
                     self._insert_asignatura(cursor, codigo_asignatura, datos_asignatura)
+
+                if self._asignatura_semestre_exists(cursor, codigo_asignatura, periodo):
+                    self._update_asignatura_semestre(cursor, codigo_asignatura, periodo, datos_asignatura_semestre)
+                else:
                     self._insert_asignatura_semestre(cursor, codigo_asignatura, periodo, datos_asignatura_semestre)
                     
         finally:
