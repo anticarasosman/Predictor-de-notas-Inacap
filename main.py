@@ -7,6 +7,8 @@ from dotenv import load_dotenv
 import signal
 import sys
 
+from frontend.main_menu_gui import MainMenu
+
 load_dotenv()
 
 def cleanup(db_connection, root):
@@ -29,8 +31,8 @@ if __name__ == "__main__":
             # Crear la ventana principal
             root = tk.Tk()
             root.title("Predictor de Notas INACAP")
-            root.geometry("1x1")  # Ventana muy pequeña
-            root.attributes('-alpha', 0)  # Hacerla transparente
+            root.geometry("600x600")  # Tamaño visible para el menú
+            root.resizable(False, False)
             
             # Manejador para Ctrl+C
             def on_closing():
@@ -43,8 +45,7 @@ if __name__ == "__main__":
             root.protocol("WM_DELETE_WINDOW", on_closing)
             
             # Crear GUI del cargador de archivos
-            loader_gui = FileLoaderGUI(root, db_connection)
-            loader_gui.show_type_selection()
+            menu = MainMenu(root, db_connection)
             
             root.mainloop()
         else:

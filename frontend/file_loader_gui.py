@@ -9,34 +9,39 @@ import os
 class FileLoaderGUI:
     """GUI para cargar archivos a la base de datos"""
     
-    def __init__(self, root, db_connection):
+    def __init__(self, root, db_connection, main_menu=None):
         self.root = root
         self.db_connection = db_connection
+        self.main_menu = main_menu
         self.file_types = ReadersFactory.get_file_types()
     
     def show_type_selection(self):
-        """Muestra una ventana para seleccionar el tipo de archivo"""
-        # Crear ventana de diálogo
-        dialog = tk.Toplevel(self.root)
-        dialog.title("Seleccionar tipo de archivo")
-        dialog.geometry("400x300")
-        dialog.resizable(False, False)
-        
-        # Centrar la ventana
-        dialog.transient(self.root)
-        dialog.grab_set()
+        """Muestra la selección de tipo de archivo en la ventana principal"""
+        # Limpiar la ventana principal
+        for widget in self.root.winfo_children():
+            widget.destroy()
         
         # Título
         title_label = tk.Label(
-            dialog,
-            text="¿Qué tipo de archivo deseas subir?",
-            font=("Arial", 12, "bold")
+            self.root,
+            text="SUBIR ARCHIVOS A LA BASE DE DATOS",
+            font=("Arial", 16, "bold"),
+            pady=20
         )
-        title_label.pack(pady=20)
+        title_label.pack()
         
-        # Frame para botones
-        button_frame = tk.Frame(dialog)
-        button_frame.pack(pady=10, padx=20, fill=tk.BOTH, expand=True)
+        # Subtítulo
+        subtitle_label = tk.Label(
+            self.root,
+            text="¿Qué tipo de archivo deseas subir?",
+            font=("Arial", 12),
+            fg="gray"
+        )
+        subtitle_label.pack(pady=10)
+        
+        # Frame para botones de tipos de archivo
+        button_frame = tk.Frame(self.root)
+        button_frame.pack(pady=20, padx=50, fill=tk.X)
         
         # Crear botones para cada tipo
         for file_type, info in self.file_types.items():
@@ -45,20 +50,48 @@ class FileLoaderGUI:
                 text=info['name'],
                 font=("Arial", 11),
                 height=2,
-                command=lambda ft=file_type: self.select_files(ft, dialog)
+                bg="#2196F3",
+                fg="white",
+                command=lambda ft=file_type: self.select_files(ft)
             )
-            btn.pack(pady=10, fill=tk.X)
+            btn.pack(pady=8, fill=tk.X)
         
-        # Botón Cancelar
-        cancel_btn = tk.Button(
-            dialog,
-            text="Cancelar",
+        # Frame para botones inferiores
+        bottom_frame = tk.Frame(self.root)
+        bottom_frame.pack(pady=20)
+        
+        # Botón Volver al Menú
+        if self.main_menu:
+            back_btn = tk.Button(
+                bottom_frame,
+                text="← Volver al Menú Principal",
+                font=("Arial", 10),
+                bg="#607D8B",
+                fg="white",
+                width=25,
+                command=self.return_to_menu
+            )
+            back_btn.pack(side=tk.LEFT, padx=10)
+        
+        # Botón Cerrar Programa
+        exit_btn = tk.Button(
+            bottom_frame,
+            text="Cerrar Programa",
             font=("Arial", 10),
-            command=dialog.destroy
+            bg="#f44336",
+            fg="white",
+            width=20,
+            command=self.root.quit
         )
-        cancel_btn.pack(pady=10)
+        exit_btn.pack(side=tk.LEFT, padx=10)
     
-    def select_files(self, file_type, dialog):
+    def return_to_menu(self):
+        """Vuelve al menú principal"""
+        if self.main_menu:
+            self.main_menu.create_menu()
+
+    
+    def select_files(self, file_type):
         """Abre explorador de archivos para seleccionar archivos"""
         file_info = self.file_types[file_type]
         
@@ -69,7 +102,6 @@ class FileLoaderGUI:
         )
         
         if files:
-            dialog.destroy()
             self.process_files(file_type, files)
         else:
             messagebox.showwarning("Cancelado", "No se seleccionaron archivos")
@@ -187,15 +219,29 @@ class FileLoaderGUI:
                 text_widget.insert(tk.END, f"• {error}\n")
             text_widget.config(state=tk.DISABLED)
         
-        # Botón cerrar
-        close_btn = tk.Button(
-            result_dialog,
-            text="Cerrar",
-            font=("Arial", 10),
-            command=result_dialog.destroy
-        )
-        close_btn.pack(pady=10)
+        # Frame para botones
+        button_frame = tk.Frame(result_dialog)
+        button_frame.pack(pady=10)
         
+        # Botón Volver al Menú Principal
+        if self.main_menu:
+            menu_btn = tk.Button(
+                button_frame,
+                text="← Volver al Menú Principal",
+                font=("Arial", 10),
+                command=lambda: [result_dialog.destroy(), self.return_to_menu()]
+            )
+            menu_btn.pack(side=tk.LEFT, padx=10)
+        
+        # Botón Cerrar Programa
+        exit_btn = tk.Button(
+            button_frame,
+            text="Cerrar Programa",
+            font=("Arial", 10),
+            command=self.root.quit
+        )
+        exit_btn.pack(side=tk.LEFT, padx=10)
+
         # Mensaje de éxito/error general
         if success_count == total_files:
             messagebox.showinfo(
