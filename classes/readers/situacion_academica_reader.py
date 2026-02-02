@@ -9,11 +9,13 @@ class SituacionAcademicaReader(Reader):
         self.db_connection = db_connection
         self.df = pd.read_csv(self.file_path, delimiter=';', skiprows=5, encoding='utf-8')
 
-    def _process_and_upsert(self):
+    def _process_and_upsert(self, progress_callback=None):
         cursor = self.db_connection.cursor()
         
         try:
             for index, row in self.df.iterrows():
+                if progress_callback:
+                    progress_callback(index + 1)
                 rut_estudiante = row['RUT'] + '-' + str(row['DV'])
                 periodo = row['PERIODO']
 

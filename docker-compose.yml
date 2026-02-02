@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  db:
+    build: .
+    container_name: inacap-db
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-root}
+      MYSQL_DATABASE: ${DB_NAME:-inacap_db}
+      MYSQL_USER: ${DB_USER:-inacap_user}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-inacap_password}
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database:/docker-entrypoint-initdb.d
+    networks:
+      - inacap_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+volumes:
+  mysql_data:
+
+networks:
+  inacap_network:
+    driver: bridge

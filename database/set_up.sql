@@ -26,7 +26,7 @@ SOURCE c:/Users/gstaudt/Desktop/Predictor-de-notas-Inacap/database/seed_data/01_
 SOURCE c:/Users/gstaudt/Desktop/Predictor-de-notas-Inacap/database/seed_data/02_semestre.sql;
 SOURCE c:/Users/gstaudt/Desktop/Predictor-de-notas-Inacap/database/seed_data/03_asignatura.sql;
 
-SOURCE c:/Users/gstaudt/Desktop/Predictor-de-notas-Inacap/database/seed_data/04_reporte_financiero_estudiante.sql;
+SOURCE c:/Users/gstaudt/Desktop/Predictor-de-notas-Inacap/database/seed_data/04_reporte_financiero.sql;
 
 SOURCE c:/Users/gstaudt/Desktop/Predictor-de-notas-Inacap/database/seed_data/05_estudiante_semestre.sql;
 SOURCE c:/Users/gstaudt/Desktop/Predictor-de-notas-Inacap/database/seed_data/06_asignatura_semestre.sql;

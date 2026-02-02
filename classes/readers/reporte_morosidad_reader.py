@@ -8,57 +8,66 @@ class ReporteMorosidadReader(Reader):
         self.file_path = file_path
         self.db_connection = db_connection
         self.patron_año = r'(\d{4})'
-        self.df = pd.read_csv(self.file_path, delimiter=';', skiprows=2, encoding='utf-8')
+        self.df = pd.read_csv(self.file_path, delimiter=',', skiprows=0, encoding='utf-8')
+        # Limpiar nombres de columnas (eliminar espacios)
+        self.df.columns = self.df.columns.str.strip()
 
-    def _process_and_upsert(self):
+    def _process_and_upsert(self, progress_callback=None):
         cursor = self.db_connection.cursor()
         
         try:
             for index, row in self.df.iterrows():
-                rut_estudiante = row['Rut Alumno']
-                periodo = self._convert_periodo(row["Semestre"])
+                if progress_callback:
+                    progress_callback(index + 1)
+                try:
+                    rut_estudiante = row['Rut Alumno']
+                    periodo = self._convert_periodo(row["Semestre"])
 
-                self._insert_semestre(cursor, periodo)
+                    self._insert_semestre(cursor, periodo)
 
-                datos_estudiante = {
-                    "rut": rut_estudiante,
-                    "secciones_curriculares": None,
-                    "secciones_online": None,
-                    "deuda": int(row['Total Saldo']) if row['Total Saldo'] else 0,
-                    "asistencia_promedio": None,
-                    "nombre": None,
-                    "programa_estudio": row['Programa de Estudio'],
-                    "nombre_apoderado": row['Nombre Apoderado'],
-                    "terminal": False,
-                    "tiene_gratuidad": True if row['Tiene Gratuidad'] == 1 or row['Tiene Gratuidad'] == "Si" else False,
-                    "solicitud_interrupcion_estudios": None,
-                    "solicitud_interrupcion_estudio_pendiente": None,
-                    "interrupcion_estudio_pendiente": None,
-                    "beca_stem": None,
-                    "tipo_alumno": "NUEVO" if row['Tipo Alumno'].upper() == "NUEVO" else "VIEJO",
-                    "estado_matricula": row['Estado Matricula'],
-                    "promedio_media_matematica": None,
-                    "promedio_media_lenguaje": None,
-                    "promedio_media_ingles": None,
-                    "ultima_asistencia": None,
-                }
-                
-                datos_reporte_financiero_estudiante = {
-                    "rut_estudiante": rut_estudiante,
-                    "cantidad_cuotas_pendientes_matriculas": int(row['Cantidad Cuotas Pendientes Matricula']) if row['Cantidad Cuotas Pendientes Matricula'] else 0,
-                    "cantidad_cuotas_pendientes_colegiaturas": int(row['Cantidad Cuotas Pendientes Colegiaturas']) if row['Cantidad Cuotas Pendientes Colegiaturas'] else 0,
-                    "deuda_matriculas": int(row['Deuda Matriculas']) if row['Deuda Matriculas'] else 0,
-                    "deuda_colegiaturas": int(row['Deuda Colegiaturas']) if row['Deuda Colegiaturas'] else 0,
-                    "otras_deudas": int(row['Deuda Total Otras Deudas ']) if row['Deuda Total Otras Deudas '] else 0,
-                    "deuda_total": int(row['Deuda Total (Compromisos+Colegiaturas+Otras Deudas)']) if row['Deuda Total (Compromisos+Colegiaturas+Otras Deudas)'] else 0,
-                }
+                    datos_estudiante = {
+                        "rut": rut_estudiante,
+                        "secciones_curriculares": None,
+                        "secciones_online": None,
+                        "deuda": int(str(row['Total Saldo']).replace('$', '').replace(',', '')) if row['Total Saldo'] and str(row['Total Saldo']) != '$0' else 0,
+                        "asistencia_promedio": None,
+                        "nombre": None,
+                        "programa_estudio": row['Programa de Estudio'],
+                        "nombre_apoderado": row['Nombre Apoderado'],
+                        "terminal": False,
+                        "tiene_gratuidad": True if row['Tiene Gratuidad'] == 1 or row['Tiene Gratuidad'] == "Si" or str(row['Tiene Gratuidad']).upper() == 'YES' else False,
+                        "solicitud_interrupcion_estudios": None,
+                        "solicitud_interrupcion_estudio_pendiente": None,
+                        "interrupcion_estudio_pendiente": None,
+                        "beca_stem": None,
+                        "tipo_alumno": row['Tipo Alumno'],
+                        "estado_matricula": row['Estado Matricula'],
+                        "promedio_media_matematica": None,
+                        "promedio_media_lenguaje": None,
+                        "promedio_media_ingles": None,
+                        "ultima_asistencia": None,
+                    }
+                    
+                    datos_reporte_financiero_estudiante = {
+                        "rut_estudiante": rut_estudiante,
+                        "cantidad_cuotas_pendientes_matriculas": int(row['Cantidad Cuotas Pendientes Matricula']) if row['Cantidad Cuotas Pendientes Matricula'] else 0,
+                        "cantidad_cuotas_pendientes_colegiaturas": int(row['Cantidad Cuotas Pendientes Colegiaturas']) if row['Cantidad Cuotas Pendientes Colegiaturas'] else 0,
+                        "deuda_matriculas": int(str(row['Deuda Matriculas']).replace('$', '').replace(',', '')) if row['Deuda Matriculas'] and str(row['Deuda Matriculas']) != '$0' else 0,
+                        "deuda_colegiaturas": int(str(row['Deuda Colegiaturas']).replace('$', '').replace(',', '')) if row['Deuda Colegiaturas'] and str(row['Deuda Colegiaturas']) != '$0' else 0,
+                        "otras_deudas": int(row['Deuda Total Otras Deudas']) if row['Deuda Total Otras Deudas'] else 0,
+                        "deuda_total": int(str(row['Deuda Total (Compromisos+Colegiaturas+Otras Deudas)']).replace('$', '').replace(',', '')) if row['Deuda Total (Compromisos+Colegiaturas+Otras Deudas)'] and str(row['Deuda Total (Compromisos+Colegiaturas+Otras Deudas)']) != '$0' else 0,
+                    }
 
-                if self._estudiante_exists(cursor, rut_estudiante):
-                    self._update_estudiante(cursor, rut_estudiante, datos_estudiante)
-                    self._update_reporte_financiero(cursor, rut_estudiante, datos_reporte_financiero_estudiante)
-                else:
-                    self._insert_estudiante(cursor, rut_estudiante, datos_estudiante)
-                    self._insert_reporte_financiero(cursor, rut_estudiante, datos_reporte_financiero_estudiante)
+                    if self._estudiante_exists(cursor, rut_estudiante):
+                        self._update_estudiante(cursor, rut_estudiante, datos_estudiante)
+                        self._update_reporte_financiero(cursor, rut_estudiante, datos_reporte_financiero_estudiante)
+                    else:
+                        self._insert_estudiante(cursor, rut_estudiante, datos_estudiante)
+                        self._insert_reporte_financiero(cursor, rut_estudiante, datos_reporte_financiero_estudiante)
+                        
+                except (ValueError, KeyError, TypeError) as e:
+                    fila_num = index + 1
+                    raise ValueError(f"Error en fila {fila_num} (índice {index}): {str(e)}\nDatos de la fila: {dict(row)}")
 
         finally:
             cursor.close()
@@ -70,4 +79,4 @@ class ReporteMorosidadReader(Reader):
             if "PRIMAVERA" in periodo_str.upper():
                 return f"PRIMAVERA {año}"
             elif "OTOÑO" in periodo_str.upper():
-                return f"OTOÑO {año}"
+                return f"OTONO {año}"

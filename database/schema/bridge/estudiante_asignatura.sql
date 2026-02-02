@@ -7,7 +7,7 @@ CREATE TABLE Estudiante_Asignatura (
     codigo_asignatura VARCHAR(10),
     FOREIGN KEY (codigo_asignatura) REFERENCES Asignatura(codigo_asignatura),
 
-    periodo_semestre VARCHAR(10),
+    periodo_semestre VARCHAR(20),
     FOREIGN KEY (periodo_semestre) REFERENCES Semestre(periodo),
 
     nombre_docente VARCHAR(200),

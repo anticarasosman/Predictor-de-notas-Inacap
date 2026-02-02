@@ -3,7 +3,7 @@ CREATE TABLE Estudiante_Semestre (
 
     rut_estudiante VARCHAR(12),
     FOREIGN KEY (rut_estudiante) REFERENCES Estudiante(rut),
-    periodo_semestre VARCHAR(10),
+    periodo_semestre VARCHAR(20),
     FOREIGN KEY (periodo_semestre) REFERENCES Semestre(periodo),
 
     asignaturas_PE INT,

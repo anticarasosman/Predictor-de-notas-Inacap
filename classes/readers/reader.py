@@ -17,7 +17,7 @@ class Reader(ABC):
             cursor = self.db_connection.cursor()
             query = "SELECT COUNT(*) FROM Estudiante WHERE rut = %s"
             cursor.execute(query, (rut,))
-            result = cursor.fetchone() is not None
+            result = cursor.fetchone()[0] > 0
             cursor.close()
             return result
         except Error as e:
@@ -27,9 +27,9 @@ class Reader(ABC):
     def _asignatura_exists(self, codigo):
         try:
             cursor = self.db_connection.cursor()
-            query = "SELECT COUNT(*) FROM Asignatura WHERE codigo = %s"
+            query = "SELECT COUNT(*) FROM Asignatura WHERE codigo_asignatura = %s"
             cursor.execute(query, (codigo,))
-            result = cursor.fetchone() is not None
+            result = cursor.fetchone()[0] > 0
             cursor.close()
             return result
         except Error as e:
@@ -40,7 +40,7 @@ class Reader(ABC):
         try:
             query = "SELECT COUNT(*) FROM Asignatura_semestre WHERE codigo_asignatura = %s AND periodo_semestre = %s"
             cursor.execute(query, (codigo, periodo))
-            result = cursor.fetchone() is not None
+            result = cursor.fetchone()[0] > 0
             return result
         except Error as e:
             print(f"✗ Error al verificar asignatura_semestre: {str(e)}")
@@ -50,7 +50,7 @@ class Reader(ABC):
         try:
             query = "SELECT COUNT(*) FROM Estudiante_semestre WHERE rut_estudiante = %s AND periodo_semestre = %s"
             cursor.execute(query, (rut, periodo))
-            result = cursor.fetchone() is not None
+            result = cursor.fetchone()[0] > 0
             return result
         except Error as e:
             print(f"✗ Error al verificar estudiante_semestre: {str(e)}")
@@ -60,7 +60,7 @@ class Reader(ABC):
         try:
             query = "SELECT COUNT(*) FROM Estudiante_asignatura WHERE rut_estudiante = %s AND codigo_asignatura = %s AND periodo_semestre = %s"
             cursor.execute(query, (rut, codigo, periodo))
-            result = cursor.fetchone() is not None
+            result = cursor.fetchone()[0] > 0
             return result
         except Error as e:
             print(f"✗ Error al verificar estudiante_asignatura: {str(e)}")
@@ -70,11 +70,70 @@ class Reader(ABC):
     
     def _insert_estudiante(self, cursor, rut, datos):
         """Inserta un nuevo estudiante"""
-        pass
+        try:
+            query = """
+                INSERT INTO Estudiante (
+                    rut, nombre, programa_estudio, nombre_apoderado, terminal,
+                    tiene_gratuidad, solicitud_interrupcion_estudios, 
+                    solicitud_interrupcion_estudio_pendiente, interrupcion_estudio_pendiente,
+                    beca_stem, tipo_alumno, estado_matricula, secciones_curriculares,
+                    secciones_online, asistencia_promedio, promedio_media_matematica,
+                    promedio_media_lenguaje, promedio_media_ingles, ultima_asistencia, deuda
+                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            """
+            values = (
+                rut,
+                datos.get('nombre'),
+                datos.get('programa_estudio'),
+                datos.get('nombre_apoderado'),
+                datos.get('terminal'),
+                datos.get('tiene_gratuidad'),
+                datos.get('solicitud_interrupcion_estudios'),
+                datos.get('solicitud_interrupcion_estudio_pendiente'),
+                datos.get('interrupcion_estudio_pendiente'),
+                datos.get('beca_stem'),
+                datos.get('tipo_alumno'),
+                datos.get('estado_matricula'),
+                datos.get('secciones_curriculares'),
+                datos.get('secciones_online'),
+                datos.get('asistencia_promedio'),
+                datos.get('promedio_media_matematica'),
+                datos.get('promedio_media_lenguaje'),
+                datos.get('promedio_media_ingles'),
+                datos.get('ultima_asistencia'),
+                datos.get('deuda')
+            )
+            cursor.execute(query, values)
+            print(f"✓ Estudiante {rut} creado")
+        except Error as e:
+            print(f"✗ Error al insertar estudiante {rut}: {str(e)}")
+            raise
     
     def _update_estudiante(self, cursor, rut, datos):
-        """Actualiza un estudiante existente"""
-        pass
+        """Actualiza un estudiante existente (solo campos no None)"""
+        try:
+            campos = []
+            valores = []
+            for key, value in datos.items():
+                if value is not None:
+                    campos.append(f"{key} = %s")
+                    valores.append(value)
+            
+            if not campos:
+                print(f"→ No hay datos para actualizar en estudiante {rut}")
+                return
+            
+            valores.append(rut)
+            query = f"""
+                UPDATE Estudiante SET
+                    {', '.join(campos)}
+                WHERE rut = %s
+            """
+            cursor.execute(query, valores)
+            print(f"✓ Estudiante {rut} actualizado")
+        except Error as e:
+            print(f"✗ Error al actualizar estudiante {rut}: {str(e)}")
+            raise
     
     # --- SEMESTRE ---
     

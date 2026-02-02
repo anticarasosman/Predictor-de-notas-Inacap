@@ -1,0 +1,52 @@
+# Docker Configuration Guide
+
+## ✅ Archivos creados
+
+1. **Dockerfile** - Define la imagen MySQL con tu BD
+2. **docker-compose.yml** - Orquesta el contenedor
+3. **DOCKER_SETUP.md** - Guía completa
+4. **test_db_connection.py** - Script para probar conexión
+5. **.env.example** - Actualizado con variables Docker
+
+## 🚀 Quick Start (3 pasos)
+
+### Paso 1: Copiar variables de entorno
+```powershell
+Copy-Item .env.example .env
+```
+
+### Paso 2: Levantar Docker
+```powershell
+docker-compose up -d
+```
+
+### Paso 3: Probar conexión
+```powershell
+python test_db_connection.py
+```
+
+---
+
+## 📝 Notas importantes
+
+**El Dockerfile asume:**
+- Scripts SQL en carpeta `database/`
+- Se ejecutan en orden: core → bridge → seed
+
+**Si tu estructura es diferente**, edita el Dockerfile:
+```dockerfile
+# Cambiar estas líneas según tu estructura
+COPY database/schema/core/*.sql /docker-entrypoint-initdb.d/01_core/
+COPY database/schema/bridge/*.sql /docker-entrypoint-initdb.d/02_bridge/
+COPY database/seed_data/*.sql /docker-entrypoint-initdb.d/03_seed/
+```
+
+---
+
+## 🔧 Próximos pasos
+
+1. Verifica que tienes `docker` y `docker-compose` instalados
+2. Ejecuta los 3 pasos del Quick Start
+3. Si todo sale bien, tu código Python puede conectar en segundos
+
+¿Necesitas ayuda con algo específico?

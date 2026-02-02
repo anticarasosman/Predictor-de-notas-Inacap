@@ -5,7 +5,7 @@ CREATE TABLE Estudiante (
     secciones_online INT,
     asistencia_promedio INT,
 
-    nombre VARCHAR(200) NOT NULL,
+    nombre VARCHAR(200),
     programa_estudio VARCHAR(100),
     nombre_apoderado VARCHAR(200),
 
@@ -16,14 +16,15 @@ CREATE TABLE Estudiante (
     interrupcion_estudio_pendiente BOOLEAN DEFAULT FALSE,
     beca_stem BOOLEAN DEFAULT FALSE,
 
-    tipo_alumno ENUM("NUEVO", "VIEJO"),
-    estado_matricula ENUM("ACTIVO", "PENDIENTE", "EN POSTULACION", "MATRICULADO", "LISTA DE ESPERA", "CANCELADO"),
+    tipo_alumno VARCHAR(50),
+    estado_matricula VARCHAR(50),
 
     promedio_media_matematica DECIMAL(2,1),
     promedio_media_lenguaje DECIMAL(2,1),
     promedio_media_ingles DECIMAL(2,1),
     
     ultima_asistencia DATE,
+    deuda INT DEFAULT 0,
 
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP

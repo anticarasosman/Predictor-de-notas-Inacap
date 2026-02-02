@@ -9,11 +9,13 @@ class SeguimientoDeAlumnosReader(Reader):
         self.db_connection = db_connection
         self.df = pd.read_csv(self.file_path, delimiter=';', skiprows=5, encoding='utf-8')
 
-    def _process_and_upsert(self):
+    def _process_and_upsert(self, progress_callback=None):
         cursor = self.db_connection.cursor()
         
         try:
             for index, row in self.df.iterrows():
+                if progress_callback:
+                    progress_callback(index + 1)
                 rut_estudiante = row['Rut Alumno']
                 codigo_asignatura = row['Cod Asignatura']
                 periodo = row['Periodo']
@@ -68,7 +70,7 @@ class SeguimientoDeAlumnosReader(Reader):
                     "codigo_asignatura": codigo_asignatura,
                     "periodo_semestre": periodo,
                     "nombre_docente": row['Nombre Docente'],
-                    "notas_parciales": row['Notas Parciales'].replace("(Z)", "") if row['Notas Parciales'] else None,
+                    "notas_parciales": str(row['Notas Parciales']).replace("(Z)", "") if row['Notas Parciales'] and str(row['Notas Parciales']) != 'nan' else None,
                     "porcentaje_asistencia": int(row['% Asistencia']) if row['% Asistencia'] else None,
                     "riesgo": True if row['Riesgo'] == "RI" else False,
                 }

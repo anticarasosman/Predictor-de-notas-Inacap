@@ -1,5 +1,10 @@
 import mysql.connector
 from mysql.connector import Error
+import os
+from dotenv import load_dotenv
+
+# Cargar variables de entorno desde .env
+load_dotenv()
 
 
 class DatabaseConnection:
@@ -7,21 +12,23 @@ class DatabaseConnection:
     Maneja la conexión y operaciones con la base de datos MySQL
     """
     
-    def __init__(self, host: str = 'localhost', user: str = 'root', 
-                 password: str = '', database: str = 'predictor_notas'):
+    def __init__(self, host: str = None, user: str = None, 
+                 password: str = None, database: str = None, port: int = None):
         """
-        Inicializa parámetros de conexión
+        Inicializa parámetros de conexión desde .env o parámetros
         
         Args:
-            host: Host de MySQL (default: localhost)
-            user: Usuario de MySQL (default: root)
-            password: Contraseña de MySQL
-            database: Nombre de la base de datos
+            host: Host de MySQL (default: desde .env o localhost)
+            user: Usuario de MySQL (default: desde .env o root)
+            password: Contraseña de MySQL (default: desde .env)
+            database: Nombre de la base de datos (default: desde .env o predictor_notas)
+            port: Puerto de MySQL (default: desde .env o 3306)
         """
-        self.host = host
-        self.user = user
-        self.password = password
-        self.database = database
+        self.host = host or os.getenv('DB_HOST', 'localhost')
+        self.user = user or os.getenv('DB_USER', 'root')
+        self.password = password or os.getenv('DB_PASSWORD', '')
+        self.database = database or os.getenv('DB_NAME', 'inacap_db')
+        self.port = port or int(os.getenv('DB_PORT', 3306))
         self.connection = None
     
     def connect(self) -> bool:
@@ -36,11 +43,26 @@ class DatabaseConnection:
                 host=self.host,
                 user=self.user,
                 password=self.password,
-                database=self.database
+                database=self.database,
+                port=self.port
             )
-            print(f"✓ Conectado a: {self.user}@{self.host}/{self.database}")
+            print(f"✓ Conectado a: {self.user}@{self.host}:{self.port}/{self.database}")
             return True
         except Error as e:
+            print(f"✗ Error de conexión: {str(e)}")
+            return False
+    
+    def cursor(self):
+        """
+        Retorna un cursor de la conexión actual
+        
+        Returns:
+            Cursor de MySQL
+        """
+        if self.connection:
+            return self.connection.cursor()
+        else:
+            raise Error("No hay conexión activa a la base de datos")
             print(f"✗ Error de conexión: {str(e)}")
             return False
     
