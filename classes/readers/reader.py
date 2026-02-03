@@ -11,6 +11,11 @@ class Reader(ABC):
     @abstractmethod
     def _process_and_upsert(self):
         pass
+    
+    @abstractmethod
+    def get_total_rows(self) -> int:
+        """Retorna el número total de filas/registros a procesar"""
+        pass
 
     def _estudiante_exists(self, cursor, rut):
         try:

@@ -12,6 +12,10 @@ class ReporteMorosidadReader(Reader):
         # Limpiar nombres de columnas (eliminar espacios)
         self.df.columns = self.df.columns.str.strip()
 
+    def get_total_rows(self) -> int:
+        """Retorna el número de filas del DataFrame"""
+        return len(self.df)
+
     def _process_and_upsert(self, progress_callback=None):
         cursor = self.db_connection.cursor()
         

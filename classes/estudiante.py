@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-class Student():
+class Estudiante():
     def __init__(self, rut, name, major, math_grade, language_grade, english_grade):
         self.rut = rut
         self.name = name

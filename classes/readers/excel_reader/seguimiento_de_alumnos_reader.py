@@ -9,6 +9,10 @@ class SeguimientoDeAlumnosReader(Reader):
         self.db_connection = db_connection
         self.df = pd.read_csv(self.file_path, delimiter=';', skiprows=5, encoding='utf-8')
 
+    def get_total_rows(self) -> int:
+        """Retorna el número de filas del DataFrame"""
+        return len(self.df)
+
     def _process_and_upsert(self, progress_callback=None):
         cursor = self.db_connection.cursor()
         

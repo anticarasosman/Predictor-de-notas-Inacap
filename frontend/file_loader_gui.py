@@ -104,8 +104,8 @@ class FileLoaderGUI:
                 # Crear reader usando la factory
                 reader = ReadersFactory.create_reader(file_type, file_path, self.db_connection)
                 
-                # Obtener total de filas del DataFrame
-                total_rows = len(reader.df)
+                # Obtener total de filas usando el método polimórfico
+                total_rows = reader.get_total_rows()
                 
                 # Crear ventana de progreso
                 progress_window = ProgressWindow(self.root, total_rows, os.path.basename(file_path))

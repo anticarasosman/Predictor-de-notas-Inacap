@@ -2,6 +2,7 @@ edits.py
 instrucciones/
 instrucciones_testing/
 Test_ToDo.txt
+INSTRUCCIONES_PDF_ACTUALIZADO.md
 
 # Variables de entorno (JAMAS subir al repositorio)
 .env
