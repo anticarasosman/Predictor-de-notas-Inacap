@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import filedialog, messagebox
 from factories.readers_factory import ReadersFactory
 from frontend.progress_window import ProgressWindow
+from frontend.buttons import create_back_button, create_exit_button, create_upload_button
 from mysql.connector import Error
 import os
 
@@ -62,28 +63,10 @@ class FileLoaderGUI:
         
         # Botón Volver al Menú
         if self.main_menu:
-            back_btn = tk.Button(
-                bottom_frame,
-                text="← Volver al Menú Principal",
-                font=("Arial", 10),
-                bg="#607D8B",
-                fg="white",
-                width=25,
-                command=self.return_to_menu
-            )
-            back_btn.pack(side=tk.LEFT, padx=10)
+            create_back_button(bottom_frame, self.return_to_menu, side=tk.LEFT, padx=10)
         
         # Botón Cerrar Programa
-        exit_btn = tk.Button(
-            bottom_frame,
-            text="Cerrar Programa",
-            font=("Arial", 10),
-            bg="#f44336",
-            fg="white",
-            width=20,
-            command=self.root.quit
-        )
-        exit_btn.pack(side=tk.LEFT, padx=10)
+        create_exit_button(bottom_frame, self.root.quit, side=tk.LEFT, padx=10)
     
     def return_to_menu(self):
         """Vuelve al menú principal"""
@@ -139,22 +122,50 @@ class FileLoaderGUI:
                 
                 success_count += 1
                 print(f"✓ Archivo {idx}/{total_files} cargado exitosamente")
-                
+            
             except FileNotFoundError:
                 error_msg = f"Archivo no encontrado: {os.path.basename(file_path)}"
                 error_messages.append(error_msg)
                 print(f"✗ {error_msg}")
+                # Deshacer cambios si hay error
+                try:
+                    self.db_connection.connection.rollback()
+                except:
+                    pass
+                
+            except Exception as e:
+                # Capturar excepciones generales incluyendo errores críticos de BD
+                error_str = str(e)
+                if "ERROR CRÍTICO" in error_str or "doesn't exist" in error_str:
+                    error_msg = f"{os.path.basename(file_path)}: {error_str}"
+                    error_messages.append(error_msg)
+                    print(f"✗ {error_msg}")
+                    # Deshacer cambios
+                    try:
+                        self.db_connection.connection.rollback()
+                    except:
+                        pass
+                    # Interrumpir el procesamiento
+                    break
+                else:
+                    error_msg = f"{os.path.basename(file_path)}: {error_str}"
+                    error_messages.append(error_msg)
+                    print(f"✗ {error_msg}")
+                    try:
+                        self.db_connection.connection.rollback()
+                    except:
+                        pass
                 
             except Error as e:
                 error_msg = f"{os.path.basename(file_path)}: Error en BD - {str(e)}"
                 error_messages.append(error_msg)
                 print(f"✗ {error_msg}")
+                # Deshacer cambios
+                try:
+                    self.db_connection.connection.rollback()
+                except:
+                    pass
                 
-            except Exception as e:
-                error_msg = f"{os.path.basename(file_path)}: {str(e)}"
-                error_messages.append(error_msg)
-                print(f"✗ {error_msg}")
-            
             finally:
                 # Cerrar ventana de progreso
                 if progress_window:
@@ -164,50 +175,52 @@ class FileLoaderGUI:
         self.show_result_summary(success_count, total_files, error_messages)
     
     def show_result_summary(self, success_count, total_files, error_messages):
-        """Muestra resumen de resultados"""
-        result_dialog = tk.Toplevel(self.root)
-        result_dialog.title("Resumen de Carga")
-        result_dialog.geometry("500x400")
-        result_dialog.resizable(False, False)
+        """Muestra resumen de resultados en la ventana principal"""
+        # Limpiar la ventana principal
+        for widget in self.root.winfo_children():
+            widget.destroy()
+        
+        # Título
+        title_label = tk.Label(
+            self.root,
+            text="RESUMEN DE CARGA",
+            font=("Arial", 16, "bold"),
+            pady=20
+        )
+        title_label.pack()
         
         # Información de resultado
-        info_text = f"""
-                    RESUMEN DE CARGA
-                    {'='*40}
-
-                    Archivos procesados: {total_files}
-                    Archivos exitosos: {success_count}
-                    Archivos con error: {len(error_messages)}
-
-                    {'='*40}
-                            """
+        info_text = f"""Archivos procesados: {total_files}
+Archivos exitosos: {success_count}
+Archivos con error: {len(error_messages)}"""
         
         info_label = tk.Label(
-            result_dialog,
+            self.root,
             text=info_text,
-            font=("Courier", 10),
-            justify=tk.LEFT
+            font=("Courier", 11),
+            justify=tk.LEFT,
+            pady=10
         )
-        info_label.pack(pady=10, padx=10)
+        info_label.pack()
         
         # Area de texto para errores
         if error_messages:
             errors_label = tk.Label(
-                result_dialog,
+                self.root,
                 text="ERRORES:",
                 font=("Arial", 10, "bold")
             )
-            errors_label.pack(pady=5, padx=10, anchor=tk.W)
+            errors_label.pack(pady=5, anchor=tk.W, padx=50)
             
-            text_frame = tk.Frame(result_dialog)
-            text_frame.pack(pady=5, padx=10, fill=tk.BOTH, expand=True)
+            text_frame = tk.Frame(self.root)
+            text_frame.pack(pady=5, padx=50, fill=tk.BOTH, expand=True)
             
             scrollbar = tk.Scrollbar(text_frame)
             scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
             
             text_widget = tk.Text(
                 text_frame,
-                height=10,
+                height=8,
                 yscrollcommand=scrollbar.set,
                 font=("Courier", 9),
                 wrap=tk.WORD
@@ -220,42 +233,15 @@ class FileLoaderGUI:
             text_widget.config(state=tk.DISABLED)
         
         # Frame para botones
-        button_frame = tk.Frame(result_dialog)
-        button_frame.pack(pady=10)
+        button_frame = tk.Frame(self.root)
+        button_frame.pack(pady=20)
+        
+        # Botón Subir otro archivo
+        create_upload_button(button_frame, self.show_type_selection, side=tk.LEFT, padx=10)
         
         # Botón Volver al Menú Principal
         if self.main_menu:
-            menu_btn = tk.Button(
-                button_frame,
-                text="← Volver al Menú Principal",
-                font=("Arial", 10),
-                command=lambda: [result_dialog.destroy(), self.return_to_menu()]
-            )
-            menu_btn.pack(side=tk.LEFT, padx=10)
+            create_back_button(button_frame, self.return_to_menu, side=tk.LEFT, padx=10)
         
         # Botón Cerrar Programa
-        exit_btn = tk.Button(
-            button_frame,
-            text="Cerrar Programa",
-            font=("Arial", 10),
-            command=self.root.quit
-        )
-        exit_btn.pack(side=tk.LEFT, padx=10)
-
-        # Mensaje de éxito/error general
-        if success_count == total_files:
-            messagebox.showinfo(
-                "Éxito",
-                f"✓ Todos los {total_files} archivos se cargaron exitosamente"
-            )
-        elif success_count > 0:
-            messagebox.showwarning(
-                "Carga parcial",
-                f"⚠ {success_count}/{total_files} archivos se cargaron\n"
-                f"{len(error_messages)} archivo(s) tuvieron errores"
-            )
-        else:
-            messagebox.showerror(
-                "Error",
-                f"✗ No se pudo cargar ningún archivo"
-            )
+        create_exit_button(button_frame, self.root.quit, side=tk.LEFT, padx=10)

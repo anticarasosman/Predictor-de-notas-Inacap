@@ -21,8 +21,11 @@ class Reader(ABC):
             cursor.close()
             return result
         except Error as e:
+            # Error 1146 es "Table doesn't exist"
+            if e.errno == 1146:
+                raise Exception(f"ERROR CRÍTICO: Tabla no existe. {str(e)}")
             print(f"✗ Error al verificar estudiante: {str(e)}")
-            return False
+            raise
         
     def _asignatura_exists(self, codigo):
         try:
@@ -33,8 +36,11 @@ class Reader(ABC):
             cursor.close()
             return result
         except Error as e:
+            # Error 1146 es "Table doesn't exist"
+            if e.errno == 1146:
+                raise Exception(f"ERROR CRÍTICO: Tabla no existe. {str(e)}")
             print(f"✗ Error al verificar asignatura: {str(e)}")
-            return False
+            raise
         
     def _asignatura_semestre_exists(self, cursor, codigo, periodo):
         try:
@@ -43,8 +49,11 @@ class Reader(ABC):
             result = cursor.fetchone()[0] > 0
             return result
         except Error as e:
+            # Error 1146 es "Table doesn't exist"
+            if e.errno == 1146:
+                raise Exception(f"ERROR CRÍTICO: Tabla no existe. {str(e)}")
             print(f"✗ Error al verificar asignatura_semestre: {str(e)}")
-            return False
+            raise
     
     def _estudiante_semestre_exists(self, cursor, rut, periodo):
         try:
@@ -53,8 +62,11 @@ class Reader(ABC):
             result = cursor.fetchone()[0] > 0
             return result
         except Error as e:
+            # Error 1146 es "Table doesn't exist"
+            if e.errno == 1146:
+                raise Exception(f"ERROR CRÍTICO: Tabla no existe. {str(e)}")
             print(f"✗ Error al verificar estudiante_semestre: {str(e)}")
-            return False
+            raise
         
     def _estudiante_asignatura_exists(self, cursor, rut, codigo, periodo):
         try:
@@ -63,8 +75,11 @@ class Reader(ABC):
             result = cursor.fetchone()[0] > 0
             return result
         except Error as e:
+            # Error 1146 es "Table doesn't exist"
+            if e.errno == 1146:
+                raise Exception(f"ERROR CRÍTICO: Tabla no existe. {str(e)}")
             print(f"✗ Error al verificar estudiante_asignatura: {str(e)}")
-            return False
+            raise
     
     # --- ESTUDIANTE ---
     

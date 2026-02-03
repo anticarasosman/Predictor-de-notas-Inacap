@@ -1,6 +1,7 @@
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, messagebox
 from frontend.file_loader_gui import FileLoaderGUI
+from frontend.excel_exporter_gui import FileExporterGUI
 
 
 class MainMenu:
@@ -48,6 +49,18 @@ class MainMenu:
         )
         upload_btn.pack(pady=10, fill=tk.X)
 
+        #Boton: Exportar a Excel
+        export_btn = tk.Button(
+            button_frame,
+            text="📊 Exportar Datos a Excel",
+            font=("Arial", 12),
+            height=3,
+            bg="#FF9800",
+            fg="white",
+            command=self.open_exporter
+        )
+        export_btn.pack(pady=10, fill=tk.X)
+
         # Botón: Salir
         exit_btn = tk.Button(
             button_frame,
@@ -64,3 +77,8 @@ class MainMenu:
         # Instanciar FileLoaderGUI y mostrar selección de archivos
         file_loader = FileLoaderGUI(self.root, self.db_connection, main_menu=self)
         file_loader.show_type_selection()
+
+    def open_exporter(self):
+        # Instanciar FileExporterGUI y mostrar pantalla de ingreso de RUT
+        exporter = FileExporterGUI(self.root, self.db_connection, main_menu=self)
+        exporter.ask_user_for_rut()

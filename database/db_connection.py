@@ -44,27 +44,35 @@ class DatabaseConnection:
                 user=self.user,
                 password=self.password,
                 database=self.database,
-                port=self.port
+                port=self.port,
+                charset="utf8mb4",
+                collation="utf8mb4_unicode_ci",
+                use_unicode=True
             )
+            try:
+                self.connection.set_charset_collation("utf8mb4", "utf8mb4_unicode_ci")
+            except Error:
+                pass
             print(f"✓ Conectado a: {self.user}@{self.host}:{self.port}/{self.database}")
             return True
         except Error as e:
             print(f"✗ Error de conexión: {str(e)}")
             return False
     
-    def cursor(self):
+    def cursor(self, **kwargs):
         """
         Retorna un cursor de la conexión actual
+        
+        Args:
+            **kwargs: Parámetros opcionales para el cursor (ej. dictionary=True)
         
         Returns:
             Cursor de MySQL
         """
         if self.connection:
-            return self.connection.cursor()
+            return self.connection.cursor(**kwargs)
         else:
             raise Error("No hay conexión activa a la base de datos")
-            print(f"✗ Error de conexión: {str(e)}")
-            return False
     
     def disconnect(self) -> bool:
         """
