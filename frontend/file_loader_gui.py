@@ -5,6 +5,7 @@ from frontend.progress_window import ProgressWindow
 from frontend.buttons import create_back_button, create_exit_button, create_upload_button
 from mysql.connector import Error
 import os
+import subprocess
 
 
 class FileLoaderGUI:

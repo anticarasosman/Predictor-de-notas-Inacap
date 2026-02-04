@@ -1,9 +1,11 @@
 import tkinter as tk
 from tkinter import filedialog, messagebox
-from export.student_exporter import StudentExporter
+from classes.export.exporter import Exporter
 from frontend.user_selects_output import select_output_directory
 from frontend.buttons import create_back_button, create_exit_button
 from frontend.progress_window import ProgressWindow
+from frontend.custom_sheet_creator_gui import CustomSheetCreatorGUI
+from utils.custom_sheet_manager import list_custom_sheets
 from pathlib import Path
 import os
 
@@ -61,6 +63,72 @@ class FileExporterGUI:
         rut_entry.pack(side=tk.LEFT, padx=10)
         rut_entry.focus()  # Poner el foco en el Entry
 
+        sheets_frame = tk.LabelFrame(
+            self.root,
+            text="Selecciona hojas para incluir en el Excel",
+            font=("Arial", 10),
+            padx=20,
+            pady=10
+        )
+        sheets_frame.pack(padx=20, pady=10)
+
+        # UNA VES IMPLEMENTAMOS LA FACTORY DE CHECKBOXES, DEBEMOS USARLA AQUI PARA CREAR LOS CHECKBOXES DEFAULT
+
+        # Variables para los checkboxes
+        self.sheet_general = tk.BooleanVar(value=True)
+        self.sheet_academic = tk.BooleanVar(value=True)
+        self.sheet_financial = tk.BooleanVar(value=True)
+
+        tk.Checkbutton(
+            sheets_frame,
+            text="Información General",
+            variable=self.sheet_general,
+            font=("Arial", 10)
+        ).pack(anchor=tk.W)
+
+        tk.Checkbutton(
+            sheets_frame,
+            text="Semestres y Asignaturas",
+            variable=self.sheet_academic,
+            font=("Arial", 10)
+        ).pack(anchor=tk.W)
+
+        tk.Checkbutton(
+            sheets_frame,
+            text="Información Financiera",
+            variable=self.sheet_financial,
+            font=("Arial", 10)
+        ).pack(anchor=tk.W)
+
+        # ===== SHEETS PERSONALIZADAS =====
+        # Cargar lista de sheets personalizadas disponibles
+        custom_sheets_list = list_custom_sheets()
+        
+        if custom_sheets_list:
+            # Crear frame para sheets personalizadas
+            personalized_sheets_frame = tk.LabelFrame(
+                self.root,
+                text="Hojas Personalizadas",
+                font=("Arial", 10),
+                padx=20,
+                pady=10
+            )
+            personalized_sheets_frame.pack(padx=20, pady=10, anchor=tk.W, fill=tk.X)
+            
+            # Variables para almacenar estado de checkboxes personalizados
+            self.custom_sheet_vars = {}
+            
+            # Crear checkboxes para cada sheet personalizada
+            for sheet_name in custom_sheets_list:
+                var = tk.BooleanVar(value=False)
+                tk.Checkbutton(
+                    personalized_sheets_frame,
+                    text=sheet_name,
+                    variable=var,
+                    font=("Arial", 10)
+                ).pack(anchor=tk.W)
+                self.custom_sheet_vars[sheet_name] = var
+
         # Frame para botones
         button_frame = tk.Frame(self.root)
         button_frame.pack(pady=20)
@@ -73,9 +141,29 @@ class FileExporterGUI:
             bg="#2196F3",
             fg="white",
             width=20,
-            command=lambda: self.export_student(rut_entry.get().strip())
+            command=lambda: self.export_student(
+                rut_entry.get().strip(), 
+                {
+                    'general': self.sheet_general.get(),
+                    'academic': self.sheet_academic.get(),
+                    'financial': self.sheet_financial.get()
+                },
+                {sheet_name: var.get() for sheet_name, var in self.custom_sheet_vars.items()}
+            )
         )
         export_btn.pack(side=tk.LEFT, padx=10)
+
+        # Boton para crear sheet personalizada
+        personalize_btn = tk.Button(
+            button_frame,
+            text="➕ Crear Hoja Personalizada",
+            font=("Arial", 10),
+            bg="#4CAF50",
+            fg="white",
+            width=20,
+            command=lambda: self.create_personalized_sheet()
+        )
+        personalize_btn.pack(side=tk.LEFT, padx=10)
 
         # Botón Volver
         if self.main_menu:
@@ -84,13 +172,19 @@ class FileExporterGUI:
         # Botón Cerrar Programa
         create_exit_button(button_frame, self.root.quit, side=tk.LEFT, padx=10)
 
-    def export_student(self, rut: str) -> None:
+    def export_student(self, rut: str, sheets_selection, custom_sheet_selection=None) -> None:
         """
         Exporta los datos del estudiante con el RUT proporcionado
         
         Args:
             rut: RUT del estudiante
+            sheets_selection: Dict con selección de sheets default
+            custom_sheet_selection: Dict con selección de sheets personalizadas
         """
+        
+        # Inicializar si viene vacío
+        if custom_sheet_selection is None:
+            custom_sheet_selection = {}
         
         # Validar que el RUT no esté vacío
         if not rut:
@@ -104,10 +198,7 @@ class FileExporterGUI:
             )
             
             # Crear exportador
-            exporter = StudentExporter(self.db_connection)
-            
-            # Mostrar ventana de progreso mientras se exporta
-            # (Para esta operación es rápida, pero lo dejamos por consistencia)
+            exporter = Exporter(self.db_connection, sheets_selection, custom_sheet_selection)
             
             # Exportar estudiante
             file_path = exporter.export_student_by_rut(rut, output_dir)
@@ -144,8 +235,8 @@ class FileExporterGUI:
 
         # Información
         info_text = f"""RUT Exportado: {rut}
-Archivo guardado en:
-{file_path}"""
+                    Archivo guardado en:
+                    {file_path}"""
         
         info_label = tk.Label(
             self.root,
@@ -183,3 +274,7 @@ Archivo guardado en:
         """Vuelve al menú principal"""
         if self.main_menu:
             self.main_menu.create_menu()
+
+    def create_personalized_sheet(self) -> None:
+        """Abre la GUI para crear una hoja personalizada"""
+        sheet_creator = CustomSheetCreatorGUI(self.root, self.db_connection)
