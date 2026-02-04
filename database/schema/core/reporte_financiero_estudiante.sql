@@ -1,5 +1,5 @@
 CREATE TABLE Reporte_financiero_estudiante (
-    id_reporte_financiero_estudiante INT PRIMARY KEY AUTO_INCREMENT,
+    id INT PRIMARY KEY AUTO_INCREMENT,
 
     rut_estudiante VARCHAR(12),
     FOREIGN KEY (rut_estudiante) REFERENCES Estudiante(rut),

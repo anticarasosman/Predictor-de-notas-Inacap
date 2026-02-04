@@ -34,7 +34,7 @@ class CustomSheet(Sheet):
                 continue
             
             # Título de la tabla
-            ws[f"A{row}"] = f"Tabla: {table_name}"
+            ws[f"A{row}"] = f"Tabla: {table_name.replace('_', ' ').title()}"
             ws[f"A{row}"].font = Font(bold=True, size=11)
             row += 1
             
@@ -43,7 +43,8 @@ class CustomSheet(Sheet):
             header_font = Font(bold=True, color="FFFFFF")
             
             for col_idx, column in enumerate(columns, 1):
-                cell = ws.cell(row=row, column=col_idx, value=column)
+                column_name = column.replace("_", " ").title()
+                cell = ws.cell(row=row, column=col_idx, value=column_name)
                 cell.fill = header_fill
                 cell.font = header_font
             
@@ -65,7 +66,8 @@ class CustomSheet(Sheet):
                         for data_row in data:
                             for col_idx, column in enumerate(columns, 1):
                                 value = data_row.get(column, "N/A")
-                                ws.cell(row=row, column=col_idx, value=value)
+                                value_edited = str(value).replace("_", " ").title()
+                                ws.cell(row=row, column=col_idx, value=value_edited)
                             row += 1
                     
                     finally:
@@ -78,6 +80,5 @@ class CustomSheet(Sheet):
             
             row += 2  # Espacio entre tablas
         
-        # Ajustar ancho de columnas
-        for col_idx in range(1, 7):
-            ws.column_dimensions[chr(64 + col_idx)].width = 18
+        # Ajustar ancho de columnas según contenido y encabezados
+        self.auto_adjust_column_widths(ws)

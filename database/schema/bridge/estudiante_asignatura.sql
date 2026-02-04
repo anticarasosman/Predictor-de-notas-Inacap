@@ -1,5 +1,5 @@
 CREATE TABLE Estudiante_Asignatura (
-    id_estudiante_asignatura INT PRIMARY KEY AUTO_INCREMENT,
+    id INT PRIMARY KEY AUTO_INCREMENT,
 
     rut_estudiante VARCHAR(12),
     FOREIGN KEY (rut_estudiante) REFERENCES Estudiante(rut),

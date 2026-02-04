@@ -31,6 +31,5 @@ class FinancialInfoSheet(Sheet):
             row += 1
         
         # Ajustar ancho de columnas
-        ws.column_dimensions['A'].width = 35
-        ws.column_dimensions['B'].width = 20
+        self.auto_adjust_column_widths(ws)
         self.export_dir = "exports"

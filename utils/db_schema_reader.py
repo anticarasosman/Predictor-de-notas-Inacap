@@ -1,4 +1,4 @@
-def get_all_tables(db_connection) -> dict:
+def get_student_tables(db_connection) -> dict:
     """
     Obtiene todas las tablas de la base de datos y sus columnas
     
@@ -10,10 +10,16 @@ def get_all_tables(db_connection) -> dict:
     try:
         # Obtener todas las tablas de la base de datos actual
         query = """
-            SELECT TABLE_NAME
-            FROM INFORMATION_SCHEMA.TABLES
-            WHERE TABLE_SCHEMA = DATABASE()
-            ORDER BY TABLE_NAME
+                SELECT TABLE_NAME
+                FROM INFORMATION_SCHEMA.TABLES
+                WHERE TABLE_SCHEMA = DATABASE()
+                    AND TABLE_NAME IN (
+                        'Estudiante',
+                        'Estudiante_Asignatura',
+                        'Estudiante_Semestre',
+                        'Reporte_financiero_estudiante'
+                    )
+                ORDER BY TABLE_NAME
         """
         cursor.execute(query)
         tables = cursor.fetchall()
@@ -49,6 +55,7 @@ def get_table_columns(db_connection, table_name: str) -> list:
             FROM INFORMATION_SCHEMA.COLUMNS
             WHERE TABLE_SCHEMA = DATABASE()
               AND TABLE_NAME = %s
+              AND COLUMN_NAME NOT IN ('id', 'fecha_registro', 'fecha_modificacion')
             ORDER BY ORDINAL_POSITION
         """
         cursor.execute(query, (table_name,))

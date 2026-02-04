@@ -1,5 +1,5 @@
 CREATE TABLE Asignatura_semestre (
-    id_asignatura_semestre INT PRIMARY KEY AUTO_INCREMENT,
+    id INT PRIMARY KEY AUTO_INCREMENT,
 
     codigo_asignatura VARCHAR(10),
     FOREIGN KEY (codigo_asignatura) REFERENCES Asignatura(codigo_asignatura),

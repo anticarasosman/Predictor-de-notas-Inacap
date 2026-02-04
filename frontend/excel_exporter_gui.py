@@ -1,13 +1,11 @@
 import tkinter as tk
-from tkinter import filedialog, messagebox
+from tkinter import messagebox
 from classes.export.exporter import Exporter
+from frontend.custom_sheet_creator_gui import CustomSheetCreatorGUI
+from frontend.custom_sheet_deleter_gui import CustomSheetDeleterGUI
 from frontend.user_selects_output import select_output_directory
 from frontend.buttons import create_back_button, create_exit_button
-from frontend.progress_window import ProgressWindow
-from frontend.custom_sheet_creator_gui import CustomSheetCreatorGUI
 from utils.custom_sheet_manager import list_custom_sheets
-from pathlib import Path
-import os
 
 class FileExporterGUI:
     """GUI para exportar datos de estudiantes a Excel"""
@@ -78,6 +76,7 @@ class FileExporterGUI:
         self.sheet_general = tk.BooleanVar(value=True)
         self.sheet_academic = tk.BooleanVar(value=True)
         self.sheet_financial = tk.BooleanVar(value=True)
+        self.sheet_notas_media = tk.BooleanVar(value=True)
 
         tk.Checkbutton(
             sheets_frame,
@@ -100,42 +99,37 @@ class FileExporterGUI:
             font=("Arial", 10)
         ).pack(anchor=tk.W)
 
-        # ===== SHEETS PERSONALIZADAS =====
-        # Cargar lista de sheets personalizadas disponibles
-        custom_sheets_list = list_custom_sheets()
-        
-        if custom_sheets_list:
-            # Crear frame para sheets personalizadas
-            personalized_sheets_frame = tk.LabelFrame(
-                self.root,
-                text="Hojas Personalizadas",
-                font=("Arial", 10),
-                padx=20,
-                pady=10
-            )
-            personalized_sheets_frame.pack(padx=20, pady=10, anchor=tk.W, fill=tk.X)
-            
-            # Variables para almacenar estado de checkboxes personalizados
-            self.custom_sheet_vars = {}
-            
-            # Crear checkboxes para cada sheet personalizada
-            for sheet_name in custom_sheets_list:
-                var = tk.BooleanVar(value=False)
-                tk.Checkbutton(
-                    personalized_sheets_frame,
-                    text=sheet_name,
-                    variable=var,
-                    font=("Arial", 10)
-                ).pack(anchor=tk.W)
-                self.custom_sheet_vars[sheet_name] = var
+        tk.Checkbutton(
+            sheets_frame,
+            text="Notas Media",
+            variable=self.sheet_notas_media,
+            font=("Arial", 10)
+        ).pack(anchor=tk.W)
 
-        # Frame para botones
-        button_frame = tk.Frame(self.root)
-        button_frame.pack(pady=20)
+        # ===== SHEETS PERSONALIZADAS =====
+        # Crear frame para sheets personalizadas (siempre visible)
+        self.personalized_sheets_frame = tk.LabelFrame(
+            self.root,
+            text="Hojas Personalizadas",
+            font=("Arial", 10),
+            padx=20,
+            pady=10
+        )
+        self.personalized_sheets_frame.pack(padx=20, pady=10, anchor=tk.W, fill=tk.X)
+        
+        # Variables para almacenar estado de checkboxes personalizados
+        self.custom_sheet_vars = {}
+        
+        # Cargar y mostrar custom sheets
+        self.load_custom_sheets()
+
+        # Frame para botones de acción principal
+        action_button_frame = tk.Frame(self.root)
+        action_button_frame.pack(pady=10)
 
         # Botón Exportar
         export_btn = tk.Button(
-            button_frame,
+            action_button_frame,
             text="📊 Exportar a Excel",
             font=("Arial", 10),
             bg="#2196F3",
@@ -146,7 +140,8 @@ class FileExporterGUI:
                 {
                     'general': self.sheet_general.get(),
                     'academic': self.sheet_academic.get(),
-                    'financial': self.sheet_financial.get()
+                    'financial': self.sheet_financial.get(),
+                    'notas_media': self.sheet_notas_media.get()
                 },
                 {sheet_name: var.get() for sheet_name, var in self.custom_sheet_vars.items()}
             )
@@ -155,22 +150,38 @@ class FileExporterGUI:
 
         # Boton para crear sheet personalizada
         personalize_btn = tk.Button(
-            button_frame,
+            action_button_frame,
             text="➕ Crear Hoja Personalizada",
             font=("Arial", 10),
             bg="#4CAF50",
             fg="white",
-            width=20,
+            width=22,
             command=lambda: self.create_personalized_sheet()
         )
         personalize_btn.pack(side=tk.LEFT, padx=10)
 
+        # Botón para borrar sheets personalizadas
+        delete_btn = tk.Button(
+            action_button_frame,
+            text="🗑 Borrar Hojas Personalizadas",
+            font=("Arial", 10),
+            bg="#f44336",
+            fg="white",
+            width=24,
+            command=lambda: self.delete_personalized_sheets()
+        )
+        delete_btn.pack(side=tk.LEFT, padx=10)
+
+        # Frame para botones de navegación
+        navigation_button_frame = tk.Frame(self.root)
+        navigation_button_frame.pack(pady=10)
+
         # Botón Volver
         if self.main_menu:
-            create_back_button(button_frame, self.return_to_menu, side=tk.LEFT, padx=10)
+            create_back_button(navigation_button_frame, self.return_to_menu, side=tk.LEFT, padx=10)
 
         # Botón Cerrar Programa
-        create_exit_button(button_frame, self.root.quit, side=tk.LEFT, padx=10)
+        create_exit_button(navigation_button_frame, self.root.quit, side=tk.LEFT, padx=10)
 
     def export_student(self, rut: str, sheets_selection, custom_sheet_selection=None) -> None:
         """
@@ -275,6 +286,48 @@ class FileExporterGUI:
         if self.main_menu:
             self.main_menu.create_menu()
 
+    def load_custom_sheets(self) -> None:
+        """Carga las custom sheets disponibles y crea checkboxes"""
+        # Limpiar checkboxes existentes
+        for widget in self.personalized_sheets_frame.winfo_children():
+            widget.destroy()
+        
+        # Limpiar variables
+        self.custom_sheet_vars.clear()
+        
+        # Cargar lista de sheets personalizadas disponibles
+        custom_sheets_list = list_custom_sheets()
+        
+        if custom_sheets_list:
+            # Crear checkboxes para cada sheet personalizada
+            for sheet_name in custom_sheets_list:
+                var = tk.BooleanVar(value=False)
+                tk.Checkbutton(
+                    self.personalized_sheets_frame,
+                    text=sheet_name,
+                    variable=var,
+                    font=("Arial", 10)
+                ).pack(anchor=tk.W)
+                self.custom_sheet_vars[sheet_name] = var
+        else:
+            # Mostrar mensaje si no hay custom sheets
+            tk.Label(
+                self.personalized_sheets_frame,
+                text="No hay hojas personalizadas creadas",
+                font=("Arial", 9),
+                fg="gray"
+            ).pack(anchor=tk.W)
+    
     def create_personalized_sheet(self) -> None:
         """Abre la GUI para crear una hoja personalizada"""
-        sheet_creator = CustomSheetCreatorGUI(self.root, self.db_connection)
+        sheet_creator = CustomSheetCreatorGUI(
+            self.root, 
+            self.db_connection,
+            refresh_callback=self.load_custom_sheets
+        )
+    
+    def delete_personalized_sheets(self) -> None:
+        """Abre la GUI para borrar hojas personalizadas"""
+        sheet_deleter = CustomSheetDeleterGUI(
+            refresh_callback=self.load_custom_sheets
+        )

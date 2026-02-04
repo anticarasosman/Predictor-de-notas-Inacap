@@ -2,6 +2,7 @@ from classes.sheets.custom_sheet import CustomSheet
 from classes.sheets.general_info_sheet import GeneralInfoSheet
 from classes.sheets.academic_info_sheet import AcademicInfoSheet
 from classes.sheets.financial_info_sheet import FinancialInfoSheet
+from classes.sheets.info_media_sheet import InfoMediaSheet
 from utils.custom_sheet_manager import load_custom_sheet_config
 
 class SheetsFactory():
@@ -11,7 +12,8 @@ class SheetsFactory():
         sheets = {
             "general_info": GeneralInfoSheet() if sheet_selection.get('general') else None,
             "academic_info": AcademicInfoSheet() if sheet_selection.get('academic') else None,
-            "financial_info": FinancialInfoSheet() if sheet_selection.get('financial') else None
+            "financial_info": FinancialInfoSheet() if sheet_selection.get('financial') else None,
+            "notas_media": InfoMediaSheet() if sheet_selection.get('notas_media') else None,
         }
 
         for sheet_name, is_selected in custom_sheet_selection.items():

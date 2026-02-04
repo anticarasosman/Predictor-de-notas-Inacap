@@ -1,15 +1,15 @@
 import tkinter as tk
 from tkinter import messagebox
-from utils.db_schema_reader import get_all_tables, get_table_columns
+from utils.db_schema_reader import get_student_tables, get_table_columns
 from utils.custom_sheet_manager import save_custom_sheet_data
 from factories.frontend_factories.checkbox_factory import CheckboxFactory
 
 class CustomSheetCreatorGUI:
 
-
-    def __init__(self, root, db_connection):
+    def __init__(self, root, db_connection, refresh_callback=None):
         self.parent = root
         self.db_connection = db_connection
+        self.refresh_callback = refresh_callback
         
         # Crear ventana independiente
         self.window = tk.Toplevel(root)
@@ -51,13 +51,13 @@ class CustomSheetCreatorGUI:
         name_label.pack(side=tk.LEFT, padx=10)
 
         # Entry (campo de texto)
-        name_entry = tk.Entry(
+        self.name_entry = tk.Entry(
             input_frame,
             font=("Arial", 11),
             width=20
         )
-        name_entry.pack(side=tk.LEFT, padx=10)
-        name_entry.focus()  # Poner el foco en el Entry
+        self.name_entry.pack(side=tk.LEFT, padx=10)
+        self.name_entry.focus()  # Poner el foco en el Entry
 
         self.show_variables()
 
@@ -72,7 +72,7 @@ class CustomSheetCreatorGUI:
             height=2,
             bg="#4CAF50",
             fg="white",
-            command=lambda: self.create_custom_sheet(name_entry.get())
+            command=self.create_custom_sheet
         )
         create_btn.pack()
 
@@ -103,14 +103,14 @@ class CustomSheetCreatorGUI:
         canvas_window = canvas.create_window((0, 0), window=vars_frame, anchor=tk.NW)
 
         # Crear diccionario de tablas
-        self.tables = get_all_tables(self.db_connection)
+        self.tables = get_student_tables(self.db_connection)
         self.variables = {}
 
         # Crear checkboxes para cada variable
         for table, columns in self.tables.items():
             table_label = tk.Label(
                 vars_frame,
-                text=table,
+                text = table.replace("_", " ").title(),
                 font=("Arial", 11, "bold"),
                 pady=5
             )
@@ -118,7 +118,8 @@ class CustomSheetCreatorGUI:
 
             for column in columns:
                 var = tk.BooleanVar(value=False)
-                checkbox = CheckboxFactory.create_checkbox(vars_frame, column, var)
+                display_column = column.replace("_", " ").title()
+                checkbox = CheckboxFactory.create_checkbox(vars_frame, display_column, var)
                 checkbox.pack(anchor=tk.W, padx=20)
                 self.variables[f"{table}.{column}"] = var
 
@@ -131,13 +132,26 @@ class CustomSheetCreatorGUI:
             canvas.itemconfig(canvas_window, width=event.width)
         
         canvas.bind('<Configure>', on_canvas_configure)
+        
+        # Habilitar scroll con rueda del mouse
+        def on_mousewheel(event):
+            canvas.yview_scroll(int(-1*(event.delta/120)), "units")
+        
+        canvas.bind_all("<MouseWheel>", on_mousewheel)
 
-    def create_custom_sheet(self, sheet_name: str):
+    def create_custom_sheet(self):
         """Crea la hoja personalizada con las variables seleccionadas"""
+        sheet_name = self.name_entry.get()
         
         # Validar nombre
         if not sheet_name.strip():
-            messagebox.showerror("Error", "El nombre de la hoja no puede estar vacío.")
+            messagebox.showerror(
+                "Error",
+                "El nombre de la hoja no puede estar vacío.",
+                parent=self.window
+            )
+            self.window.lift()
+            self.name_entry.focus_set()
             return
         
         # Recopilar columnas checkeadas agrupadas por tabla
@@ -176,6 +190,10 @@ class CustomSheetCreatorGUI:
                 f"✓ Hoja personalizada '{sheet_name}' guardada correctamente.\n\n"
                 f"Se guardaron {sum(len(cols) for cols in selected_columns.values())} columnas de {len(selected_columns)} tabla(s)."
             )
+            
+            # Llamar callback para refrescar la lista de custom sheets
+            if self.refresh_callback:
+                self.refresh_callback()
             
             # Cerrar ventana después de guardar exitosamente
             self.window.destroy()

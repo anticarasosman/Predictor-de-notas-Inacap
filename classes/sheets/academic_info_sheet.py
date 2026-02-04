@@ -16,7 +16,7 @@ class AcademicInfoSheet(Sheet):
             semester = semester_obj['semester']
             subjects = semester_obj['subjects']
 
-            #Titutlo del semestre
+            #Titulo del semestre
             ws[f"A{row}"] = f"SEMESTRE: {semester['periodo_semestre']}"
             ws[f"A{row}"].font = Font(bold=True, size=12)
             ws.merge_cells(f"A{row}:F{row}")
@@ -44,8 +44,4 @@ class AcademicInfoSheet(Sheet):
             row += 2  # Espacio entre semestres
 
         # Ajustar ancho de columnas
-        ws.column_dimensions['A'].width = 18
-        ws.column_dimensions['B'].width = 20
-        ws.column_dimensions['C'].width = 18
-        ws.column_dimensions['D'].width = 15
-        ws.column_dimensions['E'].width = 12
+        self.auto_adjust_column_widths(ws)

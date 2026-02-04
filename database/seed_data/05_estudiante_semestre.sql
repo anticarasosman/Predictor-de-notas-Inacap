@@ -6,7 +6,9 @@ INSERT INTO Estudiante_Semestre (
 	asignaturas_reprobadas_tres_veces,
 	solicitud_reingreso
 ) VALUES
+('12345678-9', '2025-otoño', 4, 0, 1, FALSE),
 ('12345678-9', '2026-primavera', 5, 0, 0, FALSE),
+('12345678-9', '2026-otoño', 3, 1, 0, FALSE),
 ('9876543-2', '2025-otoño', 4, 0, 1, FALSE),
 ('18234567-1', '2025-otoño', 6, 0, 2, TRUE),
 ('7654321-0', '2026-primavera', 3, 0, 0, FALSE),

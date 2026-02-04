@@ -2,13 +2,13 @@ from classes.sheets.sheet import Sheet
 from openpyxl.styles import Font, PatternFill, Alignment
 from openpyxl import Workbook
 
-class GeneralInfoSheet(Sheet):
+class InfoMediaSheet(Sheet):
 
     def add_sheet(self, wb, student_data: dict):
         student = student_data['student']
-        ws = wb.create_sheet("Información General")
+        ws = wb.create_sheet("Información Media")
         #Titulo
-        ws["A1"] = "Información General del Estudiante"
+        ws["A1"] = "Notas Media Estudiante"
         ws["A1"].font = Font(size=14, bold=True)
         ws.merge_cells("A1:D1")
 
@@ -18,13 +18,9 @@ class GeneralInfoSheet(Sheet):
         fields = [
             ('RUT', 'rut'),
             ('Nombre', 'nombre'),
-            ('Programa de Estudio', 'programa_estudio'),
-            ('Tipo de Alumno', 'tipo_alumno'),
-            ('Estado Matrícula', 'estado_matricula'),
-            ('Terminal', 'terminal'),
-            ('Tiene Gratuidad', 'tiene_gratuidad'),
-            ('Deuda', 'deuda'),
-            ('Nombre Apoderado', 'nombre_apoderado'),
+            ('Promedio Matematica Media', 'promedio_media_matematica'),
+            ('Promedio Lenguaje Media', 'promedio_media_lenguaje'),
+            ('Promedio Inglés Media', 'promedio_media_ingles')
         ]
 
         for label, key, in fields:
