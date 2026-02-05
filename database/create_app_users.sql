@@ -13,7 +13,7 @@ USE mysql;
 -- Sin contraseña (seguro porque solo funciona desde localhost)
 
 DROP USER IF EXISTS 'inacap_app'@'localhost';
-CREATE USER 'inacap_app'@'localhost' IDENTIFIED BY '';
+CREATE USER 'inacap_app'@'%' IDENTIFIED BY 'contraseña_segura';
 
 GRANT SELECT, INSERT, UPDATE, DELETE 
   ON inacap_test.* 

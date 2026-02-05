@@ -73,6 +73,51 @@ class FileLoaderGUI:
         """Vuelve al menú principal"""
         if self.main_menu:
             self.main_menu.create_menu()
+    
+    def reset_debt_for_missing_students(self, reader):
+        """Resetea la deuda a 0 para estudiantes que NO estén en el reporte de morosidad"""
+        try:
+            # Obtener lista de RUTs del archivo cargado
+            ruts_in_report = set()
+            if hasattr(reader, 'df'):
+                # Para CSV readers
+                if 'rut' in reader.df.columns:
+                    ruts_in_report = set(reader.df['rut'].dropna().unique())
+                elif 'RUT' in reader.df.columns:
+                    ruts_in_report = set(reader.df['RUT'].dropna().unique())
+            
+            if ruts_in_report:
+                cursor = self.db_connection.cursor()
+                
+                # Crear lista de placeholders para SQL
+                placeholders = ','.join(['%s'] * len(ruts_in_report))
+                
+                # Actualizar deuda a 0 para estudiantes NO en el reporte
+                query = f"""
+                    UPDATE Reporte_financiero_estudiante 
+                    SET deuda_total = 0,
+                        deuda_matriculas = 0,
+                        deuda_colegiaturas = 0,
+                        otras_deudas = 0,
+                        cantidad_cuotas_pendientes_matriculas = 0,
+                        cantidad_cuotas_pendientes_colegiaturas = 0
+                    WHERE rut_estudiante NOT IN ({placeholders})
+                """
+                
+                cursor.execute(query, tuple(ruts_in_report))
+                self.db_connection.connection.commit()
+                
+                affected_rows = cursor.rowcount
+                print(f"✓ Deuda reseteada a 0 para {affected_rows} estudiante(s) no en el reporte")
+                
+                cursor.close()
+        
+        except Exception as e:
+            print(f"✗ Error al resetear deudas: {str(e)}")
+            try:
+                self.db_connection.connection.rollback()
+            except:
+                pass
 
     
     def select_files(self, file_type):
@@ -120,6 +165,10 @@ class FileLoaderGUI:
                 
                 # Confirmar cambios
                 self.db_connection.connection.commit()
+                
+                # Si es reporte de morosidad, resetear deuda del resto
+                if file_type == "reporte_morosidad":
+                    self.reset_debt_for_missing_students(reader)
                 
                 success_count += 1
                 print(f"✓ Archivo {idx}/{total_files} cargado exitosamente")
