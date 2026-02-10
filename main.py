@@ -1,11 +1,40 @@
+import os
+import sys
+import locale
+
+# Configurar locale ANTES de importar tkinter
+# Esto previene el error "No localization support for languaje 'eng'"
+try:
+    # Intentar configurar locale español de Chile (puede estar disponible)
+    locale.setlocale(locale.LC_ALL, 'es_CL.UTF-8')
+except:
+    try:
+        # Si falla, intentar español genérico
+        locale.setlocale(locale.LC_ALL, 'es_ES.UTF-8')
+    except:
+        try:
+            # Si falla, intentar inglés US (más común)
+            locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
+        except:
+            # Si todo falla, usar el locale por defecto del sistema
+            try:
+                locale.setlocale(locale.LC_ALL, '')
+            except:
+                pass  # Ignorar si no se puede configurar
+
+# Configurar variables de entorno para Tcl/Tk (solo para PyInstaller)
+if getattr(sys, 'frozen', False):
+    # Estamos ejecutando desde el .exe empaquetado
+    base_path = sys._MEIPASS
+    os.environ['TCL_LIBRARY'] = os.path.join(base_path, '_tcl_data')
+    os.environ['TK_LIBRARY'] = os.path.join(base_path, '_tk_data')
+
 import tkinter as tk
 from tkinter import messagebox
 from database.db_connection import DatabaseConnection
 from frontend.file_loader_gui import FileLoaderGUI
-import os
 from dotenv import load_dotenv
 import signal
-import sys
 
 from frontend.main_menu_gui import MainMenu
 

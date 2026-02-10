@@ -76,7 +76,7 @@
  [],
  False,
  False,
- 1770729144,
+ 1770729846,
  [('runw.exe',
    'c:\\Users\\gstaudt\\Desktop\\Predictor-de-notas-Inacap\\.venv\\Lib\\site-packages\\PyInstaller\\bootloader\\Windows-64bit-intel\\runw.exe',
    'EXECUTABLE')],
