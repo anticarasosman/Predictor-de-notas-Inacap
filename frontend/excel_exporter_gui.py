@@ -8,7 +8,6 @@ from frontend.buttons import create_back_button, create_exit_button
 from utils.custom_sheet_manager import list_custom_sheets
 
 class FileExporterGUI:
-    """GUI para exportar datos de estudiantes a Excel"""
 
     def __init__(self, root, db_connection, main_menu=None):
         self.root = root
@@ -16,13 +15,10 @@ class FileExporterGUI:
         self.main_menu = main_menu
 
     def ask_user_for_rut(self):
-        """Pregunta al usuario por el RUT del estudiante a exportar"""
         
-        # Limpiamos la ventana principal
         for widget in self.root.winfo_children():
             widget.destroy()
 
-        # Título
         title_label = tk.Label(
             self.root,
             text="EXPORTAR DATOS A EXCEL",
@@ -31,7 +27,6 @@ class FileExporterGUI:
         )
         title_label.pack()
 
-        # Subtítulo
         subtitle_label = tk.Label(
             self.root,
             text="Ingrese el RUT del estudiante a exportar (sin puntos y con guion):",
@@ -40,11 +35,9 @@ class FileExporterGUI:
         )
         subtitle_label.pack(pady=10)
 
-        # Frame para el input del RUT
         input_frame = tk.Frame(self.root)
         input_frame.pack(pady=20)
 
-        # Label del input
         rut_label = tk.Label(
             input_frame,
             text="RUT:",
@@ -52,7 +45,6 @@ class FileExporterGUI:
         )
         rut_label.pack(side=tk.LEFT, padx=10)
 
-        # Entry (campo de texto)
         rut_entry = tk.Entry(
             input_frame,
             font=("Arial", 11),
@@ -72,7 +64,6 @@ class FileExporterGUI:
 
         # UNA VES IMPLEMENTAMOS LA FACTORY DE CHECKBOXES, DEBEMOS USARLA AQUI PARA CREAR LOS CHECKBOXES DEFAULT
 
-        # Variables para los checkboxes
         self.sheet_general = tk.BooleanVar(value=True)
         self.sheet_academic = tk.BooleanVar(value=True)
         self.sheet_financial = tk.BooleanVar(value=True)
@@ -106,8 +97,6 @@ class FileExporterGUI:
             font=("Arial", 10)
         ).pack(anchor=tk.W)
 
-        # ===== SHEETS PERSONALIZADAS =====
-        # Crear frame para sheets personalizadas (siempre visible)
         self.personalized_sheets_frame = tk.LabelFrame(
             self.root,
             text="Hojas Personalizadas",
@@ -117,17 +106,13 @@ class FileExporterGUI:
         )
         self.personalized_sheets_frame.pack(padx=20, pady=10, anchor=tk.W, fill=tk.X)
         
-        # Variables para almacenar estado de checkboxes personalizados
         self.custom_sheet_vars = {}
         
-        # Cargar y mostrar custom sheets
         self.load_custom_sheets()
 
-        # Frame para botones de acción principal
         action_button_frame = tk.Frame(self.root)
         action_button_frame.pack(pady=10)
 
-        # Botón Exportar
         export_btn = tk.Button(
             action_button_frame,
             text="📊 Exportar a Excel",
@@ -148,7 +133,6 @@ class FileExporterGUI:
         )
         export_btn.pack(side=tk.LEFT, padx=10)
 
-        # Boton para crear sheet personalizada
         personalize_btn = tk.Button(
             action_button_frame,
             text="➕ Crear Hoja Personalizada",
@@ -160,7 +144,6 @@ class FileExporterGUI:
         )
         personalize_btn.pack(side=tk.LEFT, padx=10)
 
-        # Botón para borrar sheets personalizadas
         delete_btn = tk.Button(
             action_button_frame,
             text="🗑 Borrar Hojas Personalizadas",
@@ -172,55 +155,37 @@ class FileExporterGUI:
         )
         delete_btn.pack(side=tk.LEFT, padx=10)
 
-        # Frame para botones de navegación
         navigation_button_frame = tk.Frame(self.root)
         navigation_button_frame.pack(pady=10)
 
-        # Botón Volver
         if self.main_menu:
             create_back_button(navigation_button_frame, self.return_to_menu, side=tk.LEFT, padx=10)
 
-        # Botón Cerrar Programa
         create_exit_button(navigation_button_frame, self.root.quit, side=tk.LEFT, padx=10)
 
     def export_student(self, rut: str, sheets_selection, custom_sheet_selection=None) -> None:
-        """
-        Exporta los datos del estudiante con el RUT proporcionado
         
-        Args:
-            rut: RUT del estudiante
-            sheets_selection: Dict con selección de sheets default
-            custom_sheet_selection: Dict con selección de sheets personalizadas
-        """
-        
-        # Inicializar si viene vacío
         if custom_sheet_selection is None:
             custom_sheet_selection = {}
         
-        # Validar que el RUT no esté vacío
         if not rut:
             messagebox.showwarning("Advertencia", "Por favor, ingresa un RUT")
             return
         
         try:
-            # Solicitar al usuario que seleccione la carpeta de exportación
             output_dir = select_output_directory(
                 title="Selecciona la carpeta donde guardar el archivo Excel"
             )
             
-            # Crear exportador
             exporter = Exporter(self.db_connection, sheets_selection, custom_sheet_selection)
             
-            # Exportar estudiante
             file_path = exporter.export_student_by_rut(rut, output_dir)
             
-            # Mostrar éxito
             messagebox.showinfo(
                 "Éxito",
                 f"✓ Archivo exportado exitosamente\n\n{file_path}"
             )
             
-            # Mostrar pantalla de resultado
             self.show_export_success(rut, file_path)
             
         except ValueError as e:
@@ -229,13 +194,10 @@ class FileExporterGUI:
             messagebox.showerror("Error", f"✗ Error al exportar: {str(e)}")
 
     def show_export_success(self, rut: str, file_path: str) -> None:
-        """Muestra pantalla de éxito después de la exportación"""
         
-        # Limpiar ventana
         for widget in self.root.winfo_children():
             widget.destroy()
 
-        # Título
         title_label = tk.Label(
             self.root,
             text="EXPORTACIÓN COMPLETADA",
@@ -244,7 +206,6 @@ class FileExporterGUI:
         )
         title_label.pack()
 
-        # Información
         info_text = f"""RUT Exportado: {rut}
                     Archivo guardado en:
                     {file_path}"""
@@ -258,11 +219,9 @@ class FileExporterGUI:
         )
         info_label.pack()
 
-        # Frame para botones
         button_frame = tk.Frame(self.root)
         button_frame.pack(pady=20)
 
-        # Botón Exportar otro
         export_btn = tk.Button(
             button_frame,
             text="📊 Exportar otro estudiante",
@@ -274,32 +233,24 @@ class FileExporterGUI:
         )
         export_btn.pack(side=tk.LEFT, padx=10)
 
-        # Botón Volver
         if self.main_menu:
             create_back_button(button_frame, self.return_to_menu, side=tk.LEFT, padx=10)
 
-        # Botón Cerrar Programa
         create_exit_button(button_frame, self.root.quit, side=tk.LEFT, padx=10)
 
     def return_to_menu(self) -> None:
-        """Vuelve al menú principal"""
         if self.main_menu:
             self.main_menu.create_menu()
 
     def load_custom_sheets(self) -> None:
-        """Carga las custom sheets disponibles y crea checkboxes"""
-        # Limpiar checkboxes existentes
         for widget in self.personalized_sheets_frame.winfo_children():
             widget.destroy()
         
-        # Limpiar variables
         self.custom_sheet_vars.clear()
         
-        # Cargar lista de sheets personalizadas disponibles
         custom_sheets_list = list_custom_sheets()
         
         if custom_sheets_list:
-            # Crear checkboxes para cada sheet personalizada
             for sheet_name in custom_sheets_list:
                 var = tk.BooleanVar(value=False)
                 tk.Checkbutton(
@@ -310,7 +261,6 @@ class FileExporterGUI:
                 ).pack(anchor=tk.W)
                 self.custom_sheet_vars[sheet_name] = var
         else:
-            # Mostrar mensaje si no hay custom sheets
             tk.Label(
                 self.personalized_sheets_frame,
                 text="No hay hojas personalizadas creadas",
@@ -319,7 +269,6 @@ class FileExporterGUI:
             ).pack(anchor=tk.W)
     
     def create_personalized_sheet(self) -> None:
-        """Abre la GUI para crear una hoja personalizada"""
         sheet_creator = CustomSheetCreatorGUI(
             self.root, 
             self.db_connection,
@@ -327,7 +276,6 @@ class FileExporterGUI:
         )
     
     def delete_personalized_sheets(self) -> None:
-        """Abre la GUI para borrar hojas personalizadas"""
         sheet_deleter = CustomSheetDeleterGUI(
             refresh_callback=self.load_custom_sheets
         )

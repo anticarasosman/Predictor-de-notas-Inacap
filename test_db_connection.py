@@ -1,5 +1,5 @@
 """
-Script de prueba para verificar conexión Docker + Python
+Script de prueba para verificar conexión a la base de datos MySQL (local o AWS)
 """
 
 import os
@@ -16,7 +16,7 @@ from database.db_connection import DatabaseConnection
 
 def test_connection():
     print("=" * 60)
-    print("PRUEBA DE CONEXIÓN - Docker MySQL + Python")
+    print("PRUEBA DE CONEXIÓN - Base de Datos MySQL")
     print("=" * 60)
     
     # Mostrar configuración
@@ -49,9 +49,10 @@ def test_connection():
             print(f"✓ Tablas en la BD: {table_count}")
             
             cursor.close()
+            db.disconnect()
             
             print("\n" + "=" * 60)
-            print("✅ TODA LAS PRUEBAS PASARON")
+            print("✅ TODAS LAS PRUEBAS PASARON")
             print("=" * 60)
             
         except Exception as e:
@@ -59,9 +60,10 @@ def test_connection():
     else:
         print("❌ Fallo en conexión")
         print("\n💡 Soluciones:")
-        print("  1. Verifica que Docker Desktop está corriendo")
-        print("  2. Ejecuta: docker-compose up -d")
-        print("  3. Espera 30 segundos y reintenta")
+        print("  1. Verifica que los valores en .env son correctos")
+        print("  2. Confirma que la base de datos está accesible")
+        print("  3. Si es AWS RDS, verifica el security group permite conexiones")
+        print("  4. Revisa la contraseña y usuario en .env")
 
 if __name__ == "__main__":
     test_connection()

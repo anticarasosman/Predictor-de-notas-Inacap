@@ -1,6 +1,7 @@
 import pandas as pd
 from classes.readers.reader import Reader
 import re
+from datetime import datetime
 
 class ReporteMorosidadReader(Reader):
     
@@ -11,6 +12,8 @@ class ReporteMorosidadReader(Reader):
         self.df = pd.read_csv(self.file_path, delimiter=',', skiprows=0, encoding='utf-8')
         # Limpiar nombres de columnas (eliminar espacios)
         self.df.columns = self.df.columns.str.strip()
+        # Métricas de morosidad
+        self.metricas_morosidad = {}
 
     def get_total_rows(self) -> int:
         """Retorna el número de filas del DataFrame"""
@@ -52,6 +55,10 @@ class ReporteMorosidadReader(Reader):
                         "ultima_asistencia": None,
                     }
                     
+                    # Convertir compromisos a int
+                    monto_compromiso_matricula = int(str(row['Monto Compromiso Matricula']).replace('$', '').replace(',', '')) if row['Monto Compromiso Matricula'] and str(row['Monto Compromiso Matricula']) != '$0' else 0
+                    monto_compromiso_colegiaturas = int(str(row['Monto Compromisos Colegiaturas']).replace('$', '').replace(',', '')) if row['Monto Compromisos Colegiaturas'] and str(row['Monto Compromisos Colegiaturas']) != '$0' else 0
+                    
                     datos_reporte_financiero_estudiante = {
                         "rut_estudiante": rut_estudiante,
                         "cantidad_cuotas_pendientes_matriculas": int(row['Cantidad Cuotas Pendientes Matricula']) if row['Cantidad Cuotas Pendientes Matricula'] else 0,
@@ -60,6 +67,8 @@ class ReporteMorosidadReader(Reader):
                         "deuda_colegiaturas": int(str(row['Deuda Colegiaturas']).replace('$', '').replace(',', '')) if row['Deuda Colegiaturas'] and str(row['Deuda Colegiaturas']) != '$0' else 0,
                         "otras_deudas": int(row['Deuda Total Otras Deudas']) if row['Deuda Total Otras Deudas'] else 0,
                         "deuda_total": int(str(row['Deuda Total (Compromisos+Colegiaturas+Otras Deudas)']).replace('$', '').replace(',', '')) if row['Deuda Total (Compromisos+Colegiaturas+Otras Deudas)'] and str(row['Deuda Total (Compromisos+Colegiaturas+Otras Deudas)']) != '$0' else 0,
+                        "monto_compromiso_matricula": monto_compromiso_matricula,
+                        "monto_compromiso_colegiaturas": monto_compromiso_colegiaturas,
                     }
 
                     if self._estudiante_exists(cursor, rut_estudiante):
@@ -72,6 +81,9 @@ class ReporteMorosidadReader(Reader):
                 except (ValueError, KeyError, TypeError) as e:
                     fila_num = index + 1
                     raise ValueError(f"Error en fila {fila_num} (índice {index}): {str(e)}\nDatos de la fila: {dict(row)}")
+            
+            # Después de procesar todos los registros, calcular y guardar métricas de morosidad
+            self._calculate_and_insert_morosidad_summary(cursor)
 
         finally:
             cursor.close()
@@ -84,3 +96,90 @@ class ReporteMorosidadReader(Reader):
                 return f"PRIMAVERA {año}"
             elif "OTOÑO" in periodo_str.upper():
                 return f"OTONO {año}"
+
+    def _calculate_and_insert_morosidad_summary(self, cursor):
+        """
+        Calcula métricas resumidas de morosidad y las inserta en la tabla Resumen_reporte_morosidad
+        """
+        try:
+            # Convertir Total Saldo a numérico para cálculos
+            self.df['Total_Saldo_num'] = self.df['Total Saldo'].apply(
+                lambda x: int(str(x).replace('$', '').replace(',', '')) if x and str(x) != '$0' else 0
+            )
+            
+            # Convertir compromisos a numéricos
+            self.df['Monto_Compromiso_Matricula_num'] = self.df['Monto Compromiso Matricula'].apply(
+                lambda x: int(str(x).replace('$', '').replace(',', '')) if x and str(x) != '$0' else 0
+            )
+            
+            self.df['Monto_Compromiso_Colegiaturas_num'] = self.df['Monto Compromisos Colegiaturas'].apply(
+                lambda x: int(str(x).replace('$', '').replace(',', '')) if x and str(x) != '$0' else 0
+            )
+            
+            # Convertir cuotas Colegiaturas a numérico para promedio
+            self.df['Cuotas_Colegiaturas_num'] = pd.to_numeric(self.df['Cantidad Cuotas Pendientes Colegiaturas'], errors='coerce').fillna(0).astype(int)
+            
+            # Calcular métricas
+            numero_estudiantes_total = len(self.df)
+            numero_estudiantes_con_deuda = (self.df['Total_Saldo_num'] > 0).sum()
+            porcentaje_con_deuda = (numero_estudiantes_con_deuda / numero_estudiantes_total * 100) if numero_estudiantes_total > 0 else 0
+            
+            monto_total_adeudado = self.df['Total_Saldo_num'].sum()
+            monto_total_compromisos = self.df['Monto_Compromiso_Matricula_num'].sum() + self.df['Monto_Compromiso_Colegiaturas_num'].sum()
+            
+            # Promedio de cuotas pendientes (solo mayores que 0)
+            cuotas_mayores_cero = self.df[self.df['Cuotas_Colegiaturas_num'] > 0]['Cuotas_Colegiaturas_num']
+            promedio_cuotas = cuotas_mayores_cero.mean() if len(cuotas_mayores_cero) > 0 else 0
+            
+            # Porcentaje de morosidad
+            porcentaje_morosidad = (monto_total_adeudado / monto_total_compromisos * 100) if monto_total_compromisos > 0 else 0
+            
+            # Fecha de actualización (hoy)
+            fecha_actualizacion = datetime.now().date()
+            
+            # Guardar métricas en la tabla
+            query = """
+                INSERT INTO Resumen_reporte_morosidad 
+                (fecha_actualizacion, numero_estudiantes_total, numero_estudiantes_con_deuda, 
+                 porcentaje_estudiantes_con_deuda, monto_total_adeudado, monto_total_compromisos,
+                 promedio_cuotas_pendientes, porcentaje_morosidad)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                ON DUPLICATE KEY UPDATE
+                numero_estudiantes_total = VALUES(numero_estudiantes_total),
+                numero_estudiantes_con_deuda = VALUES(numero_estudiantes_con_deuda),
+                porcentaje_estudiantes_con_deuda = VALUES(porcentaje_estudiantes_con_deuda),
+                monto_total_adeudado = VALUES(monto_total_adeudado),
+                monto_total_compromisos = VALUES(monto_total_compromisos),
+                promedio_cuotas_pendientes = VALUES(promedio_cuotas_pendientes),
+                porcentaje_morosidad = VALUES(porcentaje_morosidad),
+                fecha_generacion = CURRENT_TIMESTAMP
+            """
+            
+            cursor.execute(query, (
+                fecha_actualizacion,
+                numero_estudiantes_total,
+                numero_estudiantes_con_deuda,
+                round(porcentaje_con_deuda, 2),
+                monto_total_adeudado,
+                monto_total_compromisos,
+                round(promedio_cuotas, 2),
+                round(porcentaje_morosidad, 2)
+            ))
+            
+            self.db_connection.connection.commit()
+            
+            # Guardar métricas para acceso posterior
+            self.metricas_morosidad = {
+                'fecha_actualizacion': fecha_actualizacion,
+                'numero_estudiantes_total': numero_estudiantes_total,
+                'numero_estudiantes_con_deuda': numero_estudiantes_con_deuda,
+                'porcentaje_estudiantes_con_deuda': round(porcentaje_con_deuda, 2),
+                'monto_total_adeudado': monto_total_adeudado,
+                'monto_total_compromisos': monto_total_compromisos,
+                'promedio_cuotas_pendientes': round(promedio_cuotas, 2),
+                'porcentaje_morosidad': round(porcentaje_morosidad, 2)
+            }
+            
+        except Exception as e:
+            print(f"✗ Error al calcular resumen de morosidad: {str(e)}")
+            raise

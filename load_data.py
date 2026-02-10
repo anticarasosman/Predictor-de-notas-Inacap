@@ -1,42 +1,5 @@
-import mysql.connector
-from mysql.connector import Error
+from database.db_connection import DatabaseConnection
 from classes.readers.asignaturas_criticas_reader import AsignaturaCriticasReader
-
-
-class DatabaseConnection:
-    """Maneja la conexión a la base de datos MySQL"""
-    
-    def __init__(self, host: str, user: str, password: str, database: str):
-        self.host = host
-        self.user = user
-        self.password = password
-        self.database = database
-        self.connection = None
-    
-    def connect(self):
-        """Establece conexión con la base de datos"""
-        try:
-            self.connection = mysql.connector.connect(
-                host=self.host,
-                user=self.user,
-                password=self.password,
-                database=self.database
-            )
-            print(f"✓ Conectado a base de datos: {self.database}")
-            return self.connection
-        except Error as e:
-            print(f"✗ Error al conectar: {str(e)}")
-            return None
-    
-    def disconnect(self):
-        """Cierra la conexión"""
-        if self.connection and self.connection.is_connected():
-            self.connection.close()
-            print("✓ Desconectado de base de datos")
-    
-    def get_connection(self):
-        """Retorna la conexión actual"""
-        return self.connection
 
 
 def main():
@@ -44,18 +7,14 @@ def main():
     Ejemplo de cómo usar los readers
     """
     
-    # 1. CREAR CONEXIÓN A LA BASE DE DATOS
-    db = DatabaseConnection(
-        host='localhost',
-        user='root',
-        password='tu_contraseña',  # Cambiar por tu contraseña
-        database='predictor_notas'
-    )
+    # 1. CREAR CONEXIÓN A LA BASE DE DATOS (usa variables de .env)
+    db = DatabaseConnection()
     
-    connection = db.connect()
-    if not connection:
+    if not db.connect():
         print("No se pudo establecer conexión a la base de datos")
         return
+    
+    connection = db.get_connection()
     
     try:
         # 2. USAR EL READER DE ASIGNATURAS CRÍTICAS

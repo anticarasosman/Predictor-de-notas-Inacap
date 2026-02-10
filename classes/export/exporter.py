@@ -29,7 +29,7 @@ class Exporter:
 
         try:
             # 1. Datos generales del estudiante
-            query = "SELECT * FROM estudiante WHERE rut = %s"
+            query = "SELECT * FROM Estudiante WHERE rut = %s"
             cursor.execute(query, (rut,))
             student = cursor.fetchone()
 
@@ -38,7 +38,7 @@ class Exporter:
             
             # 2. Semestres del estudiante
             query = """
-                SELECT * FROM estudiante_semestre
+                SELECT * FROM Estudiante_Semestre
                 WHERE rut_estudiante = %s
                 ORDER BY periodo_semestre DESC
             """
@@ -49,7 +49,7 @@ class Exporter:
             semesters_with_subjects = []
             for semester in semesters:
                 query = """
-                    SELECT * FROM estudiante_asignatura
+                    SELECT * FROM Estudiante_Asignatura
                     WHERE rut_estudiante = %s AND periodo_semestre = %s
                     ORDER BY codigo_asignatura
                 """
@@ -61,7 +61,7 @@ class Exporter:
                 })
 
             # 4. Informacion financiera
-            query = "SELECT * FROM reporte_financiero_estudiante WHERE rut_estudiante = %s"
+            query = "SELECT * FROM Reporte_financiero_estudiante WHERE rut_estudiante = %s"
             cursor.execute(query, (rut,))
             financial_info = cursor.fetchone()
 

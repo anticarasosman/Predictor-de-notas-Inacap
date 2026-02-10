@@ -49,7 +49,7 @@ class Reader(ABC):
         
     def _asignatura_semestre_exists(self, cursor, codigo, periodo):
         try:
-            query = "SELECT COUNT(*) FROM Asignatura_semestre WHERE codigo_asignatura = %s AND periodo_semestre = %s"
+            query = "SELECT COUNT(*) FROM Asignatura_Semestre WHERE codigo_asignatura = %s AND periodo_semestre = %s"
             cursor.execute(query, (codigo, periodo))
             result = cursor.fetchone()[0] > 0
             return result
@@ -62,7 +62,7 @@ class Reader(ABC):
     
     def _estudiante_semestre_exists(self, cursor, rut, periodo):
         try:
-            query = "SELECT COUNT(*) FROM Estudiante_semestre WHERE rut_estudiante = %s AND periodo_semestre = %s"
+            query = "SELECT COUNT(*) FROM Estudiante_Semestre WHERE rut_estudiante = %s AND periodo_semestre = %s"
             cursor.execute(query, (rut, periodo))
             result = cursor.fetchone()[0] > 0
             return result
@@ -75,7 +75,7 @@ class Reader(ABC):
         
     def _estudiante_asignatura_exists(self, cursor, rut, codigo, periodo):
         try:
-            query = "SELECT COUNT(*) FROM Estudiante_asignatura WHERE rut_estudiante = %s AND codigo_asignatura = %s AND periodo_semestre = %s"
+            query = "SELECT COUNT(*) FROM Estudiante_Asignatura WHERE rut_estudiante = %s AND codigo_asignatura = %s AND periodo_semestre = %s"
             cursor.execute(query, (rut, codigo, periodo))
             result = cursor.fetchone()[0] > 0
             return result
@@ -234,7 +234,7 @@ class Reader(ABC):
         """Inserta asignatura en semestre"""
         try:
             query = """
-                INSERT IGNORE INTO Asignatura_semestre (
+                INSERT IGNORE INTO Asignatura_Semestre (
                     codigo_asignatura, periodo_semestre, secciones, alumnos, alumnos_en_riesgo,
                     alumnos_ayudantia, porcentaje_reprobacion_N1, porcentaje_reprobacion_N2,
                     porcentaje_reprobacion_N3, promedio_nota_uno, promedio_nota_dos,
@@ -282,12 +282,12 @@ class Reader(ABC):
             
             valores.extend([codigo, periodo])
             query = f"""
-                UPDATE Asignatura_semestre SET
+                UPDATE Asignatura_Semestre SET
                     {', '.join(campos)}
                 WHERE codigo_asignatura = %s AND periodo_semestre = %s
             """
             cursor.execute(query, valores)
-            print(f"✓ Asignatura_semestre {codigo}-{periodo} actualizada")
+            print(f"✓ Asignatura_Semestre {codigo}-{periodo} actualizada")
         except Error as e:
             print(f"✗ Error al actualizar asignatura_semestre {codigo}-{periodo}: {str(e)}")
             raise
@@ -321,8 +321,9 @@ class Reader(ABC):
                 INSERT INTO Reporte_financiero_estudiante (
                     rut_estudiante, cantidad_cuotas_pendientes_matriculas,
                     cantidad_cuotas_pendientes_colegiaturas, deuda_matriculas,
-                    deuda_colegiaturas, otras_deudas, deuda_total
-                ) VALUES (%s, %s, %s, %s, %s, %s, %s)
+                    deuda_colegiaturas, otras_deudas, deuda_total,
+                    monto_compromiso_matricula, monto_compromiso_colegiaturas
+                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
             """
             values = (
                 rut,
@@ -331,7 +332,9 @@ class Reader(ABC):
                 datos.get('deuda_matriculas'),
                 datos.get('deuda_colegiaturas'),
                 datos.get('otras_deudas'),
-                datos.get('deuda_total')
+                datos.get('deuda_total'),
+                datos.get('monto_compromiso_matricula'),
+                datos.get('monto_compromiso_colegiaturas')
             )
             cursor.execute(query, values)
             print(f"✓ Reporte financiero para {rut} creado")
