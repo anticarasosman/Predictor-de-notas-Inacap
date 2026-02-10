@@ -33,16 +33,32 @@ if tcl_root.exists():
             print(f"[DEBUG SPEC] [OK] Agregando {item.name}")
     print(f"[DEBUG SPEC] [OK] Copiando contenido de TCL completo")
 
+# Agregar datos de MySQL connector (archivos de error/localización)
+mysql_datas = []
+try:
+    mysql_files = collect_data_files('mysql.connector')
+    if mysql_files:
+        mysql_datas.extend(mysql_files)
+        print(f"[DEBUG SPEC] [OK] Agregados datos de mysql.connector: {len(mysql_files)} items")
+except Exception as e:
+    print(f"[DEBUG SPEC] [WARN] Error recopilando mysql.connector: {e}")
+
+# Combinar todos los datos
+all_datas = tcl_datas + mysql_datas
+
+# Recopilar binarios de Tkinter
 tcl_binaries = collect_dynamic_libs('tkinter')
 
-print(f"[DEBUG SPEC] Total datas: {len(tcl_datas)}")
+print(f"[DEBUG SPEC] Total TCL datas: {len(tcl_datas)}")
+print(f"[DEBUG SPEC] Total MySQL datas: {len(mysql_datas)}")
+print(f"[DEBUG SPEC] Total combinado: {len(all_datas)}")
 print(f"[DEBUG SPEC] Total binaries: {len(tcl_binaries)}")
 
 a = Analysis(
     ['main.py'],
     pathex=[],
     binaries=tcl_binaries,
-    datas=tcl_datas,
+    datas=all_datas,
     hiddenimports=[
         'database', 
         'frontend', 'classes', 
@@ -72,7 +88,7 @@ exe = EXE(
     bootloader_ignore_signals=False,
     strip=False,
     upx=True,
-    console=False,  # Sin consola - TCL ya está incluido
+    console=True,  # CON CONSOLA - para debugging
     disable_windowed_traceback=False,
     argv_emulation=False,
     target_arch=None,
