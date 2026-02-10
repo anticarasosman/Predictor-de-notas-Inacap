@@ -58,12 +58,27 @@ Write-Host ""
 Write-Host "[3/4] Iniciando aplicacion..." -ForegroundColor Yellow
 Write-Host ""
 
-if (Test-Path "Herramienta-Consultas-Inacap.exe") {
-    Start-Process "Herramienta-Consultas-Inacap.exe"
-    Write-Host "[OK] Aplicacion iniciada con tunel SSH" -ForegroundColor Green
+# Usar la ruta completa del script para saber dónde estamos
+$scriptDir = Split-Path -Parent $PSCommandPath
+$exePath = Join-Path $scriptDir "Herramienta-Consultas-Inacap.exe"
+
+if (Test-Path $exePath) {
+    try {
+        # Cambiar al directorio del script
+        Push-Location $scriptDir
+        
+        # Ejecutar el .exe desde la carpeta correcta
+        & $exePath
+        
+        Pop-Location
+        Write-Host "[OK] Aplicacion iniciada con tunel SSH" -ForegroundColor Green
+    } catch {
+        Write-Host "[ERROR] No se pudo iniciar la aplicacion: $($_.Exception.Message)" -ForegroundColor Red
+        Write-Host "Intenta ejecutar manualmente: $exePath" -ForegroundColor Yellow
+    }
 } else {
     Write-Host "[ERROR] No se encuentra 'Herramienta-Consultas-Inacap.exe'" -ForegroundColor Red
-    Write-Host "Ejecuta este script desde la carpeta donde esta el .exe" -ForegroundColor Yellow
+    Write-Host "Ruta esperada: $exePath" -ForegroundColor Yellow
 }
 
 Write-Host ""
