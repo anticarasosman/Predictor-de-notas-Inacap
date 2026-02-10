@@ -1,12 +1,38 @@
 # -*- mode: python ; coding: utf-8 -*-
 
 from PyInstaller.utils.hooks import collect_data_files, collect_dynamic_libs
+import pathlib
+import subprocess
 import sys
 
-# Recopilar datos de Tcl/Tk explícitamente
-tcl_datas = collect_data_files('tkinter')
-tcl_datas += collect_data_files('tcl', subdir='tcltk')
+# Encontrar la instalación real de Python (no el venv)
+try:
+    result = subprocess.run(
+        [sys.executable, '-c', 'import sys; print(sys.base_prefix)'],
+        capture_output=True,
+        text=True
+    )
+    python_real = pathlib.Path(result.stdout.strip())
+except:
+    python_real = pathlib.Path("C:\\Program Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.3312.0_x64__qbz5n2kfra8p0")
+
+tcl_root = python_real / 'tcl'
+
+print(f"[DEBUG SPEC] Python real: {python_real}")
+print(f"[DEBUG SPEC] TCL exists: {tcl_root.exists()}")
+
+# Preparar datos - incluir la carpeta tcl COMPLETA (contiene tcl + tk)
+tcl_datas = []
+
+if tcl_root.exists():
+    # Copiar toda la carpeta tcl (que incluye tk8.6, tcl8.6, etc.)
+    tcl_datas.append((str(tcl_root), 'tcl'))
+    print(f"[DEBUG SPEC] [OK] Copiando TCL completa: {tcl_root}")
+
 tcl_binaries = collect_dynamic_libs('tkinter')
+
+print(f"[DEBUG SPEC] Total datas: {len(tcl_datas)}")
+print(f"[DEBUG SPEC] Total binaries: {len(tcl_binaries)}")
 
 a = Analysis(
     ['main.py'],
@@ -15,14 +41,13 @@ a = Analysis(
     datas=tcl_datas,
     hiddenimports=[
         'database', 
-        'frontend', 
-        'classes', 
+        'frontend', 'classes', 
         'utils', 
         'factories', 
         'openpyxl', 
         'mysql.connector', 
         'pandas',
-        'setup_tkinter',  # Agregar explícitamente
+        'setup_tkinter',
     ],
     hookspath=[],
     hooksconfig={},
@@ -43,7 +68,7 @@ exe = EXE(
     bootloader_ignore_signals=False,
     strip=False,
     upx=True,
-    console=True,  # TEMPORAL: para ver mensajes de debug
+    console=False,  # Sin consola - TCL ya está incluido
     disable_windowed_traceback=False,
     argv_emulation=False,
     target_arch=None,
