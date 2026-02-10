@@ -1,0 +1,132 @@
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                                                                           ║
+║         INSTRUCCIONES - USO EN RED CORPORATIVA (Túnel SSH)                ║
+║                                                                           ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+
+📋 ¿QUÉ ES ESTO?
+═══════════════════════════════════════════════════════════════════════════
+
+Si la aplicación funciona desde tu celular (datos móviles) pero NO funciona
+desde la red WiFi de la empresa, es porque el puerto 3306 está bloqueado.
+
+Esta solución usa un "túnel SSH" que pasa por el puerto 443 (HTTPS), que 
+las redes corporativas normalmente tienen abierto.
+
+
+🔧 CONFIGURACIÓN INICIAL (SOLO UNA VEZ)
+═══════════════════════════════════════════════════════════════════════════
+
+1. Descarga y guarda estos archivos en la MISMA CARPETA del .exe:
+   
+   ✓ Herramienta-Consultas-Inacap.exe
+   ✓ tunnel-inacap.pem (archivo de clave SSH)
+   ✓ .env.tunnel (configuración para red corporativa)
+   ✓ iniciar-con-tunel.ps1 (script de inicio)
+
+2. El archivo "tunnel-inacap.pem" debe tener permisos restringidos:
+   - Click derecho → Propiedades → Seguridad → Avanzado
+   - Quita todos los permisos excepto tu usuario
+   - Esto es necesario para SSH
+
+
+🚀 CÓMO USAR (Red Corporativa)
+═══════════════════════════════════════════════════════════════════════════
+
+Opción A: Usando el script automático (RECOMENDADO)
+───────────────────────────────────────────────────
+
+1. Haz doble clic en "iniciar-con-tunel.ps1"
+
+2. Si Windows bloquea el script:
+   - Click derecho → "Ejecutar con PowerShell"
+   - O abre PowerShell como Administrador y ejecuta:
+     Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+
+3. El script hará TODO automáticamente:
+   ✓ Configura el .env para usar el túnel
+   ✓ Inicia el túnel SSH en segundo plano
+   ✓ Abre la aplicación
+
+4. ¡Listo! Usa la aplicación normalmente.
+
+
+Opción B: Manual
+────────────────
+
+1. Abre PowerShell en la carpeta del .exe
+
+2. Ejecuta este comando:
+   
+   ssh -p 443 -i tunnel-inacap.pem -L 3307:base-de-datos-inacap.cxeouo22gw7q.sa-east-1.rds.amazonaws.com:3306 ec2-user@18.228.10.215 -N
+
+3. Deja esa ventana abierta (el túnel debe estar activo)
+
+4. Renombra ".env.tunnel" a ".env"
+
+5. Ejecuta "Herramienta-Consultas-Inacap.exe"
+
+
+🏠 CÓMO USAR (Red Normal - WiFi casa/celular)
+═══════════════════════════════════════════════════════════════════════════
+
+Si NO estás en red corporativa:
+
+1. Asegúrate que el archivo ".env" tenga estos valores:
+   
+   DB_HOST=base-de-datos-inacap.cxeouo22gw7q.sa-east-1.rds.amazonaws.com
+   DB_PORT=3306
+
+2. Ejecuta "Herramienta-Consultas-Inacap.exe" normalmente
+
+3. NO necesitas el túnel SSH
+
+
+⚙️ CERRAR EL TÚNEL SSH
+═══════════════════════════════════════════════════════════════════════════
+
+Cuando termines de usar la aplicación en red corporativa:
+
+1. Abre el Administrador de Tareas (Ctrl + Shift + Esc)
+
+2. Busca el proceso "ssh.exe"
+
+3. Click derecho → Finalizar tarea
+
+Esto libera el puerto y cierra la conexión.
+
+
+🔍 SOLUCIÓN DE PROBLEMAS
+═══════════════════════════════════════════════════════════════════════════
+
+❌ ERROR: "Permission denied" al iniciar túnel
+   SOLUCIÓN: Verifica los permisos del archivo .pem (solo lectura para ti)
+
+❌ ERROR: "Connection refused" puerto 443
+   SOLUCIÓN: Tu red también bloquea el 443. Usa datos móviles del celular.
+
+❌ ERROR: La app no conecta a la base de datos
+   SOLUCIÓN: Verifica que el .env tenga DB_HOST=localhost y DB_PORT=3307
+
+❌ ERROR: El túnel se cierra solo
+   SOLUCIÓN: Puede ser timeout de inactividad. Reinicia el túnel.
+
+
+📞 SOPORTE
+═══════════════════════════════════════════════════════════════════════════
+
+Si tienes problemas:
+
+1. Verifica que el script "iniciar-con-tunel.ps1" ejecute sin errores
+2. Revisa que el archivo .pem esté en la carpeta correcta
+3. Confirma que tienes acceso a internet desde la red corporativa
+4. Prueba usando datos móviles para verificar que funcione fuera de la red
+
+
+═══════════════════════════════════════════════════════════════════════════
+
+Versión: 2.7
+Fecha: Febrero 2026
+
+═══════════════════════════════════════════════════════════════════════════
