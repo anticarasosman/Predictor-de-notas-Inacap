@@ -4573,6 +4573,9 @@
    'C:\\Program '
    'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.3312.0_x64__qbz5n2kfra8p0\\Lib\\selectors.py',
    'PYMODULE'),
+  ('setup_tkinter',
+   'C:\\Users\\gstaudt\\Desktop\\Predictor-de-notas-Inacap\\setup_tkinter.py',
+   'PYMODULE'),
   ('setuptools',
    'c:\\Users\\gstaudt\\Desktop\\Predictor-de-notas-Inacap\\.venv\\Lib\\site-packages\\setuptools\\__init__.py',
    'PYMODULE'),

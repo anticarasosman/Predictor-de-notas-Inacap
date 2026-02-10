@@ -1,11 +1,11 @@
 # -*- mode: python ; coding: utf-8 -*-
 
 from PyInstaller.utils.hooks import collect_data_files, collect_dynamic_libs
+import sys
 
-
+# Recopilar datos de Tcl/Tk explícitamente
 tcl_datas = collect_data_files('tkinter')
-tcl_datas += collect_data_files('tcl')
-tcl_datas += collect_data_files('tk')
+tcl_datas += collect_data_files('tcl', subdir='tcltk')
 tcl_binaries = collect_dynamic_libs('tkinter')
 
 a = Analysis(
@@ -13,7 +13,17 @@ a = Analysis(
     pathex=[],
     binaries=tcl_binaries,
     datas=tcl_datas,
-    hiddenimports=['database', 'frontend', 'classes', 'utils', 'factories', 'openpyxl', 'mysql.connector', 'pandas'],
+    hiddenimports=[
+        'database', 
+        'frontend', 
+        'classes', 
+        'utils', 
+        'factories', 
+        'openpyxl', 
+        'mysql.connector', 
+        'pandas',
+        'setup_tkinter',  # Agregar explícitamente
+    ],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
@@ -33,7 +43,7 @@ exe = EXE(
     bootloader_ignore_signals=False,
     strip=False,
     upx=True,
-    console=False,
+    console=True,  # TEMPORAL: para ver mensajes de debug
     disable_windowed_traceback=False,
     argv_emulation=False,
     target_arch=None,
