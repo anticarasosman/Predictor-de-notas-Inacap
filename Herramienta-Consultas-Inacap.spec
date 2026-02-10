@@ -25,9 +25,13 @@ print(f"[DEBUG SPEC] TCL exists: {tcl_root.exists()}")
 tcl_datas = []
 
 if tcl_root.exists():
-    # Copiar toda la carpeta tcl (que incluye tk8.6, tcl8.6, etc.)
-    tcl_datas.append((str(tcl_root), 'tcl'))
-    print(f"[DEBUG SPEC] [OK] Copiando TCL completa: {tcl_root}")
+    # Copiar el contenido de la carpeta tcl directamente a _internal
+    # Esto pone tcl8.6, tk8.6, etc. directamente en _internal, no en _internal/tcl
+    for item in tcl_root.iterdir():
+        if item.is_dir():
+            tcl_datas.append((str(item), item.name))
+            print(f"[DEBUG SPEC] [OK] Agregando {item.name}")
+    print(f"[DEBUG SPEC] [OK] Copiando contenido de TCL completo")
 
 tcl_binaries = collect_dynamic_libs('tkinter')
 

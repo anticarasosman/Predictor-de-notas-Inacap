@@ -20,43 +20,44 @@ def setup_tcl_tk():
     if is_frozen:
         # Estamos dentro de un .exe empaquetado
         base_path = pathlib.Path(sys.executable).parent
+        internal_path = base_path / '_internal'
         
-        print(f"[SETUP] Buscando TCL/TK desde: {base_path}")
+        print(f"[SETUP] Buscando TCL/TK desde: {internal_path}")
         
-        # Buscar en múltiples ubicaciones posibles
-        possible_locations_tcl = [
-            base_path / '_internal' / 'tcl',
-            base_path / 'tcl',
-            base_path.parent / '_internal' / 'tcl',
-            base_path.parent / 'tcl',
+        # Buscar tcl8.6 (donde init.tcl está directamente)
+        possible_tcl = [
+            internal_path / 'tcl8.6',
+            internal_path / 'tcl' / 'tcl8.6',
+            base_path / 'tcl8.6',
         ]
         
-        possible_locations_tk = [
-            base_path / '_internal' / 'tk',
-            base_path / 'tk',
-            base_path.parent / '_internal' / 'tk',
-            base_path.parent / 'tk',
+        # Buscar tk8.6
+        possible_tk = [
+            internal_path / 'tk8.6',
+            internal_path / 'tcl' / 'tk8.6',
+            base_path / 'tk8.6',
         ]
         
         # Buscar y configurar TCL
-        for tcl_path in possible_locations_tcl:
+        for tcl_path in possible_tcl:
             if tcl_path.exists():
                 os.environ['TCL_LIBRARY'] = str(tcl_path)
-                print(f"[SETUP] ✓ TCL_LIBRARY configurado: {tcl_path}")
+                print(f"[SETUP] OK - TCL_LIBRARY: {tcl_path}")
                 break
         else:
-            print(f"[SETUP] ✗ TCL no encontrado en ninguna ruta")
+            print(f"[SETUP] WARN - TCL no encontrado")
         
         # Buscar y configurar TK
-        for tk_path in possible_locations_tk:
+        for tk_path in possible_tk:
             if tk_path.exists():
                 os.environ['TK_LIBRARY'] = str(tk_path)
-                print(f"[SETUP] ✓ TK_LIBRARY configurado: {tk_path}")
+                print(f"[SETUP] OK - TK_LIBRARY: {tk_path}")
                 break
         else:
-            print(f"[SETUP] ✗ TK no encontrado en ninguna ruta")
+            print(f"[SETUP] WARN - TK no encontrado")
 
 
 # Ejecutar setup apenas se importe este módulo
 setup_tcl_tk()
+
 
