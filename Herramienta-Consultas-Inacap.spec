@@ -43,6 +43,19 @@ try:
 except Exception as e:
     print(f"[DEBUG SPEC] [WARN] Error recopilando mysql.connector: {e}")
 
+# Agregar explícitamente la carpeta locales de mysql.connector
+try:
+    import mysql.connector as _mysql_connector
+    mysql_path = pathlib.Path(_mysql_connector.__file__).parent
+    mysql_locales = mysql_path / 'locales'
+    if mysql_locales.exists():
+        mysql_datas.append((str(mysql_locales), 'mysql/connector/locales'))
+        print(f"[DEBUG SPEC] [OK] Agregada carpeta locales: {mysql_locales}")
+    else:
+        print(f"[DEBUG SPEC] [WARN] Carpeta locales no encontrada: {mysql_locales}")
+except Exception as e:
+    print(f"[DEBUG SPEC] [WARN] Error agregando locales: {e}")
+
 # Combinar todos los datos
 all_datas = tcl_datas + mysql_datas
 
@@ -66,10 +79,13 @@ a = Analysis(
         'factories', 
         'openpyxl', 
         'mysql.connector', 
+        'mysql.connector.locales',
+        'mysql.connector.locales.eng',  # Localización en inglés
+        'mysql.connector.errors',
         'pandas',
         'setup_tkinter',
     ],
-    hookspath=[],
+    hookspath=['.'],  # Usar hooks personalizados de esta carpeta
     hooksconfig={},
     runtime_hooks=[],
     excludes=[],
