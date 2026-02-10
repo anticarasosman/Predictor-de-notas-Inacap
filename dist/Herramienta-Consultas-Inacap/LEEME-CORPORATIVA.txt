@@ -47,7 +47,7 @@ Una vez lo tengas, colócalo en esta misma carpeta.
 │                                                                          │
 │  1. Consigue el archivo "tunnel-inacap.pem" (solicítalo)                │
 │  2. Colócalo en esta carpeta                                            │
-│  3. Ejecuta "iniciar-con-tunel.ps1"                                     │
+│  3. Haz DOBLE CLIC en "iniciar-con-tunel.bat"  ← USAR ESTO              │
 │  4. ¡Listo!                                                              │
 │                                                                          │
 │  Lee "INSTRUCCIONES_RED_CORPORATIVA.txt" para más detalles.             │

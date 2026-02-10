@@ -34,22 +34,21 @@ las redes corporativas normalmente tienen abierto.
 🚀 CÓMO USAR (Red Corporativa)
 ═══════════════════════════════════════════════════════════════════════════
 
-Opción A: Usando el script automático (RECOMENDADO)
+Opción A: Usando el script automático (RECOMENDADO) ⭐
 ───────────────────────────────────────────────────
 
-1. Haz doble clic en "iniciar-con-tunel.ps1"
+1. Haz doble clic en "iniciar-con-tunel.bat"
 
-2. Si Windows bloquea el script:
-   - Click derecho → "Ejecutar con PowerShell"
-   - O abre PowerShell como Administrador y ejecuta:
-     Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+   ✓ NO necesita derechos de administrador
+   ✓ NO necesita configuración previa
+   ✓ Automáticamente abre PowerShell con permisos correctos
 
-3. El script hará TODO automáticamente:
+2. El script hará TODO automáticamente:
    ✓ Configura el .env para usar el túnel
    ✓ Inicia el túnel SSH en segundo plano
    ✓ Abre la aplicación
 
-4. ¡Listo! Usa la aplicación normalmente.
+3. ¡Listo! Usa la aplicación normalmente.
 
 
 Opción B: Manual
