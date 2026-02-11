@@ -17,8 +17,8 @@ load_dotenv()
 def cleanup(db_connection, root):
     """Cierra conexión y limpia recursos"""
     try:
-        if db_connection and db_connection.connection:
-            db_connection.connection.close()
+        if db_connection and db_connection.is_connected():
+            db_connection.disconnect()
             print("✓ Conexión cerrada")
     except Exception as e:
         print(f"Error al cerrar conexión: {e}")
