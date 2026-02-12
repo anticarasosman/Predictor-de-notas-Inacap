@@ -1,11 +1,14 @@
+import os
+import subprocess
+import threading
 import tkinter as tk
+from aws.s3_uploader import S3Uploader
+from aws.job_monitor import JobMonitor
 from tkinter import filedialog, messagebox
 from factories.readers_factory import ReadersFactory
 from frontend.progress_window import ProgressWindow
 from frontend.buttons import create_back_button, create_exit_button, create_upload_button
 from mysql.connector import Error
-import os
-import subprocess
 
 
 class FileLoaderGUI:
@@ -16,7 +19,48 @@ class FileLoaderGUI:
         self.db_connection = db_connection
         self.main_menu = main_menu
         self.file_types = ReadersFactory.get_file_types()
+        api_url = os.getenv('API_URL')
+        self.s3_uploader = S3Uploader(api_url) if api_url else None
+        self.job_monitor = JobMonitor(api_url) if api_url else None
     
+    def load_files(self):
+        filepath = self.file_path.get()
+        filename = os.path.basename(filepath)
+
+        try:
+            self.status_label.config(text="Subiendo archivo...")
+            job_id = self.s3_uploader.upload_csv(filepath, filename)
+
+            self.status_label.config(text=f"Procesando... Job ID: {job_id}")
+
+            def monitor():
+                def update_progress(status):
+                    processed = status.get('processed_rows', 0)
+                    total = status.get('total_rows', 1)
+                    percent = (processed / total * 100) if total > 0 else 0
+
+                    self.root.after(0, lambda: self.progress_bar.config(value=percent))
+                    self.root.after(0, lambda: self.status_label.config(
+                        text=f"Procesando: {processed}/{total} filas ({percent:.1f}%)"
+                    ))
+                final_status = self.job_monitor.wait_for_completion(job_id, update_progress)
+
+                if final_status.get('status') == 'completed':
+                    self.root.after(0, lambda: messagebox.showinfo(
+                        "Éxito",
+                        f"Archivo procesado: {final_status['total_rows']} filas"
+                    ))
+                else:
+                    self.root.after(0, lambda: messagebox.showerror(
+                        "Error",
+                        f"Error: {final_status.get('error_message', 'Desconocido')}"
+                    ))
+            
+            threading.Thread(target=monitor, daemon=True).start()
+        
+        except Exception as e:
+            messagebox.showerror("Error", f"Error al cargar archivo: {str(e)}")
+
     def show_type_selection(self):
         """Muestra la selección de tipo de archivo en la ventana principal"""
         # Limpiar la ventana principal
@@ -241,8 +285,8 @@ class FileLoaderGUI:
         
         # Información de resultado
         info_text = f"""Archivos procesados: {total_files}
-Archivos exitosos: {success_count}
-Archivos con error: {len(error_messages)}"""
+                    Archivos exitosos: {success_count}
+                    Archivos con error: {len(error_messages)}"""
         
         info_label = tk.Label(
             self.root,
