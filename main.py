@@ -69,7 +69,19 @@ if __name__ == "__main__":
             
             root.mainloop()
         else:
-            messagebox.showerror("Error", "No se pudo conectar a la base de datos")
+            # Mensaje detallado de error
+            error_msg = f"No se pudo conectar a la base de datos\n\n"
+            error_msg += f"Host: {db_connection.host}\n"
+            error_msg += f"User: {db_connection.user}\n"
+            error_msg += f"Database: {db_connection.database}\n"
+            error_msg += f"Port: {db_connection.port}\n\n"
+            error_msg += f"Verifica:\n"
+            error_msg += f"1. El archivo .env existe en la misma carpeta que el .exe\n"
+            error_msg += f"2. Las credenciales son correctas\n"
+            error_msg += f"3. El servidor está accesible desde este PC\n\n"
+            error_msg += f"Revisa la consola para más detalles."
+            messagebox.showerror("Error de Conexión", error_msg)
+            input("\nPresiona ENTER para cerrar...")
     except KeyboardInterrupt:
         print("\n✓ Aplicación cerrada por el usuario")
         sys.exit(0)

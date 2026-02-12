@@ -32,19 +32,26 @@ a = Analysis(
         ('.env.example', '.'),
     ],
     hiddenimports=[
-        # MySQL Connector
+        # API Gateway / AWS
+        'requests',
+        'urllib3',
+        'certifi',
+        'boto3',
+        'botocore',
+        # AWS API Client
+        'aws.api_client',
+        # MySQL Connector (para compatibilidad/fallback)
         'mysql.connector',
         'mysql.connector.locales',
         'mysql.connector.locales.eng',
         'mysql.connector.abstracts',
         'mysql.connector.plugins',
-        # Agregar todos los submódulos de locales dinámicamente
         *mysql_locales,
         # Pandas y dependencias
         'pandas',
         'pandas._libs.tslibs.offsets',
         'numpy',
-        # Openpyxl (Excel) - TODO
+        # Openpyxl (Excel)
         'openpyxl',
         'openpyxl.compat',
         'openpyxl.compat.itertools',
@@ -95,7 +102,7 @@ exe = EXE(
     bootloader_ignore_signals=False,
     strip=False,
     upx=True,
-    console=False,  # Sin ventana de consola
+    console=True,  # TEMPORAL: Activar consola para diagnóstico
     disable_windowed_traceback=False,
     target_arch=None,
     codesign_identity=None,
