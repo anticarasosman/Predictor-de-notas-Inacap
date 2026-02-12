@@ -8,8 +8,12 @@ Fecha: Febrero 2026
 
 import sys
 import os
+from PyInstaller.utils.hooks import collect_submodules
 
 block_cipher = None
+
+# Incluir TODOS los submódulos de mysql.connector.locales
+mysql_locales = collect_submodules('mysql.connector.locales')
 
 a = Analysis(
     ['main.py'],
@@ -31,10 +35,11 @@ a = Analysis(
         # MySQL Connector
         'mysql.connector',
         'mysql.connector.locales',
+        'mysql.connector.locales.eng',
         'mysql.connector.abstracts',
         'mysql.connector.plugins',
-        'mysql.connector.plugins.mysql_auth_plugin',
-        'mysql.connector.plugins.mysql_native_password',
+        # Agregar todos los submódulos de locales dinámicamente
+        *mysql_locales,
         # Pandas y dependencias
         'pandas',
         'pandas._libs.tslibs.offsets',
@@ -64,7 +69,7 @@ a = Analysis(
         'dotenv',
         'chardet',
     ],
-    hookspath=[],  # No usar hooks locales por defecto
+    hookspath=['.'],  # Incluir hooks personalizados del directorio actual
     hooksconfig={},
     runtime_hooks=[],
     excludedimports=[
