@@ -1,7 +1,7 @@
-../Scripts/__pycache__/dumppdf.cpython-313.pyc,,
-../Scripts/__pycache__/pdf2txt.cpython-313.pyc,,
-../Scripts/dumppdf.py,sha256=vYr9HhP995j43dxWYSHBKB1JvzDgZWM3xWlGqrEbAv0,14678
-../Scripts/pdf2txt.py,sha256=HttMclMJEvsNLWuMx7bmdudVU_8aN3oVhjzKSgufmWc,10136
+../../Scripts/__pycache__/dumppdf.cpython-313.pyc,,
+../../Scripts/__pycache__/pdf2txt.cpython-313.pyc,,
+../../Scripts/dumppdf.py,sha256=D5HKXsc2jfocdaxnV-0TWoHYJeepLg6tR_0ZjZFsu-s,14639
+../../Scripts/pdf2txt.py,sha256=zS0vhkMj1aJyRbhBTp6z4ltqNBtPuie3b2xM4vNj13Q,10097
 pdfminer/__init__.py,sha256=XuojqZ5_3pC50U67S5E4JxoAg7FL3JUu5DwE-FkIzw4,260
 pdfminer/__pycache__/__init__.cpython-313.pyc,,
 pdfminer/__pycache__/_saslprep.cpython-313.pyc,,

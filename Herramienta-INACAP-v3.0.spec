@@ -39,18 +39,32 @@ a = Analysis(
         'pandas',
         'pandas._libs.tslibs.offsets',
         'numpy',
-        # Openpyxl (Excel)
+        # Openpyxl (Excel) - TODO
         'openpyxl',
         'openpyxl.compat',
+        'openpyxl.compat.itertools',
+        'openpyxl.styles',
         'openpyxl.styles.fonts',
+        'openpyxl.styles.colors',
+        'openpyxl.styles.borders',
+        'openpyxl.styles.fills',
+        'openpyxl.styles.alignment',
+        'openpyxl.styles.numbers',
+        'openpyxl.worksheet',
         'openpyxl.worksheet.datavalidation',
+        'openpyxl.worksheet.worksheet',
+        'openpyxl.worksheet.table',
+        'openpyxl.utils',
+        'openpyxl.utils.datetime',
+        'openpyxl.drawing',
+        'openpyxl.drawing.image',
         # PDF
         'PyPDF2',
         # Otros
         'dotenv',
         'chardet',
     ],
-    hookspath=['./'],  # Usar hook-mysql_connector.py local
+    hookspath=[],  # No usar hooks locales por defecto
     hooksconfig={},
     runtime_hooks=[],
     excludedimports=[
