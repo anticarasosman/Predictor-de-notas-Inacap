@@ -1,10 +1,19 @@
 import mysql.connector
 from mysql.connector import Error
 import os
+import sys
 from dotenv import load_dotenv
 
-# Cargar variables de entorno desde .env
-load_dotenv()
+# Cargar .env desde el directorio del ejecutable (importante para PyInstaller)
+# NOTA: main.py ya carga el .env, este es un fallback por si se usa este módulo directamente
+if not os.getenv('DB_HOST'):
+    if getattr(sys, 'frozen', False):
+        application_path = os.path.dirname(sys.executable)
+    else:
+        application_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    
+    env_path = os.path.join(application_path, '.env')
+    load_dotenv(env_path)
 
 
 class DatabaseConnection:
