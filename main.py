@@ -43,6 +43,9 @@ def cleanup(db_connection, root):
 if __name__ == "__main__":
     # Crear conexión a la base de datos
     try:
+        print(f"[MAIN] Python ejecutándose desde: {sys.executable}")
+        print(f"[MAIN] Directorio de trabajo: {os.getcwd()}")
+        
         db_connection = DatabaseConnection()
         if db_connection.connect():
             # Crear la ventana principal

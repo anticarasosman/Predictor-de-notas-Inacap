@@ -29,6 +29,13 @@ class DatabaseConnection:
     
     def connect(self) -> bool:
         try:
+            print(f"[DB] Intentando conectar...")
+            print(f"[DB] Host: {self.host}")
+            print(f"[DB] User: {self.user}")
+            print(f"[DB] Database: {self.database}")
+            print(f"[DB] Port: {self.port}")
+            print(f"[DB] Password: {'*' * len(self.password) if self.password else '(vacío)'}")
+            
             self.connection = mysql.connector.connect(
                 host=self.host,
                 user=self.user,
@@ -46,7 +53,10 @@ class DatabaseConnection:
             print(f"✓ Conectado a: {self.user}@{self.host}:{self.port}/{self.database}")
             return True
         except Error as e:
-            print(f"✗ Error de conexión: {str(e)}")
+            print(f"✗ Error de conexión MySQL:")
+            print(f"   Código: {e.errno}")
+            print(f"   Mensaje: {e.msg}")
+            print(f"   Detalles completos: {str(e)}")
             return False
     
     def cursor(self, **kwargs):
