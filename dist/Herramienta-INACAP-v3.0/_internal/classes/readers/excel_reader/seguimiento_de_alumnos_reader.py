@@ -22,7 +22,7 @@ class SeguimientoDeAlumnosReader(Reader):
                     progress_callback(index + 1)
                 rut_estudiante = row['Rut Alumno']
                 codigo_asignatura = row['Cod Asignatura']
-                periodo = row['Periodo']
+                periodo = self._normalize_periodo(row['Periodo'])
 
                 datos_estudiante = {
                     "rut": rut_estudiante,

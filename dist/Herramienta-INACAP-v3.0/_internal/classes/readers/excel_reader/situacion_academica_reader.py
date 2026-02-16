@@ -45,7 +45,7 @@ class SituacionAcademicaReader(Reader):
                     
                     # Convertir RUT y DV a string para concatenación
                     rut_estudiante = str(row['RUT']).replace('.', '').strip() + '-' + str(row['DV']).strip()
-                    periodo = str(row['PERIODO']).strip()
+                    periodo = self._normalize_periodo(row['PERIODO'])
 
                     datos_estudiante = {
                         "rut": rut_estudiante,

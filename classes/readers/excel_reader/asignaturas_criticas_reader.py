@@ -23,7 +23,7 @@ class AsignaturaCriticasReader(Reader):
                     progress_callback(index + 1)
                 try:
                     codigo_asignatura = row['CODIGO ASIGNATURA']
-                    periodo = row['PERIODO']
+                    periodo = self._normalize_periodo(row['PERIODO'])
                     
                     self._insert_semestre(cursor, periodo)
 

@@ -28,7 +28,7 @@ class ReporteMorosidadReader(Reader):
                     progress_callback(index + 1)
                 try:
                     rut_estudiante = row['Rut Alumno']
-                    periodo = self._convert_periodo(row["Semestre"])
+                    periodo = self._normalize_periodo(row["Semestre"])
 
                     self._insert_semestre(cursor, periodo)
 

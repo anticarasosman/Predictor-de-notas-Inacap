@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 import pandas as pd
 from mysql.connector import Error
+import re
 
 class Reader(ABC):
     
@@ -16,6 +17,42 @@ class Reader(ABC):
     def get_total_rows(self) -> int:
         """Retorna el número total de filas/registros a procesar"""
         pass
+
+    def _normalize_periodo(self, periodo_str: str) -> str:
+        """
+        Normaliza el formato del período a: YYYY-primavera o YYYY-otoño
+        Convierte desde:
+        - "PRIMAVERA 2025" → "2025-primavera"
+        - "OTOÑO 2025" → "2025-otoño"
+        - "2025 Primavera" → "2025-primavera"
+        - "2025 Otoño" → "2025-otoño"
+        - "2025-primavera" → "2025-primavera" (ya normalizado)
+        - "2025-otoño" → "2025-otoño" (ya normalizado)
+        """
+        periodo_str = str(periodo_str).strip()
+        
+        # Si ya está en formato normalizado, retornar directamente
+        if re.match(r'\d{4}-(primavera|otoño)', periodo_str.lower()):
+            return periodo_str.lower()
+        
+        periodo_upper = periodo_str.upper()
+        
+        # Patrón 1: "PALABRA YYYY" (ej: "PRIMAVERA 2025", "OTOÑO 2025")
+        match = re.match(r'(PRIMAVERA|OTOÑO)\s+(\d{4})', periodo_upper)
+        if match:
+            estacion = match.group(1).lower()
+            año = match.group(2)
+            return f"{año}-{estacion}"
+        
+        # Patrón 2: "YYYY PALABRA" (ej: "2025 Primavera", "2025 Otoño")
+        match = re.match(r'(\d{4})\s+(PRIMAVERA|OTOÑO)', periodo_upper)
+        if match:
+            año = match.group(1)
+            estacion = match.group(2).lower()
+            return f"{año}-{estacion}"
+        
+        # Si no coincide ningún patrón, retornar como está
+        return periodo_str.lower()
 
     def _estudiante_exists(self, cursor, rut):
         try:
