@@ -85,9 +85,10 @@ class SemesterRangeExporter:
         Returns:
             list: Lista de diccionarios con:
                 - rut: RUT del estudiante
+                - nombre: Nombre del estudiante
                 - programa: Programa de estudio
                 - ramo: Nombre del ramo
-                - nota: Nota obtenida
+                - notas_parciales: Notas separadas por comas
                 - docente: Nombre del docente
                 - asignaturas_reprobadas_cuatro_veces
                 - asignaturas_reprobadas_tres_veces
@@ -98,9 +99,10 @@ class SemesterRangeExporter:
             query = """
                 SELECT 
                     e.rut,
+                    COALESCE(e.nombre, '') AS nombre,
                     COALESCE(e.programa_estudio, '') AS programa_estudio,
                     COALESCE(a.nombre, 'Sin asignaturas registradas') AS ramo,
-                    COALESCE(ea.notas_parciales, '') AS nota,
+                    COALESCE(ea.notas_parciales, '') AS notas_parciales,
                     COALESCE(ea.nombre_docente, '') AS docente,
                     COALESCE(es.asignaturas_reprobadas_cuatro_veces, 0) AS asignaturas_reprobadas_cuatro_veces,
                     COALESCE(es.asignaturas_reprobadas_tres_veces, 0) AS asignaturas_reprobadas_tres_veces
@@ -126,16 +128,35 @@ class SemesterRangeExporter:
         sheet_name = semestre.replace('/', '-')[:31]
         ws = wb.create_sheet(title=sheet_name)
         
-        # Configurar encabezados
+        # Determinar número máximo de notas para crear columnas dinámicas
+        max_notas = 0
+        for row_data in data:
+            notas_str = row_data.get('notas_parciales', '')
+            if notas_str:
+                num_notas = len(notas_str.split(','))
+                max_notas = max(max_notas, num_notas)
+        
+        # Si no hay notas, crear al menos 3 columnas
+        if max_notas == 0:
+            max_notas = 3
+        
+        # Configurar encabezados dinámicos
         headers = [
             'RUT',
+            'Nombre',
             'Programa de Estudio',
-            'Ramo',
-            'Nota',
+            'Ramo'
+        ]
+        
+        # Agregar columnas de notas (SN-1, SN-2, SN-3, ...)
+        for i in range(1, max_notas + 1):
+            headers.append(f'SN-{i}')
+        
+        headers.extend([
             'Docente',
             'Asignaturas Reprobadas (4 veces)',
             'Asignaturas Reprobadas (3 veces)'
-        ]
+        ])
         
         # Estilo para encabezados
         header_fill = PatternFill(start_color="366092", end_color="366092", fill_type="solid")
@@ -152,34 +173,78 @@ class SemesterRangeExporter:
         # Escribir datos
         if not data:
             # Si no hay datos, agregar mensaje informativo
+            total_cols = len(headers)
             ws.cell(row=2, column=1, value='No hay estudiantes registrados en este semestre')
-            ws.merge_cells('A2:G2')
+            ws.merge_cells(start_row=2, start_column=1, end_row=2, end_column=total_cols)
             cell = ws.cell(row=2, column=1)
             cell.alignment = Alignment(horizontal="center", vertical="center")
             cell.font = Font(italic=True, color="808080")
         else:
             for row_idx, row_data in enumerate(data, start=2):
-                ws.cell(row=row_idx, column=1, value=row_data.get('rut', ''))
-                ws.cell(row=row_idx, column=2, value=row_data.get('programa_estudio', ''))
-                ws.cell(row=row_idx, column=3, value=row_data.get('ramo', ''))
-                ws.cell(row=row_idx, column=4, value=row_data.get('nota', ''))
-                ws.cell(row=row_idx, column=5, value=row_data.get('docente', ''))
-                ws.cell(row=row_idx, column=6, value=row_data.get('asignaturas_reprobadas_cuatro_veces', ''))
-                ws.cell(row=row_idx, column=7, value=row_data.get('asignaturas_reprobadas_tres_veces', ''))
+                col_idx = 1
+                
+                # RUT
+                ws.cell(row=row_idx, column=col_idx, value=row_data.get('rut', ''))
+                col_idx += 1
+                
+                # Nombre
+                ws.cell(row=row_idx, column=col_idx, value=row_data.get('nombre', ''))
+                col_idx += 1
+                
+                # Programa
+                ws.cell(row=row_idx, column=col_idx, value=row_data.get('programa_estudio', ''))
+                col_idx += 1
+                
+                # Ramo
+                ws.cell(row=row_idx, column=col_idx, value=row_data.get('ramo', ''))
+                col_idx += 1
+                
+                # Notas parciales - dividir por cada columna
+                notas_str = row_data.get('notas_parciales', '')
+                if notas_str:
+                    notas_list = [nota.strip() for nota in notas_str.split(',')]
+                else:
+                    notas_list = []
+                
+                # Escribir cada nota en su columna correspondiente
+                for i in range(max_notas):
+                    if i < len(notas_list):
+                        ws.cell(row=row_idx, column=col_idx, value=notas_list[i])
+                    else:
+                        ws.cell(row=row_idx, column=col_idx, value='')
+                    col_idx += 1
+                
+                # Docente
+                ws.cell(row=row_idx, column=col_idx, value=row_data.get('docente', ''))
+                col_idx += 1
+                
+                # Asignaturas reprobadas 4 veces
+                ws.cell(row=row_idx, column=col_idx, value=row_data.get('asignaturas_reprobadas_cuatro_veces', ''))
+                col_idx += 1
+                
+                # Asignaturas reprobadas 3 veces
+                ws.cell(row=row_idx, column=col_idx, value=row_data.get('asignaturas_reprobadas_tres_veces', ''))
         
-        # Ajustar ancho de columnas
-        column_widths = {
-            'A': 15,  # RUT
-            'B': 40,  # Programa
-            'C': 35,  # Ramo
-            'D': 10,  # Nota
-            'E': 30,  # Docente
-            'F': 25,  # Reprobadas 4x
-            'G': 25   # Reprobadas 3x
-        }
+        # Ajustar ancho de columnas dinámicamente
+        ws.column_dimensions['A'].width = 15  # RUT
+        ws.column_dimensions['B'].width = 30  # Nombre
+        ws.column_dimensions['C'].width = 40  # Programa
+        ws.column_dimensions['D'].width = 35  # Ramo
         
-        for col, width in column_widths.items():
-            ws.column_dimensions[col].width = width
+        # Columnas de notas (SN-1, SN-2, etc.)
+        for i in range(max_notas):
+            col_letter = chr(ord('E') + i)  # E, F, G, ...
+            ws.column_dimensions[col_letter].width = 10
+        
+        # Docente y reprobadas
+        docente_col = chr(ord('E') + max_notas)
+        ws.column_dimensions[docente_col].width = 30
+        
+        reprobadas_4_col = chr(ord('E') + max_notas + 1)
+        ws.column_dimensions[reprobadas_4_col].width = 25
+        
+        reprobadas_3_col = chr(ord('E') + max_notas + 2)
+        ws.column_dimensions[reprobadas_3_col].width = 25
         
         # Congelar primera fila
         ws.freeze_panes = 'A2'

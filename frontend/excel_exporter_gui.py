@@ -6,6 +6,8 @@ from frontend.custom_sheet_deleter_gui import CustomSheetDeleterGUI
 from frontend.user_selects_output import select_output_directory
 from frontend.buttons import create_back_button, create_exit_button
 from utils.custom_sheet_manager import list_custom_sheets
+from pathlib import Path
+import subprocess
 
 class FileExporterGUI:
 
@@ -177,14 +179,23 @@ class FileExporterGUI:
                 title="Selecciona la carpeta donde guardar el archivo Excel"
             )
             
+            if not output_dir:
+                return  # Usuario canceló
+            
             exporter = Exporter(self.db_connection, sheets_selection, custom_sheet_selection)
             
             file_path = exporter.export_student_by_rut(rut, output_dir)
             
-            messagebox.showinfo(
-                "Éxito",
-                f"✓ Archivo exportado exitosamente\n\n{file_path}"
+            # Mostrar mensaje de éxito y preguntar si desea abrir el archivo
+            result = messagebox.askyesno(
+                "Exportación Exitosa",
+                f"Los datos se han exportado correctamente.\n\n"
+                f"Archivo: {Path(file_path).name}\n\n"
+                f"¿Desea abrir el archivo?"
             )
+            
+            if result:
+                subprocess.Popen([file_path], shell=True)
             
             self.show_export_success(rut, file_path)
             

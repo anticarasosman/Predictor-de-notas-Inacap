@@ -2,7 +2,6 @@ import pandas as pd
 from openpyxl import Workbook
 from factories.sheets_factory import SheetsFactory
 import os
-import subprocess
 from datetime import datetime
 from pathlib import Path
 
@@ -97,5 +96,4 @@ class Exporter:
         filename = f"Estudiante_{rut}_{timestamp}.xlsx"
         file_path = output_dir / filename
         wb.save(file_path)
-        subprocess.Popen(f'explorer /select,"{file_path}"')
         return str(file_path)
