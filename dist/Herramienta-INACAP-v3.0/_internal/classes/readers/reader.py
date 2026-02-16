@@ -49,7 +49,7 @@ class Reader(ABC):
         
     def _asignatura_semestre_exists(self, cursor, codigo, periodo):
         try:
-            query = "SELECT COUNT(*) FROM Asignatura_Semestre WHERE codigo_asignatura = %s AND periodo_semestre = %s"
+            query = "SELECT COUNT(*) FROM Asignatura_semestre WHERE codigo_asignatura = %s AND periodo_semestre = %s"
             cursor.execute(query, (codigo, periodo))
             result = cursor.fetchone()[0] > 0
             return result
@@ -234,7 +234,7 @@ class Reader(ABC):
         """Inserta asignatura en semestre"""
         try:
             query = """
-                INSERT IGNORE INTO Asignatura_Semestre (
+                INSERT IGNORE INTO Asignatura_semestre (
                     codigo_asignatura, periodo_semestre, secciones, alumnos, alumnos_en_riesgo,
                     alumnos_ayudantia, porcentaje_reprobacion_N1, porcentaje_reprobacion_N2,
                     porcentaje_reprobacion_N3, promedio_nota_uno, promedio_nota_dos,
@@ -282,7 +282,7 @@ class Reader(ABC):
             
             valores.extend([codigo, periodo])
             query = f"""
-                UPDATE Asignatura_Semestre SET
+                UPDATE Asignatura_semestre SET
                     {', '.join(campos)}
                 WHERE codigo_asignatura = %s AND periodo_semestre = %s
             """
@@ -296,21 +296,115 @@ class Reader(ABC):
     
     def _insert_estudiante_semestre(self, cursor, rut, periodo, datos):
         """Inserta estudiante en semestre"""
-        pass
+        try:
+            query = """
+                INSERT IGNORE INTO Estudiante_Semestre (
+                    rut_estudiante, periodo_semestre, asignaturas_PE,
+                    asignaturas_reprobadas_cuatro_veces, asignaturas_reprobadas_tres_veces,
+                    solicitud_reingreso
+                ) VALUES (%s, %s, %s, %s, %s, %s)
+            """
+            values = (
+                rut,
+                periodo,
+                datos.get('asignaturas_PE'),
+                datos.get('asignaturas_reprobadas_cuatro_veces'),
+                datos.get('asignaturas_reprobadas_tres_veces'),
+                datos.get('solicitud_reingreso')
+            )
+            cursor.execute(query, values)
+            if cursor.rowcount > 0:
+                print(f"✓ Estudiante_semestre {rut}-{periodo} creado")
+            else:
+                print(f"→ Estudiante_semestre {rut}-{periodo} ya existe")
+        except Error as e:
+            print(f"✗ Error al insertar estudiante_semestre {rut}-{periodo}: {str(e)}")
+            raise
     
     def _update_estudiante_semestre(self, cursor, rut, periodo, datos):
         """Actualiza estudiante en semestre"""
-        pass
+        try:
+            campos = []
+            valores = []
+            for key, value in datos.items():
+                if key in ("rut_estudiante", "periodo_semestre"):
+                    continue
+                if value is not None:
+                    campos.append(f"{key} = %s")
+                    valores.append(value)
+
+            if not campos:
+                print(f"→ No hay datos para actualizar en estudiante_semestre {rut}-{periodo}")
+                return
+
+            valores.extend([rut, periodo])
+            query = f"""
+                UPDATE Estudiante_Semestre SET
+                    {', '.join(campos)}
+                WHERE rut_estudiante = %s AND periodo_semestre = %s
+            """
+            cursor.execute(query, valores)
+            print(f"✓ Estudiante_semestre {rut}-{periodo} actualizado")
+        except Error as e:
+            print(f"✗ Error al actualizar estudiante_semestre {rut}-{periodo}: {str(e)}")
+            raise
     
     # --- ESTUDIANTE_ASIGNATURA ---
     
     def _insert_estudiante_asignatura(self, cursor, rut, codigo, periodo, datos):
         """Inserta estudiante en asignatura"""
-        pass
+        try:
+            query = """
+                INSERT IGNORE INTO Estudiante_Asignatura (
+                    rut_estudiante, codigo_asignatura, periodo_semestre,
+                    nombre_docente, notas_parciales, porcentaje_asistencia, riesgo
+                ) VALUES (%s, %s, %s, %s, %s, %s, %s)
+            """
+            values = (
+                rut,
+                codigo,
+                periodo,
+                datos.get('nombre_docente'),
+                datos.get('notas_parciales'),
+                datos.get('porcentaje_asistencia'),
+                datos.get('riesgo')
+            )
+            cursor.execute(query, values)
+            if cursor.rowcount > 0:
+                print(f"✓ Estudiante_asignatura {rut}-{codigo}-{periodo} creada")
+            else:
+                print(f"→ Estudiante_asignatura {rut}-{codigo}-{periodo} ya existe")
+        except Error as e:
+            print(f"✗ Error al insertar estudiante_asignatura {rut}-{codigo}-{periodo}: {str(e)}")
+            raise
     
     def _update_estudiante_asignatura(self, cursor, rut, codigo, periodo, datos):
         """Actualiza estudiante en asignatura"""
-        pass
+        try:
+            campos = []
+            valores = []
+            for key, value in datos.items():
+                if key in ("rut_estudiante", "codigo_asignatura", "periodo_semestre"):
+                    continue
+                if value is not None:
+                    campos.append(f"{key} = %s")
+                    valores.append(value)
+
+            if not campos:
+                print(f"→ No hay datos para actualizar en estudiante_asignatura {rut}-{codigo}-{periodo}")
+                return
+
+            valores.extend([rut, codigo, periodo])
+            query = f"""
+                UPDATE Estudiante_Asignatura SET
+                    {', '.join(campos)}
+                WHERE rut_estudiante = %s AND codigo_asignatura = %s AND periodo_semestre = %s
+            """
+            cursor.execute(query, valores)
+            print(f"✓ Estudiante_asignatura {rut}-{codigo}-{periodo} actualizada")
+        except Error as e:
+            print(f"✗ Error al actualizar estudiante_asignatura {rut}-{codigo}-{periodo}: {str(e)}")
+            raise
     
     # --- REPORTE_FINANCIERO ---
 

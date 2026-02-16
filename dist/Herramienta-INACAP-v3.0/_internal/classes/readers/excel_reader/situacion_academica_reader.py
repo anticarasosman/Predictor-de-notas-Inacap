@@ -73,9 +73,9 @@ class SituacionAcademicaReader(Reader):
                         "rut_estudiante": rut_estudiante,
                         "periodo_semestre": periodo,
                         "asignaturas_PE": safe_int(row['ASIGNATURAS PE']) or None,
-                        "asignaturas_reprobadas": safe_int(row['ASIGNATURAS REPROBADAS CUARTA']) + safe_int(row['ASIGNATURAS REPROBADAS TERCERA']),
-                        "promedio_notas_semestre": None,
-                        "estado_situacion_academica": row['ESTADO MATRICULA'],
+                        "asignaturas_reprobadas_cuatro_veces": safe_int(row['ASIGNATURAS REPROBADAS CUARTA']) or None,
+                        "asignaturas_reprobadas_tres_veces": safe_int(row['ASIGNATURAS REPROBADAS TERCERA']) or None,
+                        "solicitud_reingreso": True if row['SOLICITUD REINTEGRO'] == "SI" else False,
                     }
 
                     if self._estudiante_exists(cursor, rut_estudiante):

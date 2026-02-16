@@ -5,7 +5,7 @@ from openpyxl import Workbook
 class FinancialInfoSheet(Sheet):
 
     def add_sheet(self, wb, student_data: dict):
-        financial_info = student_data["financial_info"]
+        financial_info = student_data.get("financial_info") or {}
         ws = wb.create_sheet("Información Financiera")
 
         #Titutlo

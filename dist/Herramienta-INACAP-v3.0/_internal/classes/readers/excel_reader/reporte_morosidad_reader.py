@@ -120,19 +120,19 @@ class ReporteMorosidadReader(Reader):
             self.df['Cuotas_Colegiaturas_num'] = pd.to_numeric(self.df['Cantidad Cuotas Pendientes Colegiaturas'], errors='coerce').fillna(0).astype(int)
             
             # Calcular métricas
-            numero_estudiantes_total = len(self.df)
-            numero_estudiantes_con_deuda = (self.df['Total_Saldo_num'] > 0).sum()
-            porcentaje_con_deuda = (numero_estudiantes_con_deuda / numero_estudiantes_total * 100) if numero_estudiantes_total > 0 else 0
+            numero_estudiantes_total = int(len(self.df))
+            numero_estudiantes_con_deuda = int((self.df['Total_Saldo_num'] > 0).sum())
+            porcentaje_con_deuda = float((numero_estudiantes_con_deuda / numero_estudiantes_total * 100) if numero_estudiantes_total > 0 else 0)
             
-            monto_total_adeudado = self.df['Total_Saldo_num'].sum()
-            monto_total_compromisos = self.df['Monto_Compromiso_Matricula_num'].sum() + self.df['Monto_Compromiso_Colegiaturas_num'].sum()
+            monto_total_adeudado = int(self.df['Total_Saldo_num'].sum())
+            monto_total_compromisos = int(self.df['Monto_Compromiso_Matricula_num'].sum() + self.df['Monto_Compromiso_Colegiaturas_num'].sum())
             
             # Promedio de cuotas pendientes (solo mayores que 0)
             cuotas_mayores_cero = self.df[self.df['Cuotas_Colegiaturas_num'] > 0]['Cuotas_Colegiaturas_num']
-            promedio_cuotas = cuotas_mayores_cero.mean() if len(cuotas_mayores_cero) > 0 else 0
+            promedio_cuotas = float(cuotas_mayores_cero.mean()) if len(cuotas_mayores_cero) > 0 else 0.0
             
             # Porcentaje de morosidad
-            porcentaje_morosidad = (monto_total_adeudado / monto_total_compromisos * 100) if monto_total_compromisos > 0 else 0
+            porcentaje_morosidad = float((monto_total_adeudado / monto_total_compromisos * 100) if monto_total_compromisos > 0 else 0)
             
             # Fecha de actualización (hoy)
             fecha_actualizacion = datetime.now().date()
@@ -171,13 +171,13 @@ class ReporteMorosidadReader(Reader):
             # Guardar métricas para acceso posterior
             self.metricas_morosidad = {
                 'fecha_actualizacion': fecha_actualizacion,
-                'numero_estudiantes_total': numero_estudiantes_total,
-                'numero_estudiantes_con_deuda': numero_estudiantes_con_deuda,
-                'porcentaje_estudiantes_con_deuda': round(porcentaje_con_deuda, 2),
-                'monto_total_adeudado': monto_total_adeudado,
-                'monto_total_compromisos': monto_total_compromisos,
-                'promedio_cuotas_pendientes': round(promedio_cuotas, 2),
-                'porcentaje_morosidad': round(porcentaje_morosidad, 2)
+                'numero_estudiantes_total': int(numero_estudiantes_total),
+                'numero_estudiantes_con_deuda': int(numero_estudiantes_con_deuda),
+                'porcentaje_estudiantes_con_deuda': float(round(porcentaje_con_deuda, 2)),
+                'monto_total_adeudado': int(monto_total_adeudado),
+                'monto_total_compromisos': int(monto_total_compromisos),
+                'promedio_cuotas_pendientes': float(round(promedio_cuotas, 2)),
+                'porcentaje_morosidad': float(round(porcentaje_morosidad, 2))
             }
             
         except Exception as e:

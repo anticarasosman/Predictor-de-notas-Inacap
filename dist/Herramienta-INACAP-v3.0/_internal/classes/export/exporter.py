@@ -65,6 +65,9 @@ class Exporter:
             cursor.execute(query, (rut,))
             financial_info = cursor.fetchone()
 
+            if not financial_info:
+                financial_info = {}
+
             return {
                 "student": student,
                 "semesters": semesters_with_subjects,

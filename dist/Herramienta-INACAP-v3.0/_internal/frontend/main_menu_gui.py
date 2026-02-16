@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from frontend.file_loader_gui import FileLoaderGUI
 from frontend.excel_exporter_gui import FileExporterGUI
+from frontend.semester_exporter_gui import SemesterExporterGUI
 
 
 class MainMenu:
@@ -52,7 +53,7 @@ class MainMenu:
         #Boton: Exportar a Excel
         export_btn = tk.Button(
             button_frame,
-            text="📊 Exportar Datos a Excel",
+            text="📊 Exportar Datos de alumno a Excel",
             font=("Arial", 12),
             height=3,
             bg="#FF9800",
@@ -60,6 +61,18 @@ class MainMenu:
             command=self.open_exporter
         )
         export_btn.pack(pady=10, fill=tk.X)
+
+        # Botón: Exportar por Semestre
+        semester_export_btn = tk.Button(
+            button_frame,
+            text="📚 Exportar Datos por Semestre",
+            font=("Arial", 12),
+            height=3,
+            bg="#2196F3",
+            fg="white",
+            command=self.open_semester_exporter
+        )
+        semester_export_btn.pack(pady=10, fill=tk.X)
 
         # Botón: Salir
         exit_btn = tk.Button(
@@ -82,3 +95,8 @@ class MainMenu:
         # Instanciar FileExporterGUI y mostrar pantalla de ingreso de RUT
         exporter = FileExporterGUI(self.root, self.db_connection, main_menu=self)
         exporter.ask_user_for_rut()
+
+    def open_semester_exporter(self):
+        # Instanciar SemesterExporterGUI y mostrar selector de semestres
+        semester_exporter = SemesterExporterGUI(self.root, self.db_connection, main_menu=self)
+        semester_exporter.show_semester_selector()
