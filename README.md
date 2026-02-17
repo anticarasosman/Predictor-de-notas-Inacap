@@ -2,10 +2,8 @@
 
 Aplicación Windows para exportación y consulta de datos de estudiantes INACAP. Permite generar reportes en Excel con información académica, financiera y personalizada, además de lectura automatizada de certificados en PDF.
 
-**Versión:** 2.0  
 **Base de Datos:** AWS RDS MySQL 8.0  
 **Plataforma:** Windows 10+  
-**Estado:** ✅ Producción
 
 ---
 
@@ -39,11 +37,11 @@ Aplicación Windows para exportación y consulta de datos de estudiantes INACAP.
 ### Instalación Rápida
 
 1. **Descargar archivo ejecutable**
-   - Descarga `Herramienta-Consultas-Inacap.exe`
+   - Descarga `Herramienta-Consultas-Inacap.zip`
 
 2. **Configurar conexión a la base de datos**
-   - En la misma carpeta que el .exe, crea un archivo llamado `.env`
-   - Copia el siguiente contenido:
+   - En la misma carpeta que el .exe, revisa que exista el archivo `.env`, si no, crea un documento de texto y llamalo exactamente `.env`.
+   - Si no existia el archivo .env, copia en el el siguiente contenido:
    ```
    DB_HOST=base-de-datos-inacap.cxeouo22gw7q.sa-east-1.rds.amazonaws.com
    DB_USER=admin
@@ -61,42 +59,49 @@ Aplicación Windows para exportación y consulta de datos de estudiantes INACAP.
 
 ## � GUÍA DE USO
 
-### 1️⃣ Buscar Estudiante
-1. Abre la aplicación
-2. En el campo de búsqueda, ingresa el **RUT del estudiante** (ej: 17.234.567-8)
-3. Haz clic en "Buscar"
-4. Los datos del estudiante se cargarán automáticamente
+### 1️⃣ Subir Archivos a la Base de Datos
+1. Abre la aplicación y selecciona **"Subir Archivos a la Base de Datos"**
+2. Elige el tipo de archivo (CSV o PDF) y selecciona el archivo
+3. Espera el progreso de carga y confirmación
 
-### 2️⃣ Exportar Datos a Excel
-1. Selecciona los tipos de reporte que deseas incluir:
-   - ☑️ **Información General**: Datos personales
-   - ☑️ **Información Académica**: Calificaciones y semestres
-   - ☑️ **Información Financiera**: Estado de cuenta
-   - ☑️ **Reportes Personalizados**: Tus reportes guardados
+### 2️⃣ Exportar Datos de un Estudiante a Excel
+1. Selecciona **"Exportar Datos de alumno a Excel"**
+2. Ingresa el **RUT** del estudiante (sin puntos y con guion)
+3. Selecciona las hojas a incluir:
+   - ☑️ **Información General**
+   - ☑️ **Semestres y Asignaturas**
+   - ☑️ **Información Financiera**
+   - ☑️ **Notas Media**
+   - ☑️ **Hojas Personalizadas**
+4. Elige la carpeta de salida
+5. Confirma si deseas abrir el archivo al finalizar
 
-2. Define el nombre del archivo Excel
-3. Haz clic en "Exportar"
-4. El archivo se guardará en tu carpeta de Descargas
+### 3️⃣ Exportar Datos por Semestre
+1. Selecciona **"Exportar Datos por Semestre"**
+2. Elige **Periodo Inicio** y **Periodo Fin**
+3. El reporte generará una hoja por cada semestre en el rango
+4. Elige la carpeta de salida y confirma si deseas abrir el archivo
 
-### 3️⃣ Crear Reporte Personalizado
-1. Haz clic en "Crear Reportes Personalizados"
-2. Una ventana mostrará todas las tablas y columnas disponibles
-3. Selecciona las columnas que deseas incluir
-4. Escribe un nombre para el reportes
-5. Haz clic en "Guardar Reportes"
-6. El reportes estará disponible para futuras exportaciones
+### 4️⃣ Exportar Datos Financieros (Morosidad)
+1. Selecciona **"Exportar Datos Financieros (Morosidad)"**
+2. El reporte incluye solo estudiantes con deuda
+3. Se muestra el porcentaje de morosidad y el detalle financiero
+4. Elige la carpeta de salida y confirma si deseas abrir el archivo
 
-### 4️⃣ Eliminar Reporte Personalizado
-1. Haz clic en "Eliminar Reportes Personalizados"
-2. Selecciona el o los reportes que deseas eliminar
-3. Haz clic en "Eliminar"
-4. Confirma la eliminación
+### 5️⃣ Crear Reporte Personalizado
+1. Selecciona **"Crear Hoja Personalizada"**
+2. Elige tablas y columnas a incluir
+3. Asigna un nombre al reporte y guarda
+4. El reporte aparecerá en la lista de hojas personalizadas
 
-### 5️⃣ Leer Certificado PDF
-1. Haz clic en "Leer Certificado"
-2. Selecciona el archivo PDF del certificado
-3. La aplicación detectará automáticamente el tipo (ANUAL o CONCENTRACIÓN)
-4. Los datos se cargarán para revisión
+### 6️⃣ Eliminar Reporte Personalizado
+1. Selecciona **"Borrar Hojas Personalizadas"**
+2. Marca los reportes a eliminar y confirma
+
+### 7️⃣ Leer Certificado PDF
+1. Selecciona **"Leer Certificado"**
+2. Carga el PDF (ANUAL o CONCENTRACIÓN)
+3. La aplicación extrae las calificaciones automáticamente
 
 ---
 
@@ -165,24 +170,6 @@ La aplicación exporta:
 
 ---
 
-## 📁 ESTRUCTURA DE ARCHIVOS
-
-Después de instalar, tu carpeta contendrá:
-```
-Herramienta-Consultas-Inacap/
-├── Herramienta-Consultas-Inacap.exe      - Aplicación principal
-├── .env                                  - Configuración (creado por ti)
-├── personalized_sheets/                  - Reportes personalizados (se crea automáticamente)
-│   ├── reporte_1.json
-│   ├── reporte_2.json
-│   └── ...
-└── datos_exportados/                     - Archivos Excel generados
-    ├── Estudiante_XXXXX_2026-01-15.xlsx
-    └── ...
-```
-
----
-
 ## 📞 SOPORTE
 
 Si encuentras problemas:
@@ -201,6 +188,9 @@ Si encuentras problemas:
    - Incluye el mensaje de error exacto
    - Indica tu usuario y RUT del estudiante buscado
 
+### Informacion de contacto:
+   - Guillermo Staudt Ossa, +56 9 5001 9329, gastaudt@uc.cl
+
 ---
 
 ## 🔄 ACTUALIZACIONES
@@ -210,21 +200,6 @@ Cuando haya nuevas versiones:
 2. Reemplaza el archivo anterior
 3. Mantén tu archivo `.env` en la misma carpeta
 4. Tus reportes personalizados se conservarán
-
----
-
-## 📋 HISTORIAL DE VERSIONES
-
-**v2.0** (Febrero 2026)
-- ✨ Interfaz gráfica mejorada
-- ✨ Conexión a AWS RDS
-- ✨ Creación de reportes personalizados
-- ✨ Lectura de certificados PDF
-- ✨ Ajuste automático de ancho de columnas
-
-**v1.0** (Versión inicial)
-- Exportación básica de datos
-- Reportes predeterminados
 
 ---
 

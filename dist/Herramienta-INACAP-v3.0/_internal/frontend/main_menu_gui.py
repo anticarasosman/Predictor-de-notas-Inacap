@@ -3,6 +3,7 @@ from tkinter import ttk, messagebox
 from frontend.file_loader_gui import FileLoaderGUI
 from frontend.excel_exporter_gui import FileExporterGUI
 from frontend.semester_exporter_gui import SemesterExporterGUI
+from frontend.financial_exporter_gui import FinancialExporterGUI
 
 
 class MainMenu:
@@ -74,6 +75,18 @@ class MainMenu:
         )
         semester_export_btn.pack(pady=10, fill=tk.X)
 
+        # Botón: Exportar Datos Financieros
+        financial_export_btn = tk.Button(
+            button_frame,
+            text="💰 Exportar Datos Financieros (Morosidad)",
+            font=("Arial", 12),
+            height=3,
+            bg="#C4161C",
+            fg="white",
+            command=self.open_financial_exporter
+        )
+        financial_export_btn.pack(pady=10, fill=tk.X)
+
         # Botón: Salir
         exit_btn = tk.Button(
             button_frame,
@@ -100,3 +113,8 @@ class MainMenu:
         # Instanciar SemesterExporterGUI y mostrar selector de semestres
         semester_exporter = SemesterExporterGUI(self.root, self.db_connection, main_menu=self)
         semester_exporter.show_semester_selector()
+
+    def open_financial_exporter(self):
+        # Instanciar FinancialExporterGUI y mostrar pantalla de exportación financiera
+        financial_exporter = FinancialExporterGUI(self.root, self.db_connection, main_menu=self)
+        financial_exporter.show_financial_export()

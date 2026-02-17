@@ -2,6 +2,7 @@ from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment
 from pathlib import Path
 from datetime import datetime
+import re
 
 
 class SemesterRangeExporter:
@@ -120,6 +121,14 @@ class SemesterRangeExporter:
         finally:
             cursor.close()
 
+    def _split_notas(self, notas_str: str) -> list:
+        """Divide notas por coma o punto y coma, normalizando espacios y comillas."""
+        if not notas_str:
+            return []
+        cleaned = str(notas_str).strip().strip('"')
+        parts = re.split(r'[;,]', cleaned)
+        return [nota.strip() for nota in parts if nota.strip()]
+
     def _create_semester_sheet(self, wb: Workbook, semestre: str, data: list):
         """
         Crea una hoja en el workbook para un semestre específico.
@@ -133,7 +142,7 @@ class SemesterRangeExporter:
         for row_data in data:
             notas_str = row_data.get('notas_parciales', '')
             if notas_str:
-                num_notas = len(notas_str.split(','))
+                num_notas = len(self._split_notas(notas_str))
                 max_notas = max(max_notas, num_notas)
         
         # Si no hay notas, crear al menos 3 columnas
@@ -180,19 +189,23 @@ class SemesterRangeExporter:
             cell.alignment = Alignment(horizontal="center", vertical="center")
             cell.font = Font(italic=True, color="808080")
         else:
+            prev_rut = None
             for row_idx, row_data in enumerate(data, start=2):
                 col_idx = 1
                 
-                # RUT
-                ws.cell(row=row_idx, column=col_idx, value=row_data.get('rut', ''))
+                current_rut = row_data.get('rut', '')
+                is_repeat = current_rut == prev_rut and current_rut != ''
+                
+                # RUT (solo si cambia)
+                ws.cell(row=row_idx, column=col_idx, value='' if is_repeat else current_rut)
                 col_idx += 1
                 
-                # Nombre
-                ws.cell(row=row_idx, column=col_idx, value=row_data.get('nombre', ''))
+                # Nombre (solo si cambia)
+                ws.cell(row=row_idx, column=col_idx, value='' if is_repeat else row_data.get('nombre', ''))
                 col_idx += 1
                 
-                # Programa
-                ws.cell(row=row_idx, column=col_idx, value=row_data.get('programa_estudio', ''))
+                # Programa (solo si cambia)
+                ws.cell(row=row_idx, column=col_idx, value='' if is_repeat else row_data.get('programa_estudio', ''))
                 col_idx += 1
                 
                 # Ramo
@@ -201,10 +214,7 @@ class SemesterRangeExporter:
                 
                 # Notas parciales - dividir por cada columna
                 notas_str = row_data.get('notas_parciales', '')
-                if notas_str:
-                    notas_list = [nota.strip() for nota in notas_str.split(',')]
-                else:
-                    notas_list = []
+                notas_list = self._split_notas(notas_str)
                 
                 # Escribir cada nota en su columna correspondiente
                 for i in range(max_notas):
@@ -218,12 +228,22 @@ class SemesterRangeExporter:
                 ws.cell(row=row_idx, column=col_idx, value=row_data.get('docente', ''))
                 col_idx += 1
                 
-                # Asignaturas reprobadas 4 veces
-                ws.cell(row=row_idx, column=col_idx, value=row_data.get('asignaturas_reprobadas_cuatro_veces', ''))
+                # Asignaturas reprobadas 4 veces (solo si cambia)
+                ws.cell(
+                    row=row_idx,
+                    column=col_idx,
+                    value='' if is_repeat else row_data.get('asignaturas_reprobadas_cuatro_veces', '')
+                )
                 col_idx += 1
                 
-                # Asignaturas reprobadas 3 veces
-                ws.cell(row=row_idx, column=col_idx, value=row_data.get('asignaturas_reprobadas_tres_veces', ''))
+                # Asignaturas reprobadas 3 veces (solo si cambia)
+                ws.cell(
+                    row=row_idx,
+                    column=col_idx,
+                    value='' if is_repeat else row_data.get('asignaturas_reprobadas_tres_veces', '')
+                )
+                
+                prev_rut = current_rut
         
         # Ajustar ancho de columnas dinámicamente
         ws.column_dimensions['A'].width = 15  # RUT
