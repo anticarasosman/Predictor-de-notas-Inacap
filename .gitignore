@@ -7,6 +7,7 @@ testing/
 lambda/
 data/
 dist/
+build/
 Test_ToDo.txt
 INSTRUCCIONES_PDF_ACTUALIZADO.md
 tunnel-inacap.pem
