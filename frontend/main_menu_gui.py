@@ -20,7 +20,7 @@ class MainMenu:
         # Título principal
         title_label = tk.Label(
             self.root,
-            text="PREDICTOR DE NOTAS INACAP",
+            text="HERRAMIENTA DE GESTIÓN DE DATOS - INACAP",
             font=("Arial", 18, "bold"),
             pady=30
         )
