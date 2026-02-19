@@ -30,6 +30,9 @@ a = Analysis(
         ('database', 'database'),
         # Archivos de configuración
         ('.env.example', '.'),
+        # Sistema de encriptación
+        ('config_loader.py', '.'),
+        ('.env.encrypted', '.'),
     ],
     hiddenimports=[
         # API Gateway / AWS
@@ -75,6 +78,12 @@ a = Analysis(
         # Otros
         'dotenv',
         'chardet',
+        # Encriptación
+        'cryptography',
+        'cryptography.fernet',
+        'cryptography.hazmat',
+        'cryptography.hazmat.primitives',
+        'cryptography.hazmat.backends',
     ],
     hookspath=['.'],  # Incluir hooks personalizados del directorio actual
     hooksconfig={},

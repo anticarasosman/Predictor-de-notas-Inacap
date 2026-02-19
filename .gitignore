@@ -16,6 +16,8 @@ tunnel-inacap.pem
 .env    
 .env.local
 .env.*.local
+# Permitir archivo encriptado para distribución
+!.env.encrypted
 
 # Python
 __pycache__/

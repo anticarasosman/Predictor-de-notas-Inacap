@@ -6,27 +6,14 @@ from tkinter import messagebox
 from database.db_connection import DatabaseConnection
 from frontend.file_loader_gui import FileLoaderGUI
 import os
-from dotenv import load_dotenv
+import config_loader
 import signal
 import sys
 
 from frontend.main_menu_gui import MainMenu
 
-# Cargar .env desde el directorio del ejecutable (importante para PyInstaller)
-if getattr(sys, 'frozen', False):
-    # Estamos en un ejecutable empaquetado
-    application_path = os.path.dirname(sys.executable)
-else:
-    # Estamos en desarrollo
-    application_path = os.path.dirname(os.path.abspath(__file__))
-
-env_path = os.path.join(application_path, '.env')
-load_dotenv(env_path)
-print(f"[MAIN] Buscando .env en: {env_path}")
-if os.path.exists(env_path):
-    print("[MAIN] ✓ Archivo .env encontrado")
-else:
-    print("[MAIN] ✗ ADVERTENCIA: Archivo .env NO encontrado")
+# Cargar configuración desde .env.encrypted
+config_loader.load_config()
 
 def cleanup(db_connection, root):
     """Cierra conexión y limpia recursos"""
